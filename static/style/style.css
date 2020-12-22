@@ -1,0 +1,94 @@
+
+@font-face {
+  font-family: myFont;
+  src: url("fonts/Another America.ttf");
+}
+
+body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  background-color: #141414;
+}
+
+.logoImg{
+  width: 50vw;
+  height: auto;
+}
+
+h1{
+  font-family: myFont;
+  font-size: 7vw;
+  color: rgb(243, 0, 239);
+}
+
+
+label{
+  margin-right: 20px;
+}
+
+input[type=submit] {
+  width: 10vw;
+  background-color: rgb(163,0,159);
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.logoSection{
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.formSection{
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+form{
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input[type=text], select {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
+.button{
+  width: 10vw;
+  background-color: rgb(163,0,159);
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 20px;
+  border-radius: 5px;
+}
+
+.footer{
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
