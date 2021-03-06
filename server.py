@@ -20,12 +20,32 @@ Run app.py
 """
 
 import os
-from flask import Flask, session, request, redirect, render_template
+from flask import Flask, session, request, redirect, render_template,flash, url_for
+from werkzeug.utils import secure_filename
 from flask_session import Session
 from ClassificationPkg import getClassification
 import spotipy
 import uuid
 import pathlib
+
+
+
+# upload file parameters
+UPLOAD_FOLDER = '/home/OLLAREGANG/beats'
+ALLOWED_EXTENSIONS = {'wav', 'aiff', 'caf', 'flac'}
+
+# upload file format control
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+#path to session cache
+def session_cache_path():
+    return caches_folder + session.get('uuid')
+
+#flask initialization?
+app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER #
 
 os.environ['SPOTIPY_CLIENT_ID'] = '7ce43cbf9883427e84fa7581dbac0f83'
 os.environ['SPOTIPY_CLIENT_SECRET'] = 'b60c4489024d403c911865b67d264d88'
@@ -33,7 +53,6 @@ os.environ['SPOTIPY_REDIRECT_URI'] = 'https://OLLAREGANG.pythonanywhere.com/bell
 os.environ['FLASK_ENV'] = 'development'
 projectPath = pathlib.Path(__file__).parent.absolute()  # get path of the project
 os.environ['FLASK_APP'] = '/home/OLLAREGANG/mysite/server.py'
-
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(64)
@@ -46,17 +65,18 @@ if not os.path.exists(caches_folder):
     os.makedirs(caches_folder)
 
 
-def session_cache_path():
-    return caches_folder + session.get('uuid')
 
-#the main page is the login page
+
+
+
+
+# the main page is the login page
 @app.route('/')
 def index():
     return render_template("login.html")
 
 
-
-#server method to actually do the login with spotify
+# server method to actually do the login with spotify
 @app.route('/login')
 def login():
     if not session.get('uuid'):
@@ -76,11 +96,11 @@ def login():
         # Step 2. Display sign in link when no token
         auth_url = auth_manager.get_authorize_url()
         return redirect(auth_url)
-        #return f'<h2><a href="{auth_url}">Sign in</a></h2>'
+        # return f'<h2><a href="{auth_url}">Sign in</a></h2>'
 
     # Step 4. Signed in, display data
-    #spotify = spotipy.Spotify(auth_manager=auth_manager)
-    #return redirect('/bella')
+    # spotify = spotipy.Spotify(auth_manager=auth_manager)
+    # return redirect('/bella')
 
 
 def sign_out():
@@ -114,21 +134,42 @@ def currently_playing():
         return track
     return "No track currently playing."
 
+
 @app.route('/bella/')
 def bella():
     return render_template("index.html")
 
 
+@app.route('/fileUpload', methods=['POST'])
+def fileUpload():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit an empty part without filename
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('uploaded_file', filename=filename));
+
+
+
 @app.route('/playlist')
 def playlist():
     playlist_url = request.args.get("playlist_url")
-    if(playlist_url.startswith('spotify:playlist:')):
+    if playlist_url.startswith('spotify:playlist:'):
         songClass = getClassification(playlist_url)
-        beat_url ="https://github.com/waddafunk/Rhythmic_Automatic_Composition/blob/main/complete_beats/trapshit" + str(songClass) + ".wav?raw=true"
+        beat_url = "https://github.com/waddafunk/Rhythmic_Automatic_Composition/blob/main/complete_beats/trapshit" + str(
+            songClass) + ".wav?raw=true"
         return redirect(beat_url)
 
     return "ERROR"
-
 
 
 @app.route('/current_user')
