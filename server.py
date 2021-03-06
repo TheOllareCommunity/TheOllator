@@ -32,7 +32,7 @@ import pathlib
 
 # upload file parameters
 UPLOAD_FOLDER = '/home/OLLAREGANG/beats'
-ALLOWED_EXTENSIONS = {'wav', 'aiff', 'caf', 'flac'}
+ALLOWED_EXTENSIONS = {'wav', 'aiff', 'caf', 'flac', 'mp3'}
 
 # upload file format control
 def allowed_file(filename):
