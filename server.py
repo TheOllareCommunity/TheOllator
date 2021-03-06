@@ -20,7 +20,7 @@ Run app.py
 """
 
 import os
-from flask import Flask, session, request, redirect, render_template,flash, url_for
+from flask import Flask, session, request, redirect, render_template,flash, url_for, send_from_directory
 from werkzeug.utils import secure_filename
 from flask_session import Session
 from ClassificationPkg import getClassification
@@ -63,10 +63,6 @@ Session(app)
 caches_folder = './.spotify_caches/'
 if not os.path.exists(caches_folder):
     os.makedirs(caches_folder)
-
-
-
-
 
 
 
@@ -137,28 +133,46 @@ def currently_playing():
 
 @app.route('/bella/')
 def bella():
+    print("!!!!!!!!!!!BELLA!!!!!!!!!!!!\n\n")
     return render_template("index.html")
 
 
 @app.route('/fileUpload', methods=['POST'])
 def fileUpload():
     if request.method == 'POST':
-        # check if the post request has the file part
-        if 'file' not in request.files:
+
+        #checks the file's origin form
+        if 'uploadedBeat' not in request.files:
             flash('No file part')
             return redirect(request.url)
-        file = request.files['file']
+
+
+        file = request.files['uploadedBeat']
+        print('File')
+
         # if user does not select file, browser also
         # submit an empty part without filename
+
         if file.filename == '':
             flash('No selected file')
             return redirect(request.url)
+
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('uploaded_file', filename=filename));
+            file.save(os.path.join(UPLOAD_FOLDER, filename))
+            #to open uploaded file
+            #return redirect(url_for('uploaded_file', filename=filename));
+            return redirect('/bella');
 
 
+
+
+
+#load file
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    print("prova")
+    return send_from_directory(UPLOAD_FOLDER,filename)
 
 @app.route('/playlist')
 def playlist():

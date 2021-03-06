@@ -19,7 +19,7 @@
     <div class="footer">
       <p>Generate your Hip-Hop track in seconds</p>
     </div>
-      <form action="/fileUpload" method="post">
+      <form action="/fileUpload" enctype="multipart/form-data" method="POST">
       <label for="uploadedBeat">Select a file:</label>
       <input type="file" id="uploadedBeat" name="uploadedBeat"><br><br>
       <input type="submit">
