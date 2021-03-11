@@ -9,6 +9,19 @@ from pprint import pprint
 from SpotipyEnvironmentPkg import SpotipyEnvironment
 from FeaturesPkg import SpotifyFeatures, getMidpoint
 
+'''
+getPlaylistIds(fromInput=False):
+    Print ids of playlist song
+createPlaylist():
+    Comanducci script to create a playlist
+    
+getPlaylistMidpoint(playlistId='spotify:playlist:0XgEPjlWTX4g4HjBNhtZIL'):
+    Gets midpoint of representation of playlist tracks in feature space
+    Args:
+        playlistURI uri of the playlist to classify
+        
+    return: 1x1 numpy.array containing index of FeatureSpaceRepresentation class selected 
+'''
 
 def getPlaylistIds(fromInput=False):
     env = SpotipyEnvironment()
