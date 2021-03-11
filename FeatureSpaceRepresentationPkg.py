@@ -1,5 +1,13 @@
 from FeaturesPkg import SpotifyFeatures
 
+'''
+class FeatureSpaceRepresentation:
+    Manual representation of feature space, TODO implement it properly
+    
+    getClasses(self):
+        Get classes
+        return: python array of SpotifyFeatures
+'''
 
 class FeatureSpaceRepresentation:
     def __init__(self):
