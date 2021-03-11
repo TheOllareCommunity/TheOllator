@@ -2,6 +2,13 @@ from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy
 import os
 
+'''
+class SpotipyEnvironment:
+    STATIC attributes:
+        sp: spotipy's spotify interface
+        pl_id: default playlist id
+        offset: to be removed
+'''
 
 class SpotipyEnvironment:
     # begin static variables
