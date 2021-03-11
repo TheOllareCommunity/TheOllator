@@ -3,6 +3,40 @@ import time
 import numpy
 from SpotipyEnvironmentPkg import SpotipyEnvironment
 
+'''
+CLASS SpotifyFeatures:
+    Class representing features of a song
+        __init__(self, energy=0, loudness=0, acousticness=0, valence=0, tempo=0, danceability=0, time_signature=0):
+            Args:
+                energy feature
+                loudness feature
+                acousticness feature
+                valence feature
+                tempo feature
+                danceability feature
+                time_signature feature    
+        
+        STANDARD GETTERS
+        
+        getNumpyArray(self):
+            return: 1x7 numpy array containing all features
+                 
+getArtistFeatures(fromInput=False):
+    Shows acoustic features for tracks for the given artist
+getMidpoint(featuresArray):
+    Gets midpoint of a set of features
+    Args:
+        features array: python array of SpotifyFeatures class
+        
+    return: 1x7 numpy.array containing midpont in feature space   
+    
+getMatrix(featuresArray):   
+    Gets feature matrix of a set of features
+    Args:
+        features array: python array of SpotifyFeatures class
+        
+    return: Nx7 numpy.array with N = len(featuresArray) 
+'''
 
 def getArtistFeatures(fromInput=False):  # shows acoustic features for tracks for the given artist
     sp = SpotipyEnvironment().sp
