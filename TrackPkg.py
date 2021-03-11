@@ -4,6 +4,22 @@ import librosa
 import pydub
 from pydub import playback
 
+'''
+CLASS Track:
+    Class representing a track to play
+        __init__(self, path):
+            Args:
+                path: path to wav file   
+        STANDARD GETTERS
+        play(self):
+            play track
+getTracks(path):
+    Gets tracs in a folder
+    Args:
+        path: path to multitrack folder
+        
+    return: 1xN python array containing all wav files in Args:path folder
+'''
 
 class Track:
     def __init__(self, path):
