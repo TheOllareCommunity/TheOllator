@@ -20,7 +20,16 @@ getPlaylistMidpoint(playlistId='spotify:playlist:0XgEPjlWTX4g4HjBNhtZIL'):
     Args:
         playlistURI uri of the playlist to classify
         
-    return: 1x1 numpy.array containing index of FeatureSpaceRepresentation class selected 
+    return: 
+        1x1 numpy.array containing index of FeatureSpaceRepresentation class selected 
+    
+    
+getFeaturesArray(playlistId='spotify:playlist:0XgEPjlWTX4g4HjBNhtZIL'):
+    Returns Nx7 python array of SpotifyFeatures class
+    Args:
+        playlistURI uri of the playlist to classify
+    return: 
+        Nx7 python array of SpotifyFeatures class
 '''
 
 def getPlaylistIds(fromInput=False):
@@ -179,8 +188,7 @@ def createPlaylist():
         if os.path.exists("%s.mp3" % name_playlist):
             os.remove("%s.wav" % name_playlist)
 
-
-def getPlaylistMidpoint(playlistId='spotify:playlist:0XgEPjlWTX4g4HjBNhtZIL'):
+def getFeaturesArray(playlistId='spotify:playlist:49LLb0A1u7U88QTc6cRDAX'):
     sp = SpotipyEnvironment().sp
     pl_id = playlistId
     offset = 0
@@ -245,7 +253,10 @@ def getPlaylistMidpoint(playlistId='spotify:playlist:0XgEPjlWTX4g4HjBNhtZIL'):
             time_signature = n.group(1)
             time_signature = float(time_signature)
         features.append(SpotifyFeatures(energy, loudness, acousticness, valence, tempo, danceability, time_signature))
+    return features
 
+def getPlaylistMidpoint(playlistId='spotify:playlist:49LLb0A1u7U88QTc6cRDAX'):
+    features = getFeaturesArray(playlistId)
     return getMidpoint(features)
 
 
