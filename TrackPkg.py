@@ -50,76 +50,101 @@ def getTracks(path):  # returns list of all wav files in "path" directory
     return tracks_collection
 
 
-# print(getTracks("/Users/PilvioSol/Desktop/Prova"))
+def getDrums(path):
+    tracks_collection = [f for f in os.listdir(path) if f.endswith('drums.wav')]
+    return tracks_collection
 
-# prova = Track("/Users/PilvioSol/Desktop/Prova/BeatA_drum.wav").play()
-# prova = Track("/Users/PilvioSol/Desktop/Prova/BeatA_melody.wav").play()
 
-projectPath = pathlib.Path(__file__).parent.absolute()  # get path of the project
-multiTrackPath = pathlib.Path(str(projectPath) + '/Beats_multitrack')  # append desired multitrack path
-tracks = getTracks(multiTrackPath)
-print(tracks)
-outputMix = []
-drums =[]
-tracksObjects = []
-firstTrackPath = pathlib.Path(str(multiTrackPath) + '/{}'.format(tracks[0]))
-mixedAudio = pydub.AudioSegment.from_file(firstTrackPath, format='wav')  # load first track
-outputMix.append(mixedAudio)  # append first track
-# end init
+def getMelodies(path):
+    tracks_collection = [f for f in os.listdir(path) if f.endswith('melody.wav')]
+    return tracks_collection
 
-'''
-for index in enumerate(tracks):  # load tracks
 
-    singleTrackPath = pathlib.Path(str(multiTrackPath) + '/{}'.format(index[1]))  # append single track name
+def getBass(path):
+    tracks_collection = [f for f in os.listdir(path) if f.endswith('bass.wav')]
+    return tracks_collection
 
-    # begin append and mix track
-    tracksObjects.append(Track(singleTrackPath))  # store track object
 
-    if index[0] != 0:
-        segment = tracksObjects[-1].getPydubTrack()  # get track to overlay
-        mix = outputMix[-1].overlay(segment)  # overlay to output mix
-        outputMix.append(mix)  # append new mix
-    # end append and mix track
+def getHarmony(path):
+    tracks_collection = [f for f in os.listdir(path) if f.endswith('harmony.wav')]
+    return tracks_collection
 
-print(outputMix)
-#play(mix)
-mix.export("/Generated_beats/mixed_sounds.mp3", format="mp3")
-'''
-letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
-for index in enumerate(letters):
-    for index2 in enumerate(tracks):
+
+def splitTracks():
+    projectPath = pathlib.Path(__file__).parent.absolute()  # get path of the project
+    multiTrackPath = pathlib.Path(str(projectPath) + '/Beats_multitrack')  # append desired multitrack path
+    tracks = getTracks(multiTrackPath)
+    print(tracks)
+    outputMix = []
+    drums = []
+    tracksObjects = []
+    firstTrackPath = pathlib.Path(str(multiTrackPath) + '/{}'.format(tracks[0]))
+    mixedAudio = pydub.AudioSegment.from_file(firstTrackPath, format='wav')  # load first track
+    outputMix.append(mixedAudio)  # append first track
+    # end init
+
+    '''
+    for index in enumerate(tracks):  # load tracks
+    
+        singleTrackPath = pathlib.Path(str(multiTrackPath) + '/{}'.format(index[1]))  # append single track name
+    
+        # begin append and mix track
+        tracksObjects.append(Track(singleTrackPath))  # store track object
+    
+        if index[0] != 0:
+            segment = tracksObjects[-1].getPydubTrack()  # get track to overlay
+            mix = outputMix[-1].overlay(segment)  # overlay to output mix
+            outputMix.append(mix)  # append new mix
+        # end append and mix track
+    
+    print(outputMix)
+    #play(mix)
+    mix.export("/Generated_beats/mixed_sounds.mp3", format="mp3")
+    '''
+    letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+    accompainment = []
+    for index in enumerate(letters):
+        dict = {"letter": index[1]}
+        for index2 in enumerate(tracks):
             singleTrackPath = pathlib.Path(str(multiTrackPath) + '/{}'.format(index2[1]))  # append single track name
             singleTrackPath_str = str(singleTrackPath)
-            #print(singleTrackPath_str)
+            # print(singleTrackPath_str)
 
-            if singleTrackPath_str == (
-                '/Users/PilvioSol/Desktop/TheOllator/Beats_multitrack/Beat' + str(index[1]) + '_drum.wav'):
-                #print(singleTrackPath)
-                drums.append(singleTrackPath)
-                tracksObjects.append(Track(singleTrackPath))
-
-
-print(drums[0])
-for index2 in enumerate(tracks):
-    singleTrackPath = pathlib.Path(str(multiTrackPath) + '/{}'.format(index2[1]))  # append single track name
-    singleTrackPath_str = str(singleTrackPath)
-    if 'drum' not in singleTrackPath_str and 'A_' in singleTrackPath_str:
-        print(singleTrackPath)
-        segment = tracksObjects[-1].getPydubTrack()  # get track to overlay
-        mix = outputMix[-1].overlay(segment)  # overlay to output mix
-        outputMix.append(mix)  # append new mix
+            if singleTrackPath_str.endswith(index[1] + '_drum.wav'):
+                # print(singleTrackPath)
+                drums.append({"track": Track(singleTrackPath), "letter": index[1]})
+            elif singleTrackPath_str.endswith(index[1] + '_melody.wav'):
+                dict["melody"] = Track(singleTrackPath)
+            elif singleTrackPath_str.endswith(index[1] + '_harmony.wav'):
+                dict["harmony"] = Track(singleTrackPath)
+            elif singleTrackPath_str.endswith(index[1] + '_bass.wav'):
+                dict["bass"] = Track(singleTrackPath)
+        accompainment.append(dict)
+    exportMixes(drums, accompainment)
 
 
-play(mix)
+def exportMixes(drums, accompainments):
+    for drum in drums:
+        for accompainment in accompainments:
+            mix = drum["track"].getPydubTrack().overlay(accompainment["melody"].getPydubTrack())
+            mix = mix.overlay(accompainment["harmony"].getPydubTrack())
+            mix = mix.overlay(accompainment["bass"].getPydubTrack())
+            play(mix)
+            input("hjc")
 
 
-#print(tracksObjects)
+    '''print(drums[0])
+    for index2 in enumerate(tracks):
+        singleTrackPath = pathlib.Path(str(multiTrackPath) + '/{}'.format(index2[1]))  # append single track name
+        singleTrackPath_str = str(singleTrackPath)
+        if 'drum' not in singleTrackPath_str and 'A_' in singleTrackPath_str:
+            print(singleTrackPath)
+            segment = tracksObjects[-1].getPydubTrack()  # get track to overlay
+            mix = outputMix[-1].overlay(segment)  # overlay to output mix
+            outputMix.append(mix)  # append new mix
+
+    play(mix)'''
 
 
-
-'''   
-for index in enumerate(tracks):
-    singleTrackPath = pathlib.Path(str(multiTrackPath) + '/{}'.format(index[1]))  # append single track name
-    singleTrackPath_str= str(singleTrackPath)
-    if singleTrackPath_str.endswith('_drum'):
-'''
+if __name__ == "__main__":
+    splitTracks()
