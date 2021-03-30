@@ -137,6 +137,12 @@ def bella():
     return render_template("index.html")
 
 
+@app.route('/sampler/')
+def sampler():
+    print("!!!!!!!!!!!BELLA!!!!!!!!!!!!\n\n")
+    return render_template("sampler.html")
+
+
 @app.route('/fileUpload', methods=['POST'])
 def fileUpload():
     if request.method == 'POST':
