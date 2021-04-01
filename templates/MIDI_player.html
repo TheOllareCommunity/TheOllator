@@ -1,0 +1,20 @@
+<html>
+	<head>
+		<script src='https://surikov.github.io/webaudiofont/npm/dist/WebAudioFontPlayer.js'></script>
+		<script src='https://surikov.github.io/webaudiofontdata/sound/0250_SoundBlasterOld_sf2.js'></script>
+		<script>
+			var AudioContextFunc = window.AudioContext || window.webkitAudioContext;
+			var audioContext = new AudioContextFunc();
+			var player=new WebAudioFontPlayer();
+			player.loader.decodeAfterLoading(audioContext, '_tone_0250_SoundBlasterOld_sf2');
+			function play(){
+				player.queueWaveTable(audioContext, audioContext.destination
+					, _tone_0250_SoundBlasterOld_sf2, 0, 12*4+7, 2);
+				return false;
+			}
+		</script>
+	</head>
+	<body>
+		<p><a href='javascript:play();'>Hello, world!</a></p>
+	</body>
+</html>
