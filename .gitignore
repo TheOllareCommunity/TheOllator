@@ -5,4 +5,5 @@ __pycache__
 .flask_session
 .spotify_caches
 .vscode
-.Generated_beats
+
+Generated_beats/
