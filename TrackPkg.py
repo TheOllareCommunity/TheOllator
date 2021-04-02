@@ -4,7 +4,7 @@ import librosa
 import pydub
 from pydub import playback
 from pydub.playback import play
-import ffmpeg
+
 
 '''
 CLASS Track:
