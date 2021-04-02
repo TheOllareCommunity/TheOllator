@@ -136,6 +136,16 @@ def bella():
     print("!!!!!!!!!!!BELLA!!!!!!!!!!!!\n\n")
     return render_template("index.html")
 
+@app.route('/MIDI_player/')
+def MIDI_player():
+    print("!!!!!!!!!!!BELLA!!!!!!!!!!!!\n\n")
+    return render_template("MIDI_player.html")
+
+@app.route('/MIDI_loader/')
+def MIDI_loader():
+    print("!!!!!!!!!!!BELLA!!!!!!!!!!!!\n\n")
+    return render_template("MIDI_loader.html")
+
 
 @app.route('/fileUpload', methods=['POST'])
 def fileUpload():
