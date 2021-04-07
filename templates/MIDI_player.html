@@ -19,10 +19,7 @@
 			}
 
 			//attach a click listener to a play button
-			document.getElementById('startbutton')?.addEventListener('click', async () => {
-				await Tone.start()
-				console.log('audio is ready')
-			})
+			document.getElementById('startbutton')?.addEventListener('click', start)
 		</script>
 	</head>
 	<body>
