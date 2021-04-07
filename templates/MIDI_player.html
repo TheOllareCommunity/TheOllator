@@ -2,6 +2,11 @@
 	<head>
 		<script src='https://surikov.github.io/webaudiofont/npm/dist/WebAudioFontPlayer.js'></script>
 		<script src='https://surikov.github.io/webaudiofontdata/sound/0250_SoundBlasterOld_sf2.js'></script>
+		<script src="{{ url_for('static', filename='Tone.js') }}" type="text/javascript"></script>
+		<script
+			type="module"
+			src="{{ url_for('static', filename='Metronome.js') }}"
+		></script>
 		<script>
 			var AudioContextFunc = window.AudioContext || window.webkitAudioContext;
 			var audioContext = new AudioContextFunc();
@@ -12,9 +17,21 @@
 					, _tone_0250_SoundBlasterOld_sf2, 0, 12*4+7, 2);
 				return false;
 			}
+
+			//attach a click listener to a play button
+			document.getElementById('startbutton')?.addEventListener('click', async () => {
+				await Tone.start()
+				console.log('audio is ready')
+			})
 		</script>
 	</head>
 	<body>
 		<p><a href='javascript:play();'>Hello, world!</a></p>
+	<button id="startbutton" onclick="start()">Start</button>
+	<button onclick="stop()">Stop</button>
+	<form>
+		<input id="bpm" type="number" value="60">
+		<button type="button" onclick="submitBPM()">Enter BPM</button>
+	</form>
 	</body>
 </html>
