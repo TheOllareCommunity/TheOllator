@@ -30,10 +30,12 @@ function play_MIDI(midi){
 )}
 
 function dummy_play(){
+
     player.loader.decodeAfterLoading(audioContext, 'https://tonejs.github.io/audio/berklee/gong_1.mp3');
     player.queueWaveTable(audioContext, audioContext.destination
     	, _tone_0250_SoundBlasterOld_sf2, 0, 12*4+7, 2);
     return false;
+
     getAudioContext().resume();
 }
 
