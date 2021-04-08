@@ -1,20 +1,21 @@
 <html>
 	<head>
-		<script src='https://surikov.github.io/webaudiofont/npm/dist/WebAudioFontPlayer.js'></script>
-		<script src='https://surikov.github.io/webaudiofontdata/sound/0250_SoundBlasterOld_sf2.js'></script>
-		<script>
-			var AudioContextFunc = window.AudioContext || window.webkitAudioContext;
-			var audioContext = new AudioContextFunc();
-			var player=new WebAudioFontPlayer();
-			player.loader.decodeAfterLoading(audioContext, '_tone_0250_SoundBlasterOld_sf2');
-			function play(){
-				player.queueWaveTable(audioContext, audioContext.destination
-					, _tone_0250_SoundBlasterOld_sf2, 0, 12*4+7, 2);
-				return false;
-			}
-		</script>
+
 	</head>
 	<body>
-		<p><a href='javascript:play();'>Hello, world!</a></p>
+		<!--<p><a href='javascript:play();'>Hello, world!</a></p> -->
+	<button id="playpause">Play/Pause</button>
+
+ <form>
+  <input id="bpm" type="number" value="60">
+  <button type="button" onclick="submitBPM()">Enter BPM</button>
+ </form>
+
+	<script src='https://surikov.github.io/webaudiofont/npm/dist/WebAudioFontPlayer.js'></script>
+		<script src='https://surikov.github.io/webaudiofontdata/sound/0250_SoundBlasterOld_sf2.js'></script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/tone/0.12.63/Tone.js'></script>
+		<!--<script src="{{ url_for('static', filename='Tone.js') }}" type="text/javascript"></script> -->
+		<script src="{{ url_for('static', filename='Metronome.js') }}" type="module" ></script>
 	</body>
+
 </html>
