@@ -66,23 +66,19 @@ def getArtistFeatures(fromInput=False):  # shows acoustic features for tracks fo
 
 
 class SpotifyFeatures:
-    def __init__(self, energy=0, loudness=0, acousticness=0, valence=0, tempo=0, danceability=0, time_signature=0):
+    def __init__(self, name='', energy=0, valence=0, tempo=0, danceability=0, mode=0):
+        self._name = name
         self._energy = energy
-        self._loudness = loudness
-        self._acousticness = acousticness
         self._valence = valence
         self._tempo = tempo
         self._danceability = danceability
-        self._time_signature = time_signature
+        self._mode = mode
+
+    def getName(self):
+        return self._name
 
     def getEnergy(self):
         return self._energy
-
-    def getLoudness(self):
-        return self._loudness
-
-    def getAcousticness(self):
-        return self._acousticness
 
     def getValence(self):
         return self._valence
@@ -93,17 +89,16 @@ class SpotifyFeatures:
     def getDanceability(self):
         return self._danceability
 
-    def getTimeSignature(self):
-        return self._time_signature
+    def getMode(self):
+        return self._mode
 
     def getNumpyArray(self):
-        return numpy.array([self._energy,
-                            self._loudness,
-                            self._acousticness,
+        return numpy.array([self._name,
+                            self._energy,
                             self._valence,
                             self._tempo,
                             self._danceability,
-                            self._time_signature])
+                            self._mode])
 
 
 def getMidpoint(featuresArray):

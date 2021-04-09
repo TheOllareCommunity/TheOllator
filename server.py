@@ -20,32 +20,76 @@ Run app.py
 """
 
 import os
-from flask import Flask, session, request, redirect, render_template,flash, url_for, send_from_directory
+from flask import Flask, session, request, redirect, render_template, flash, url_for, send_from_directory
 from werkzeug.utils import secure_filename
 from flask_session import Session
 from ClassificationPkg import getClassification
 import spotipy
 import uuid
 import pathlib
+from PlaylistPkg import getFeaturesArray
+import sqlite3
+
+con = sqlite3.connect('db/db.db')
+cur = con.cursor()
 
 
+# ---------------------DB UPDATE TEST
+
+# call this function to add beats to the DB
+def updateDb(playlistID='spotify:playlist:1Rd3nbOXI3Jlui4lmv4GGH'):
+    songs = getFeaturesArray(playlistID);
+
+    for song in songs:
+        harmonyID = song.getName()[5];
+        drumsID = song.getName()[4];
+        harmony_folderPath = "Beat" + harmonyID;
+        drums_folderPath = "Beat" + drumsID;
+
+        #checks that the harmonyID is unique
+        cur.execute("SELECT ID_Harmony FROM Harmony WHERE ID_Harmony=?", harmonyID)
+        if not cur.fetchall():
+            cur.execute("INSERT INTO Harmony(ID_Harmony, FolderPath) VALUES(?, ?)", (harmonyID, harmony_folderPath))
+
+        # checks that the drumsID is unique
+        cur.execute("SELECT ID_Drums FROM Drums WHERE ID_Drums=?", drumsID)
+        if not cur.fetchall():
+            cur.execute("INSERT INTO Drums(ID_Drums, FolderPath) VALUES(?, ?)", (drumsID, drums_folderPath))
+
+        #checks that the combination of harmony and drums aren't repeated
+        cur.execute("SELECT ID_Beat FROM Beat WHERE ID_Drums=? AND ID_Harmony=?", (drumsID,harmonyID))
+        if not cur.fetchall():
+            cur.execute("INSERT INTO Beat(ID_Harmony, ID_Drums, Valence, Energy, Mode, Danceability) VALUES(?, ?, ?, ?, ? ,?)",
+                        (harmonyID, drumsID, song.getValence(), song.getEnergy(), song.getMode(),
+                         song.getDanceability()))
+
+    #cur.execute("SELECT * FROM Beat")
+    #print(cur.fetchall())
+
+    # We can also close the connection if we are done with it.
+    # Just be sure any changes have been committed or they will be lost.
+    con.commit()
+    con.close()
 
 # upload file parameters
 UPLOAD_FOLDER = '/home/OLLAREGANG/beats'
 ALLOWED_EXTENSIONS = {'wav', 'aiff', 'caf', 'flac', 'mp3'}
+
 
 # upload file format control
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-#path to session cache
+
+# path to session cache
 def session_cache_path():
     return caches_folder + session.get('uuid')
 
-#flask initialization?
+
+# flask initialization?
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER #
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER  #
 
 os.environ['SPOTIPY_CLIENT_ID'] = '7ce43cbf9883427e84fa7581dbac0f83'
 os.environ['SPOTIPY_CLIENT_SECRET'] = 'b60c4489024d403c911865b67d264d88'
@@ -63,7 +107,6 @@ Session(app)
 caches_folder = './.spotify_caches/'
 if not os.path.exists(caches_folder):
     os.makedirs(caches_folder)
-
 
 
 # the main page is the login page
@@ -151,11 +194,10 @@ def MIDI_loader():
 def fileUpload():
     if request.method == 'POST':
 
-        #checks the file's origin form
+        # checks the file's origin form
         if 'uploadedBeat' not in request.files:
             flash('No file part')
             return redirect(request.url)
-
 
         file = request.files['uploadedBeat']
         print('File')
@@ -170,19 +212,17 @@ def fileUpload():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(UPLOAD_FOLDER, filename))
-            #to open uploaded file
-            #return redirect(url_for('uploaded_file', filename=filename));
+            # to open uploaded file
+            # return redirect(url_for('uploaded_file', filename=filename));
             return redirect('/bella');
 
 
-
-
-
-#load file
+# load file
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     print("prova")
-    return send_from_directory(UPLOAD_FOLDER,filename)
+    return send_from_directory(UPLOAD_FOLDER, filename)
+
 
 @app.route('/playlist')
 def playlist():

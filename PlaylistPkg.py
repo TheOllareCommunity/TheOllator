@@ -208,51 +208,44 @@ def getFeaturesArray(playlistId='spotify:playlist:49LLb0A1u7U88QTc6cRDAX'):
     # print(str(songs))
     # print(str(songs).split(','))
 
+    songNames = str(sp.playlist_items(pl_id, fields='items.track.name')).split(", ")
     stringa = str(sp.playlist_items(pl_id, fields='items.track.id'))
     stri = stringa.split(", ")
 
     for i in range(len(stri)):
         text = (stri)[i]
-
         m = re.search('id\': \'(.+?)\'}}', text)
         if m:
             found = m.group(1)
             audio_features = str(sp.audio_features(found))
+
+
         n = re.search('energy\': (.+?), ', audio_features)
         if n:
-            energy = n.group(1)
-            energy = float(energy)
-
-        n = re.search('loudness\': (.+?), ', audio_features)
-        if n:
-            loudness = n.group(1)
-            loudness = float(loudness)
-
-        n = re.search('acousticness\': (.+?), ', audio_features)
-        if n:
-            acousticness = n.group(1)
-            acousticness = float(acousticness)
+            energy = float(n.group(1))
 
         n = re.search('valence\': (.+?), ', audio_features)
         if n:
-            valence = n.group(1)
-            valence = float(valence)
+            valence = float(n.group(1))
 
         n = re.search('tempo\': (.+?), ', audio_features)
         if n:
-            tempo = n.group(1)
-            tempo = float(tempo)
+            tempo = float(n.group(1))
 
         n = re.search('danceability\': (.+?), ', audio_features)
         if n:
-            danceability = n.group(1)
-            danceability = float(danceability)
+            danceability = float(n.group(1))
 
-        n = re.search('time_signature\': (.+?)}]', audio_features)
+        n = re.search('mode\': (.+?), ', audio_features)
         if n:
-            time_signature = n.group(1)
-            time_signature = float(time_signature)
-        features.append(SpotifyFeatures(energy, loudness, acousticness, valence, tempo, danceability, time_signature))
+            mode = int(n.group(1))
+
+        #gets the name of the song
+        songName = re.search('name\': \'(.+?)\'', songNames[i])
+        if songName:
+            songName = str(songName.group(1))
+
+        features.append(SpotifyFeatures(songName, energy, valence, tempo, danceability, mode))
     return features
 
 def getPlaylistMidpoint(playlistId='spotify:playlist:49LLb0A1u7U88QTc6cRDAX'):
