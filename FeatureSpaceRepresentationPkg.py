@@ -1,5 +1,6 @@
-from FeaturesPkg import SpotifyFeatures
+from SpotifyFeatures import SpotifyFeatures
 from PlaylistPkg import getFeaturesArray
+from db import getFeaturesFromDb
 
 '''
 class FeatureSpaceRepresentation:
@@ -12,8 +13,9 @@ class FeatureSpaceRepresentation:
 
 
 class FeatureSpaceRepresentation:
-    def __init__(self, playlistId='spotify:playlist:4qisgl4gzT7ATcUbJKZirO'):
-        self._classes = getFeaturesArray(playlistId)
+    def __init__(self):
+        self._classes = getFeaturesFromDb()
+        print(self._classes);
 
     def getClasses(self):
         return self._classes
