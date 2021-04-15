@@ -19,12 +19,12 @@ def getClassification(playlistId='spotify:playlist:0XgEPjlWTX4g4HjBNhtZIL'):
     model = KNeighborsClassifier(n_neighbors=1)
     representation = FeatureSpaceRepresentation()
     classes = representation.getClasses()
-    numpyMatrix = numpy.zeros((0, 7))
+    numpyMatrix = numpy.zeros((0, 5)) #da rendere più generico (estrai la lunghezza dall'array di features)
     labels_gt = numpy.array([])
     for index in enumerate(classes):
-        npArray = index[1].getNumpyArray()
+        npArray = index[1].getNumericFeatures()
         numpyMatrix = numpy.vstack((numpyMatrix, npArray))
-        labels_gt = numpy.append(labels_gt,index[0])
+        labels_gt = numpy.append(labels_gt, index[0])
     model.fit(numpyMatrix, labels_gt)
 
     labels = model.predict(midpoint.reshape(1, -1))

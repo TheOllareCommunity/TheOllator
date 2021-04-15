@@ -6,21 +6,22 @@ from pydub import playback, effects
 
 from TrackPkg import Track, getTracks
 from PlaylistPkg import menu as playlistMenu
-from FeaturesPkg import menu as featureMenu
+from SpotifyFeatures import menu as featureMenu
 from ClassificationPkg import getClassification
+from server import con
 
 
 def mainMenu():
     usrinput = input("\ntype \"playlist\" to access PlaylistPkg menu,"
                      " \"features\" to access FeaturePkg menu,"
                      "\"get_prediction\" to get playlist prediction, q to quit\n")
-    if usrinput == "playlist":
+    if usrinput == "1":
         playlistMenu()
         return True
-    elif usrinput == "features":
+    elif usrinput == "2":
         featureMenu()
         return True
-    elif usrinput == "get_prediction":
+    elif usrinput == "3":
         getClassification()
         return True
     elif usrinput == "q":
@@ -33,13 +34,8 @@ def mainMenu():
         return True
 
 
-print("OLLARE")
-time.sleep(1)
-print("THE")
-time.sleep(1)
-print("GANG")
-time.sleep(1)
-
 flag = mainMenu()
 while flag:
     flag = mainMenu()
+
+con.close()

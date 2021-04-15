@@ -7,7 +7,7 @@ import re
 
 from pprint import pprint
 from SpotipyEnvironmentPkg import SpotipyEnvironment
-from FeaturesPkg import SpotifyFeatures, getMidpoint
+from SpotifyFeatures import SpotifyFeatures, getMidpoint
 
 '''
 getPlaylistIds(fromInput=False):
@@ -246,6 +246,7 @@ def getFeaturesArray(playlistId='spotify:playlist:49LLb0A1u7U88QTc6cRDAX'):
             songName = str(songName.group(1))
 
         features.append(SpotifyFeatures(songName, energy, valence, tempo, danceability, mode))
+
     return features
 
 def getPlaylistMidpoint(playlistId='spotify:playlist:49LLb0A1u7U88QTc6cRDAX'):
