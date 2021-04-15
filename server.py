@@ -38,13 +38,13 @@ cur = con.cursor()
 
 # call this function to add beats to the DB
 def updateDb(playlistID='spotify:playlist:1Rd3nbOXI3Jlui4lmv4GGH'):
-    songs = getFeaturesArray(playlistID);
+    songs = getFeaturesArray(playlistID)
 
     for song in songs:
-        harmonyID = song.getName()[5];
-        drumsID = song.getName()[4];
-        harmony_folderPath = "Beat" + harmonyID;
-        drums_folderPath = "Beat" + drumsID;
+        harmonyID = song.getName()[5]
+        drumsID = song.getName()[4]
+        harmony_folderPath = "Beat" + harmonyID
+        drums_folderPath = "Beat" + drumsID
 
         #checks that the harmonyID is unique
         cur.execute("SELECT ID_Harmony FROM Harmony WHERE ID_Harmony=?", harmonyID)
@@ -214,7 +214,7 @@ def fileUpload():
             file.save(os.path.join(UPLOAD_FOLDER, filename))
             # to open uploaded file
             # return redirect(url_for('uploaded_file', filename=filename));
-            return redirect('/bella');
+            return redirect('/bella')
 
 
 # load file
