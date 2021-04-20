@@ -1,4 +1,5 @@
 import { dummy_play_test } from "./MIDI_player.js";
+import { play_test_sampler } from "./sampler.js";
 
 var ampEnv = new Tone.AmplitudeEnvelope({
   attack: 0.01,
@@ -31,6 +32,7 @@ function repeat(){
     ampEnv.triggerAttackRelease("64n");
     //dummy_play();
     dummy_play_test();
+    play_test_sampler();
 }
 
 function submitBPM() {

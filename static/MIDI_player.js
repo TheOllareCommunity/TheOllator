@@ -10,6 +10,16 @@ function changeInstrument(path,name){
 }
 changeInstrument('https://surikov.github.io/webaudiofontdata/sound/0290_Aspirin_sf2_file.js','_tone_0290_Aspirin_sf2_file');
 
+function load_MIDI(){
+ var request = gapi.client.drive.files.get({
+    'fileId': fileId
+  });
+  request.execute(function(resp) {
+    console.log('Title: ' + resp.title);
+    console.log('Description: ' + resp.description);
+    console.log('MIME type: ' + resp.mimeType);
+  });
+}
 
 function play_MIDI(midi){
      // load a midi file in the browser
