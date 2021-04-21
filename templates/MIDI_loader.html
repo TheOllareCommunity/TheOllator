@@ -4,7 +4,7 @@
 		<title>Tonejs Midi</title>
         <script src='https://surikov.github.io/webaudiofont/npm/dist/WebAudioFontPlayer.js'></script>
 		<script src='https://surikov.github.io/webaudiofontdata/sound/0250_SoundBlasterOld_sf2.js'></script>
-		<script src="{{ url_for('static', filename='Sampler.js') }}" type="module" ></script>
+
 		<script>
 			var AudioContextFunc = window.AudioContext || window.webkitAudioContext;
 			var audioContext = new AudioContextFunc();
@@ -23,7 +23,7 @@
 			type="text/javascript"
 			src="https://unpkg.com/@tonejs/midi"
 		></script>
-
+		<script src="{{ url_for('static', filename='Sampler.js') }}" type="text/javascript" ></script>
 	</head>
 	<body>
 		<style type="text/css">
@@ -146,6 +146,7 @@
 							document.querySelector(
 								"#FileDrop #Text"
 							).textContent = file.name;
+							Tone.start();
 							play_test_sampler(file);
 						}
 					});

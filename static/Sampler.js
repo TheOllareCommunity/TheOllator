@@ -1,38 +1,38 @@
 const sampler = new Tone.Sampler({
 			urls: {
-				A0: "Cymatics - 808 Mob Kick 5 - B.wav",
-				C1: "Cymatics - 808 Mob Kick 5 - B.wav",
-				"D#1": "Cymatics - 808 Mob Kick 5 - B.wav",
-				"F#1": "Cymatics - 808 Mob Kick 5 - B.wav",
-				A1: "Cymatics - 808 Mob Kick 5 - B.wav",
-				C2: "Cymatics - 808 Mob Kick 5 - B.wav",
-				"D#2": "Cymatics - 808 Mob Kick 5 - B.wav",
-				"F#2": "Cymatics - 808 Mob Kick 5 - B.wav",
-				A2: "Cymatics - 808 Mob Kick 5 - B.wav",
-				C3: "Cymatics - 808 Mob Kick 5 - B.wav",
-				"D#3": "Cymatics - 808 Mob Kick 5 - B.wav",
-				"F#3": "Cymatics - 808 Mob Kick 5 - B.wav",
-				A3: "Cymatics - 808 Mob Kick 5 - B.wav",
-				C4: "Cymatics - 808 Mob Kick 5 - B.wav",
-				"D#4": "Cymatics - 808 Mob Kick 5 - B.wav",
-				"F#4": "Cymatics - 808 Mob Kick 5 - B.wav",
-				A4: "Cymatics - 808 Mob Kick 5 - B.wav",
-				C5: "Cymatics - 808 Mob Kick 5 - B.wav",
-				"D#5": "Cymatics - 808 Mob Kick 5 - B.wav",
-				"F#5": "Cymatics - 808 Mob Kick 5 - B.wav",
-				A5: "Cymatics - 808 Mob Kick 5 - B.wav",
-				C6: "Cymatics - 808 Mob Kick 5 - B.wav",
-				"D#6": "Cymatics - 808 Mob Kick 5 - B.wav",
-				"F#6": "Cymatics - 808 Mob Kick 5 - B.wav",
-				A6: "Cymatics - 808 Mob Kick 5 - B.wav",
-				C7: "Cymatics - 808 Mob Kick 5 - B.wav",
-				"D#7": "Cymatics - 808 Mob Kick 5 - B.wav",
-				"F#7": "Cymatics - 808 Mob Kick 5 - B.wav",
-				A7: "Cymatics - 808 Mob Kick 5 - B.wav",
-				C8: "Cymatics - 808 Mob Kick 5 - B.wav"
+				A0: "gong_1.mp3",
+				C1: "gong_1.mp3",
+				"D#1": "gong_1.mp3",
+				"F#1": "gong_1.mp3",
+				A1: "gong_1.mp3",
+				C2: "gong_1.mp3",
+				"D#2": "gong_1.mp3",
+				"F#2": "gong_1.mp3",
+				A2: "gong_1.mp3",
+				C3: "gong_1.mp3",
+				"D#3": "gong_1.mp3",
+				"F#3": "gong_1.mp3",
+				A3: "gong_1.mp3",
+				C4: "gong_1.mp3",
+				"D#4": "gong_1.mp3",
+				"F#4": "gong_1.mp3",
+				A4: "gong_1.mp3",
+				C5: "gong_1.mp3",
+				"D#5": "gong_1.mp3",
+				"F#5": "gong_1.mp3",
+				A5: "gong_1.mp3",
+				C6: "gong_1.mp3",
+				"D#6": "gong_1.mp3",
+				"F#6": "gong_1.mp3",
+				A6: "gong_1.mp3",
+				C7: "gong_1.mp3",
+				"D#7": "gong_1.mp3",
+				"F#7": "gong_1.mp3",
+				A7: "gong_1.mp3",
+				C8: "gong_1.mp3"
 			},
 			release: 1,
-			baseUrl: "https://raw.github.com/TheOllareCommunity/TheOllator/metronome/Samples/"
+			baseUrl: "https://tonejs.github.io/audio/berklee/"
 		}).toDestination();
 
 
@@ -74,4 +74,4 @@ const sampler = new Tone.Sampler({
 		    play_MIDI();
 		}
 
-export { play_test_sampler as play_test_sampler};
+//export { play_test_sampler as play_test_sampler};
