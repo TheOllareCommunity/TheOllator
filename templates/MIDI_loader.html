@@ -4,6 +4,7 @@
 		<title>Tonejs Midi</title>
         <script src='https://surikov.github.io/webaudiofont/npm/dist/WebAudioFontPlayer.js'></script>
 		<script src='https://surikov.github.io/webaudiofontdata/sound/0250_SoundBlasterOld_sf2.js'></script>
+		<script src="{{ url_for('static', filename='Sampler.js') }}" type="module" ></script>
 		<script>
 			var AudioContextFunc = window.AudioContext || window.webkitAudioContext;
 			var audioContext = new AudioContextFunc();
@@ -22,10 +23,7 @@
 			type="text/javascript"
 			src="https://unpkg.com/@tonejs/midi"
 		></script>
-        <script
-			type="text/javascript"
-			src="{{ url_for('static', filename='MIDI_player.js') }}"
-		></script>
+
 	</head>
 	<body>
 		<style type="text/css">
@@ -148,28 +146,9 @@
 							document.querySelector(
 								"#FileDrop #Text"
 							).textContent = file.name;
-							parseFile(file);
+							play_test_sampler(file);
 						}
 					});
-			}
-
-			let currentMidi = null;
-
-			function parseFile(file) {
-				//read the file
-				const reader = new FileReader();
-				reader.onload = function (e) {
-					const midi = new Midi(e.target.result);
-                    play_MIDI(midi);
-					document.querySelector(
-						"#ResultsText"
-					).value = JSON.stringify(midi, undefined, 2);
-					document
-						.querySelector("tone-play-toggle")
-						.removeAttribute("disabled");
-					currentMidi = midi;
-				};
-				reader.readAsArrayBuffer(file);
 			}
 
 			const synths = [];

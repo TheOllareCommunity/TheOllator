@@ -32,7 +32,7 @@ const sampler = new Tone.Sampler({
 				C8: "Cymatics - 808 Mob Kick 5 - B.wav"
 			},
 			release: 1,
-			baseUrl: "https://raw.github.com/TheOllareCommunity/TheOllator/samplershit/Samples/"
+			baseUrl: "https://raw.github.com/TheOllareCommunity/TheOllator/metronome/Samples/"
 		}).toDestination();
 
 
