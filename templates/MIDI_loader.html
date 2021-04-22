@@ -111,7 +111,7 @@
 		</tone-content>
 
 		<script type="text/javascript">
-		/*    if (
+		       if (
 				!(
 					window.File &&
 					window.FileReader &&
@@ -146,11 +146,12 @@
 							document.querySelector(
 								"#FileDrop #Text"
 							).textContent = file.name;
+							console.log(file);
 							Tone.start();
 							play_test_sampler(file);
 						}
 					});
-			} */
+			}
 
 			const synths = [];
 			document
@@ -158,7 +159,7 @@
 				.addEventListener("play", (e) => {
 					const playing = e.detail;
 					Tone.start();
-					play_test_sampler("/Users/PilvioSol/Desktop/Beats_Spotify/BeatE");
+					play_test_sampler("C:\Users\eugep\Desktop\EUGE\MAE\Creative Programming\Beats\BeatF\BeatF_drum.mid");
 					/* if (playing && currentMidi) {
 						const now = Tone.now() + 0.5;
 
@@ -188,8 +189,8 @@
 						while (synths.length) {
 							const synth = synths.shift();
 							synth.disconnect();
-						} */
-					}
+						}
+					}*/
 				});
 		</script>
 	</body>

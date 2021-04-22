@@ -19,7 +19,11 @@ const sampler = new Tone.Sampler({
 				const midi = new Midi(e.target.result);
 				currentMidi = midi;
 			};
+
+			file= new File([],"C:\Users\eugep\Desktop\EUGE\MAE\Creative Programming\Beats\BeatF\BeatF_drum.mid");
+			//console.log(reader.readAsArrayBuffer(file));
 			reader.readAsArrayBuffer(file);
+
 		}
 
         function play_MIDI() {
