@@ -4,6 +4,7 @@
 		<title>Tonejs Midi</title>
         <script src='https://surikov.github.io/webaudiofont/npm/dist/WebAudioFontPlayer.js'></script>
 		<script src='https://surikov.github.io/webaudiofontdata/sound/0250_SoundBlasterOld_sf2.js'></script>
+		<script type=text/javascript src="{{url_for('static', filename='jquery.js') }}"></script>
 
 		<script>
 			var AudioContextFunc = window.AudioContext || window.webkitAudioContext;
@@ -110,6 +111,22 @@
 			<tone-play-toggle></tone-play-toggle>
 		</tone-content>
 
+
+			<script type=text/javascript>
+			  $(function() {
+				$('textarea#ResultsText').bind('click', function() {
+				  $.getJSON('http://127.0.0.1:8080' + '/getMidi', {
+					a: 1,
+					b: 2
+				  }, function(data) {
+					$("#ResultsText").text(data.result);
+				  });
+				  return false;
+				});
+			  });
+			</script>
+
+
 		<script type="text/javascript">
 		       if (
 				!(
@@ -141,6 +158,7 @@
 					.addEventListener("change", (e) => {
 						//get the files
 						const files = e.target.files;
+
 						if (files.length > 0) {
 							const file = files[0];
 							document.querySelector(
@@ -193,5 +211,7 @@
 					}*/
 				});
 		</script>
+
+
 	</body>
 </html>

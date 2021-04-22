@@ -20,7 +20,7 @@ Run app.py
 """
 
 import os
-from flask import Flask, session, request, redirect, render_template,flash, url_for, send_from_directory
+from flask import Flask, jsonify, session, request, redirect, render_template,flash, url_for, send_from_directory
 from werkzeug.utils import secure_filename
 from flask_session import Session
 from ClassificationPkg import getClassification
@@ -145,6 +145,18 @@ def MIDI_player():
 def MIDI_loader():
     print("!!!!!!!!!!!BELLA!!!!!!!!!!!!\n\n")
     return render_template("MIDI_loader.html")
+
+
+
+@app.route('/getMidi')
+def getMidi():
+    ID_Beat = request.args.get('ID_Beat', 0, type=int)
+    ID_Harmony = request.args.get('ID_Harmony', 0, type=int)
+    #get filepath from db
+    filepath = 'Beats/BeatJ_drums.mid'
+    #pathlib.Path(__file__).parent.absolute()
+    f = open("Beats/BeatJ_drums.mid", "r")
+    return jsonify(result = f)
 
 
 @app.route('/fileUpload', methods=['POST'])

@@ -12,6 +12,8 @@ const sampler = new Tone.Sampler({
 
 		let currentMidi = null;
 
+
+
 		function parseFile(file) {
 			//read the file
 			const reader = new FileReader();
@@ -20,9 +22,10 @@ const sampler = new Tone.Sampler({
 				currentMidi = midi;
 			};
 
-			file= new File([],"C:\Users\eugep\Desktop\EUGE\MAE\Creative Programming\Beats\BeatF\BeatF_drum.mid");
+            const blob = new Blob([// JSON --- FROM SERVER    , {type : 'application/json'});
+			//file= new File([],"C:\Users\daveg\OneDrive\Documenti\GitHub\TheOllator\Beats\BeatJ_drums.mid");
 			//console.log(reader.readAsArrayBuffer(file));
-			reader.readAsArrayBuffer(file);
+			reader.readAsArrayBuffer(blob);
 
 		}
 
