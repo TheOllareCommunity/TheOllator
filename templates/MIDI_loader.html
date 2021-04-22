@@ -107,11 +107,11 @@
 					placeholder="json output..."
 				></textarea>
 			</div>
-			<tone-play-toggle disabled></tone-play-toggle>
+			<tone-play-toggle></tone-play-toggle>
 		</tone-content>
 
 		<script type="text/javascript">
-			if (
+		/*    if (
 				!(
 					window.File &&
 					window.FileReader &&
@@ -150,15 +150,18 @@
 							play_test_sampler(file);
 						}
 					});
-			}
+			} */
 
 			const synths = [];
 			document
 				.querySelector("tone-play-toggle")
 				.addEventListener("play", (e) => {
 					const playing = e.detail;
-					if (playing && currentMidi) {
+					Tone.start();
+					play_test_sampler("/Users/PilvioSol/Desktop/Beats_Spotify/BeatE");
+					/* if (playing && currentMidi) {
 						const now = Tone.now() + 0.5;
+
 						currentMidi.tracks.forEach((track) => {
 							//create a synth for each track
 							const synth = new Tone.PolySynth(Tone.Synth, {
@@ -185,7 +188,7 @@
 						while (synths.length) {
 							const synth = synths.shift();
 							synth.disconnect();
-						}
+						} */
 					}
 				});
 		</script>

@@ -1,38 +1,12 @@
 const sampler = new Tone.Sampler({
 			urls: {
-				A0: "gong_1.mp3",
-				C1: "gong_1.mp3",
-				"D#1": "gong_1.mp3",
-				"F#1": "gong_1.mp3",
-				A1: "gong_1.mp3",
-				C2: "gong_1.mp3",
-				"D#2": "gong_1.mp3",
-				"F#2": "gong_1.mp3",
-				A2: "gong_1.mp3",
-				C3: "gong_1.mp3",
-				"D#3": "gong_1.mp3",
-				"F#3": "gong_1.mp3",
-				A3: "gong_1.mp3",
-				C4: "gong_1.mp3",
-				"D#4": "gong_1.mp3",
-				"F#4": "gong_1.mp3",
-				A4: "gong_1.mp3",
-				C5: "gong_1.mp3",
-				"D#5": "gong_1.mp3",
-				"F#5": "gong_1.mp3",
-				A5: "gong_1.mp3",
-				C6: "gong_1.mp3",
-				"D#6": "gong_1.mp3",
-				"F#6": "gong_1.mp3",
-				A6: "gong_1.mp3",
-				C7: "gong_1.mp3",
-				"D#7": "gong_1.mp3",
-				"F#7": "gong_1.mp3",
-				A7: "gong_1.mp3",
-				C8: "gong_1.mp3"
+				C2: "kick.mp3",
+				D2: "snare.mp3",
+				E2: "hihat.mp3",
 			},
 			release: 1,
-			baseUrl: "https://tonejs.github.io/audio/berklee/"
+			baseUrl: "https://tonejs.github.io/audio/drum-samples/CR78/"
+
 		}).toDestination();
 
 
