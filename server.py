@@ -24,6 +24,7 @@ from flask import Flask, jsonify, session, request, redirect, render_template,fl
 from werkzeug.utils import secure_filename
 from flask_session import Session
 from ClassificationPkg import getClassification
+from db import getMIDIfromBeatID
 import spotipy
 import uuid
 import pathlib
@@ -137,10 +138,9 @@ def currently_playing():
 def home():
     return render_template("index.html")
 
-@app.route('/MIDI_player/')
+@app.route('/DAW/')
 def MIDI_player():
-    print("!!!!!!!!!!!BELLA!!!!!!!!!!!!\n\n")
-    return render_template("MIDI_player.html")
+    return render_template("DAW.html")
 
 @app.route('/MIDI_loader/')
 def MIDI_loader():
@@ -203,12 +203,9 @@ def uploaded_file(filename):
 def playlistForm():
     playlist_url = request.args.get("playlist_url")
     if playlist_url.startswith('spotify:playlist:'):
-        songClass = getClassification(playlist_url)
-       #old implementation, downloads the beat directly as a wav file
-       # beat_url = "https://github.com/waddafunk/Rhythmic_Automatic_Composition/blob/main/complete_beats/trapshit" + str(
-       #     songClass) + ".wav?raw=true"
-
-        return redirect(beat_url)
+        beatID = getClassification(playlist_url)
+        messages= getMIDIfromBeatID(beatID)
+        return render_template('DAW.html', harmonyPath=messages[0],drumsPath=messages[1])
 
     return "ERROR"
 

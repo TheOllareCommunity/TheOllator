@@ -1,13 +1,9 @@
-
 from PlaylistPkg import getFeaturesArray
 import sqlite3
 from SpotifyFeatures import SpotifyFeatures
 
 
-
-
 def startDb():
-
     global con
     global cur
     con = sqlite3.connect('db/db.db')
@@ -28,7 +24,7 @@ def updateDb(playlistID='spotify:playlist:1Rd3nbOXI3Jlui4lmv4GGH'):
         harmony_folderPath = "Beat" + harmonyID;
         drums_folderPath = "Beat" + drumsID;
 
-        #checks that the harmonyID is unique
+        # checks that the harmonyID is unique
         cur.execute("SELECT ID_Harmony FROM Harmony WHERE ID_Harmony=?", harmonyID)
         if not cur.fetchall():
             cur.execute("INSERT INTO Harmony(ID_Harmony, FolderPath) VALUES(?, ?)", (harmonyID, harmony_folderPath))
@@ -38,15 +34,16 @@ def updateDb(playlistID='spotify:playlist:1Rd3nbOXI3Jlui4lmv4GGH'):
         if not cur.fetchall():
             cur.execute("INSERT INTO Drums(ID_Drums, FolderPath) VALUES(?, ?)", (drumsID, drums_folderPath))
 
-        #checks that the combination of harmony and drums aren't repeated
-        cur.execute("SELECT ID_Beat FROM Beat WHERE ID_Drums=? AND ID_Harmony=?", (drumsID,harmonyID))
+        # checks that the combination of harmony and drums aren't repeated
+        cur.execute("SELECT ID_Beat FROM Beat WHERE ID_Drums=? AND ID_Harmony=?", (drumsID, harmonyID))
         if not cur.fetchall():
-            cur.execute("INSERT INTO Beat(ID_Harmony, ID_Drums, Valence, Energy, Mode, Danceability) VALUES(?, ?, ?, ?, ? ,?)",
-                        (harmonyID, drumsID, song.getValence(), song.getEnergy(), song.getMode(),
-                         song.getDanceability()))
+            cur.execute(
+                "INSERT INTO Beat(ID_Harmony, ID_Drums, Valence, Energy, Mode, Danceability) VALUES(?, ?, ?, ?, ? ,?)",
+                (harmonyID, drumsID, song.getValence(), song.getEnergy(), song.getMode(),
+                 song.getDanceability()))
 
-    #cur.execute("SELECT * FROM Beat")
-    #print(cur.fetchall())
+    # cur.execute("SELECT * FROM Beat")
+    # print(cur.fetchall())
 
     # We can also close the connection if we are done with it.
     # Just be sure any changes have been committed or they will be lost.
@@ -54,7 +51,7 @@ def updateDb(playlistID='spotify:playlist:1Rd3nbOXI3Jlui4lmv4GGH'):
 
 
 def getFeaturesFromDb():
-    cur.execute("SELECT ID_Beat, Energy, Valence, Danceability, Mode  FROM Beat") #db response
+    cur.execute("SELECT ID_Beat, Energy, Valence, Danceability, Mode  FROM Beat")  # db response
     songs = cur.fetchall()
     features = []
     for song in songs:
@@ -67,3 +64,18 @@ def getFeaturesFromDb():
         features.append(SpotifyFeatures(songName, energy, valence, tempo, danceability, mode))
 
     return features;
+
+
+def getMIDIfromBeatID(beatID=None):
+    harmonyPath = None
+    drumPath = None
+    print("===============================================")
+    print(beatID)
+    if beatID != None:
+        cur.execute("SELECT FolderPath from Harmony WHERE Harmony.ID_Harmony = (SELECT ID_Harmony from Beat where ID_Beat=?)", (str(beatID),))
+        harmonyPath = cur.fetchall()
+        cur.execute("SELECT FolderPath from Drums WHERE Drums.ID_Drums = (SELECT ID_Drums from Beat where ID_Beat=?)", (str(beatID),))
+        drumPath = cur.fetchall()
+        print(harmonyPath)
+        print(drumPath)
+    return (harmonyPath, drumPath)

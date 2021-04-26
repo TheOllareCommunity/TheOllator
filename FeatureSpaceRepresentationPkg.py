@@ -15,7 +15,7 @@ class FeatureSpaceRepresentation:
 class FeatureSpaceRepresentation:
     def __init__(self):
         self._classes = getFeaturesFromDb()
-        print(self._classes);
+
 
     def getClasses(self):
         return self._classes

@@ -1,5 +1,8 @@
 import { dummy_play_test } from "./MIDI_player.js";
-import { play_test_sampler } from "./sampler.js";
+//import { play_test_sampler } from "./sampler.js";
+
+console.log("ciaoOo")
+console.log(harmonyPath);
 
 var ampEnv = new Tone.AmplitudeEnvelope({
   attack: 0.01,
