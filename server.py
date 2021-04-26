@@ -24,6 +24,7 @@ from flask import Flask, jsonify, session, request, redirect, render_template,fl
 from werkzeug.utils import secure_filename
 from flask_session import Session
 from ClassificationPkg import getClassification
+from MIDI import MIDIFile
 import spotipy
 import uuid
 import pathlib
@@ -150,13 +151,18 @@ def MIDI_loader():
 
 @app.route('/getMidi')
 def getMidi():
+    #return redirect(url_for('static', filename='midi.mid'));
     ID_Beat = request.args.get('ID_Beat', 0, type=int)
     ID_Harmony = request.args.get('ID_Harmony', 0, type=int)
     #get filepath from db
-    filepath = 'Beats/BeatJ_drums.mid'
+    filepath = 'static/midi.mid'
     #pathlib.Path(__file__).parent.absolute()
-    f = open("Beats/BeatJ_drums.mid", "r")
-    return jsonify(result = f)
+
+    return jsonify(result = url_for('static', filename='midi.mid'))
+
+@app.route('/m')
+def getMidiRoot():
+    return url_for('static', filename='midi.mid');
 
 
 @app.route('/fileUpload', methods=['POST'])

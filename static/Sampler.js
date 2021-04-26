@@ -14,19 +14,16 @@ const sampler = new Tone.Sampler({
 
 
 
-		function parseFile(file) {
+		async function parseFile(file) {
 			//read the file
 			const reader = new FileReader();
 			reader.onload = function (e) {
 				const midi = new Midi(e.target.result);
 				currentMidi = midi;
 			};
-
-            const blob = new Blob([// JSON --- FROM SERVER    , {type : 'application/json'});
-			//file= new File([],"C:\Users\daveg\OneDrive\Documenti\GitHub\TheOllator\Beats\BeatJ_drums.mid");
-			//console.log(reader.readAsArrayBuffer(file));
-			reader.readAsArrayBuffer(blob);
-
+           url = 'http://127.0.0.1:8080//static/midi.mid'
+           let blob = await fetch(url).then(response => response.blob())
+           reader.readAsArrayBuffer(blob);
 		}
 
         function play_MIDI() {
