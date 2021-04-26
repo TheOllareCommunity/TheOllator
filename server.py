@@ -20,10 +20,11 @@ Run app.py
 """
 
 import os
-from flask import Flask, session, request, redirect, render_template, flash, url_for, send_from_directory
+from flask import Flask, jsonify, session, request, redirect, render_template,flash, url_for, send_from_directory
 from werkzeug.utils import secure_filename
 from flask_session import Session
 from ClassificationPkg import getClassification
+from MIDI import MIDIFile
 import spotipy
 import uuid
 import pathlib
@@ -53,7 +54,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER  #
 
 os.environ['SPOTIPY_CLIENT_ID'] = '7ce43cbf9883427e84fa7581dbac0f83'
 os.environ['SPOTIPY_CLIENT_SECRET'] = 'b60c4489024d403c911865b67d264d88'
-os.environ['SPOTIPY_REDIRECT_URI'] = 'https://OLLAREGANG.pythonanywhere.com/bella/'
+os.environ['SPOTIPY_REDIRECT_URI'] = 'http://localhost:8080/home/'
 os.environ['FLASK_ENV'] = 'development'
 projectPath = pathlib.Path(__file__).parent.absolute()  # get path of the project
 os.environ['FLASK_APP'] = '/home/OLLAREGANG/mysite/server.py'
@@ -134,9 +135,8 @@ def currently_playing():
     return "No track currently playing."
 
 
-@app.route('/bella/')
-def bella():
-    print("!!!!!!!!!!!BELLA!!!!!!!!!!!!\n\n")
+@app.route('/home/')
+def home():
     return render_template("index.html")
 
 @app.route('/MIDI_player/')
@@ -148,6 +148,23 @@ def MIDI_player():
 def MIDI_loader():
     print("!!!!!!!!!!!BELLA!!!!!!!!!!!!\n\n")
     return render_template("MIDI_loader.html")
+
+
+
+@app.route('/getMidi')
+def getMidi():
+    #return redirect(url_for('static', filename='midi.mid'));
+    ID_Beat = request.args.get('ID_Beat', 0, type=int)
+    ID_Harmony = request.args.get('ID_Harmony', 0, type=int)
+    #get filepath from db
+    filepath = 'static/midi.mid'
+    #pathlib.Path(__file__).parent.absolute()
+
+    return jsonify(result = url_for('static', filename='midi.mid'))
+
+@app.route('/m')
+def getMidiRoot():
+    return url_for('static', filename='midi.mid');
 
 
 @app.route('/fileUpload', methods=['POST'])
@@ -184,13 +201,17 @@ def uploaded_file(filename):
     return send_from_directory(UPLOAD_FOLDER, filename)
 
 
-@app.route('/playlist')
-def playlist():
+@app.route('/playlistForm')
+def playlistForm():
     playlist_url = request.args.get("playlist_url")
     if playlist_url.startswith('spotify:playlist:'):
         songClass = getClassification(playlist_url)
-        beat_url = "https://github.com/waddafunk/Rhythmic_Automatic_Composition/blob/main/complete_beats/trapshit" + str(
-            songClass) + ".wav?raw=true"
+
+
+       #old implementation, downloads the beat directly as a wav file
+       # beat_url = "https://github.com/waddafunk/Rhythmic_Automatic_Composition/blob/main/complete_beats/trapshit" + str(
+       #     songClass) + ".wav?raw=true"
+
         return redirect(beat_url)
 
     return "ERROR"
