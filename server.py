@@ -24,12 +24,10 @@ from flask import Flask, jsonify, session, request, redirect, render_template,fl
 from werkzeug.utils import secure_filename
 from flask_session import Session
 from ClassificationPkg import getClassification
-from MIDI import MIDIFile
 import spotipy
 import uuid
 import pathlib
-from PlaylistPkg import getFeaturesArray
-from db import con, cur, getFeaturesFromDb
+
 
 
 # upload file parameters
@@ -206,8 +204,6 @@ def playlistForm():
     playlist_url = request.args.get("playlist_url")
     if playlist_url.startswith('spotify:playlist:'):
         songClass = getClassification(playlist_url)
-
-
        #old implementation, downloads the beat directly as a wav file
        # beat_url = "https://github.com/waddafunk/Rhythmic_Automatic_Composition/blob/main/complete_beats/trapshit" + str(
        #     songClass) + ".wav?raw=true"

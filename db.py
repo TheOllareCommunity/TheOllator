@@ -3,8 +3,17 @@ from PlaylistPkg import getFeaturesArray
 import sqlite3
 from SpotifyFeatures import SpotifyFeatures
 
-con = sqlite3.connect('db/db.db')
-cur = con.cursor()
+
+
+
+def startDb():
+
+    global con
+    global cur
+    con = sqlite3.connect('db/db.db')
+    cur = con.cursor()
+
+    print("DB started")
 
 
 # ---------------------DB UPDATE TEST

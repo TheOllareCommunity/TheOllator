@@ -2,6 +2,7 @@ from FeatureSpaceRepresentationPkg import FeatureSpaceRepresentation
 from PlaylistPkg import getPlaylistMidpoint
 from sklearn.neighbors import KNeighborsClassifier
 import numpy
+from db import startDb
 
 '''
 getClassification(playlistURI='spotify:playlist:0XgEPjlWTX4g4HjBNhtZIL')
@@ -15,6 +16,7 @@ getClassification(playlistURI='spotify:playlist:0XgEPjlWTX4g4HjBNhtZIL')
 '''
 
 def getClassification(playlistId='spotify:playlist:0XgEPjlWTX4g4HjBNhtZIL'):
+    startDb()
     midpoint = getPlaylistMidpoint(playlistId)
     model = KNeighborsClassifier(n_neighbors=1)
     representation = FeatureSpaceRepresentation()
@@ -28,9 +30,7 @@ def getClassification(playlistId='spotify:playlist:0XgEPjlWTX4g4HjBNhtZIL'):
     model.fit(numpyMatrix, labels_gt)
 
     labels = model.predict(midpoint.reshape(1, -1))
-    print(labels)
-    print(midpoint)
-    return int(labels)
+    return int(labels) + 302 #offset ID_Beat
 
 
 if __name__ == "__main__":
