@@ -205,7 +205,7 @@ def playlistForm():
     if playlist_url.startswith('spotify:playlist:'):
         beatID = getClassification(playlist_url)
         messages= getMIDIfromBeatID(beatID)
-        return render_template('DAW.html', harmonyPath=messages[0],drumsPath=messages[1])
+        return render_template('DAW.html', harmonyPath=str(messages[0]),drumsPath=str(messages[1]))
 
     return "ERROR"
 

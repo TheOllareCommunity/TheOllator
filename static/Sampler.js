@@ -52,4 +52,4 @@ const sampler = new Tone.Sampler({
 		    play_MIDI();
 		}
 
-//export { play_test_sampler as play_test_sampler};
+export { play_test_sampler as play_test_sampler};

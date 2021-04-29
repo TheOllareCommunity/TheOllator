@@ -1,24 +1,57 @@
 import { dummy_play_test } from "./MIDI_player.js";
 //import { play_test_sampler } from "./sampler.js";
 
-console.log("ciaoOo")
-console.log(harmonyPath);
+let drumMidi = null;
+let harmonyMidi=null;
 
-var ampEnv = new Tone.AmplitudeEnvelope({
-  attack: 0.01,
-  decay: 0.2,
-  sustain: 0.1,
-  release: 0.01
- }).toMaster();
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
 
+async function parseDrums() {
+	//read the file
+	const reader = new FileReader();
+	reader.onload = function (e) {
+	    drumMidi = new Midi(e.target.result);
+	    console.log(drumMidi)
+	};
+	console.log(drumsPath);
+    let url = 'http://127.0.0.1:8080//static/MIDI/' +  drumsPath + '/' + drumsPath + '_drum.mid';
+    console.log(url);
+    let blob = await fetch(url).then(response => response.blob());
+    reader.readAsArrayBuffer(blob);
+}
 
+async function parseHarmony() {
+	//read the file
+	const reader = new FileReader();
+	reader.onload = function (e) {
+	    harmonyMidi = new Midi(e.target.result);
+	    console.log(harmonyMidi)
+	};
+	console.log(harmonyPath);
+    let url = 'http://127.0.0.1:8080//static/MIDI/' +  harmonyPath + '/' + harmonyPath + '_harmony.mid';
+    console.log(url);
+    let blob = await fetch(url).then(response => response.blob());
+    reader.readAsArrayBuffer(blob);
+}
 
-var synth = new Tone.Synth();
-synth.oscillator.type= "triangle";
-synth.connect(ampEnv);
+function repeat(){
+    //dummy_play();
+    dummy_play_test();
+    play_test_sampler();
+}
+
+function submitBPM() {
+    var bpm = document.getElementById('bpm').value;
+    Tone.Transport.bpm.value = bpm;
+}
+
 Tone.Transport.bpm.value = 60;
-
-
 
 document.getElementById('playpause').addEventListener("click", () => {
     Tone.Transport.state === "started" ? Tone.Transport.pause() : Tone.Transport.start();
@@ -30,18 +63,9 @@ Tone.Transport.start("+1");
 
 Tone.Transport.scheduleRepeat(repeat, "4n");
 
-function repeat(){
-    synth.triggerAttackRelease("B5", "64n");
-    ampEnv.triggerAttackRelease("64n");
-    //dummy_play();
-    dummy_play_test();
-    play_test_sampler();
-}
+parseDrums();
+parseHarmony();
 
-function submitBPM() {
-    var bpm = document.getElementById('bpm').value;
-    Tone.Transport.bpm.value = bpm;
-}
 
 //window.submitBPM=submitBPM;
 
