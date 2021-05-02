@@ -1,16 +1,9 @@
 import { dummy_play_test } from "./MIDI_player.js";
-//import { play_test_sampler } from "./sampler.js";
+import { play_test_sampler, set_sampler_multiplier } from "./sampler.js";
 
 let drumMidi = null;
 let harmonyMidi=null;
 
-function httpGet(theUrl)
-{
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
-    xmlHttp.send( null );
-    return xmlHttp.responseText;
-}
 
 async function parseDrums() {
 	//read the file
@@ -42,30 +35,42 @@ async function parseHarmony() {
 
 function repeat(){
     //dummy_play();
-    dummy_play_test();
-    play_test_sampler();
+    //dummy_play_test();
+    play_test_sampler(drumMidi);
 }
 
 function submitBPM() {
     var bpm = document.getElementById('bpm').value;
-    Tone.Transport.bpm.value = bpm;
+    if (bpm > 0) {
+        Tone.Transport.stop();
+        Tone.Transport.bpm.value = bpm;
+        set_sampler_multiplier(120/bpm);
+    }
+    else {
+    alert("BPM can't be <=0");
+    }
 }
 
-Tone.Transport.bpm.value = 60;
+Tone.Transport.bpm.value = 120;
 
 document.getElementById('playpause').addEventListener("click", () => {
     Tone.Transport.state === "started" ? Tone.Transport.pause() : Tone.Transport.start();
 
 })
 
+document.getElementById('bpmButton').addEventListener("click", () => {
+    submitBPM();
+
+})
+
 
 Tone.Transport.start("+1");
 
-Tone.Transport.scheduleRepeat(repeat, "4n");
+Tone.Transport.scheduleRepeat(repeat, "32m");
 
 parseDrums();
 parseHarmony();
 
-
+export{}
 //window.submitBPM=submitBPM;
 
