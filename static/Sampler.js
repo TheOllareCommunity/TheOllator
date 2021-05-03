@@ -22,7 +22,7 @@ const sampler = new Tone.Sampler({
 
 				    if (currentMidi) {
 
-					    const now = Tone.now() + 0.5;
+					    const now = Tone.now();
 					    currentMidi.tracks.forEach((track) => {
 
 
