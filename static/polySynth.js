@@ -1,24 +1,15 @@
-const sampler = new Tone.Sampler({
-    urls: {
-    	C2: "kick.mp3",
-    	D2: "snare.mp3",
-    	E2: "hihat.mp3",
-    },
-    release: 1,
-    baseUrl: "https://tonejs.github.io/audio/drum-samples/CR78/"
-
-}).toDestination();
-
-sampler.sync();
+const poly = new Tone.PolySynth();
+poly.sync();
 
 
 function play_MIDI(currentMidi) {
+    poly.toDestination();
 	if (currentMidi) {
         const now = Tone.now();
         currentMidi.tracks.forEach((track) => {
         	//schedule all of the events
         	track.notes.forEach((note) => {
-        		sampler.triggerAttackRelease(
+        		poly.triggerAttackRelease(
         			note.name,
         			note.duration,
         			note.time + now,
@@ -29,4 +20,12 @@ function play_MIDI(currentMidi) {
 	}
 }
 
-export { play_MIDI as play_test_sampler };
+function mute(){
+    poly.volume.value = -128;
+}
+
+function unmute(){
+    poly.volume.value = 0;
+}
+
+export { play_MIDI as play_test_poly, mute as mute_polysynth, unmute as unmute_polysynth };

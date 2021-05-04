@@ -72,11 +72,11 @@ if not os.path.exists(caches_folder):
 # the main page is the login page
 @app.route('/')
 def index():
-    return render_template("login.html")
+    return render_template("index.html")
 
 
 # server method to actually do the login with spotify
-@app.route('/login')
+'''app.route('/login')
 def login():
     if not session.get('uuid'):
         # Step 1. Visitor is unknown, give random ID
@@ -109,7 +109,7 @@ def sign_out():
         session.clear()
     except OSError as e:
         print("Error: %s - %s." % (e.filename, e.strerror))
-    return redirect('/')
+    return redirect('/')'''
 
 
 @app.route('/playlists')
@@ -205,7 +205,7 @@ def playlistForm():
     if playlist_url.startswith('spotify:playlist:'):
         beatID = getClassification(playlist_url)
         messages= getMIDIfromBeatID(beatID)
-        return render_template('DAW.html', harmonyPath=messages[0],drumsPath=messages[1])
+        return render_template('DAW.html', harmonyPath=str(messages[0]),drumsPath=str(messages[1]))
 
     return "ERROR"
 

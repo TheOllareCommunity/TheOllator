@@ -1,47 +1,133 @@
-import { dummy_play_test } from "./MIDI_player.js";
-//import { play_test_sampler } from "./sampler.js";
-
-console.log("ciaoOo")
-console.log(harmonyPath);
-
-var ampEnv = new Tone.AmplitudeEnvelope({
-  attack: 0.01,
-  decay: 0.2,
-  sustain: 0.1,
-  release: 0.01
- }).toMaster();
+//import { playHarmony, setHarmonyMultiplier } from "./MIDI_Harmony.js";
+import { play_test_melody, mute_melody, unmute_melody } from "./Melody.js";
+//import { playBass, setBassMultiplier } from "./MIDI_Bass.js";
+import { play_test_sampler } from "./sampler.js";
+import { play_test_poly, mute_polysynth, unmute_polysynth } from "./polySynth.js";
+import { play_test_bass, mute_bass, unmute_bass } from "./bassSynth.js";
 
 
+let drumMidi = null;
+let harmonyMidi=null;
+let bassMidi=null;
+let melodyMidi=null;
 
-var synth = new Tone.Synth();
-synth.oscillator.type= "triangle";
-synth.connect(ampEnv);
-Tone.Transport.bpm.value = 60;
 
+async function parseDrums() {
+	//read the file
+	const reader = new FileReader();
+	reader.onload = function (e) {
+	    drumMidi = new Midi(e.target.result);
+	    console.log(drumMidi)
+	};
+	console.log(drumsPath);
+    let url = 'http://127.0.0.1:8080//static/MIDI/' +  drumsPath + '/' + drumsPath + '_drum.mid';
+    console.log(url);
+    let blob = await fetch(url).then(response => response.blob());
+    reader.readAsArrayBuffer(blob);
+}
 
+async function parseHarmony() {
+	//read the file
+	const reader = new FileReader();
+	reader.onload = function (e) {
+	    harmonyMidi = new Midi(e.target.result);
+	    console.log(harmonyMidi)
+	};
+	console.log(harmonyPath);
+    let url = 'http://127.0.0.1:8080//static/MIDI/' +  harmonyPath + '/' + harmonyPath + '_harmony.mid';
+    console.log(url);
+    let blob = await fetch(url).then(response => response.blob());
+    reader.readAsArrayBuffer(blob);
+}
+
+async function parseMelody() {
+	//read the file
+	const reader = new FileReader();
+	reader.onload = function (e) {
+	    melodyMidi = new Midi(e.target.result);
+	    console.log(melodyMidi)
+	};
+	console.log(harmonyPath);
+    let url = 'http://127.0.0.1:8080//static/MIDI/' +  harmonyPath + '/' + harmonyPath + '_melody.mid';
+    console.log(url);
+    let blob = await fetch(url).then(response => response.blob());
+    reader.readAsArrayBuffer(blob);
+}
+
+async function parseBass() {
+	//read the file
+	const reader = new FileReader();
+	reader.onload = function (e) {
+	    bassMidi = new Midi(e.target.result);
+	    console.log(bassMidi)
+	};
+	console.log(harmonyPath);
+    let url = 'http://127.0.0.1:8080//static/MIDI/' +  harmonyPath + '/' + harmonyPath + '_bass.mid';
+    console.log(url);
+    let blob = await fetch(url).then(response => response.blob());
+    reader.readAsArrayBuffer(blob);
+}
+
+function repeat(){
+    play_test_melody(melodyMidi);
+    play_test_sampler(drumMidi);
+    play_test_poly(harmonyMidi);
+    play_test_bass(bassMidi);
+
+    console.log("repeat");
+}
+
+function submitBPM() {
+    var bpm = document.getElementById('bpm').value;
+    console.log("triggered");
+    if (bpm > 0) {
+        Tone.Transport.bpm.value = bpm;
+    }
+    else {
+    alert("BPM can't be <=0");
+    }
+}
+
+Tone.Transport.bpm.value = 120;
 
 document.getElementById('playpause').addEventListener("click", () => {
-    Tone.Transport.state === "started" ? Tone.Transport.pause() : Tone.Transport.start();
+        if(Tone.Transport.state === "started"){
+            Tone.Transport.pause();
+            mute_melody();
+            mute_polysynth();
+            mute_bass();
+        }
+        else{
+            unmute_melody();
+            unmute_polysynth();
+            unmute_bass();
+            Tone.Transport.start();
+        }
+    }
+)
 
+/*document.getElementById('play').addEventListener("click", () => {
+    Tone.Transport.start();
+})
+
+document.getElementById('pause').addEventListener("click", () => {
+    Tone.Transport.pause() ;
+})
+*/
+document.getElementById('bpm').addEventListener("change", () => {
+    submitBPM();
 })
 
 
 Tone.Transport.start("+1");
 
-Tone.Transport.scheduleRepeat(repeat, "4n");
+Tone.Transport.scheduleRepeat(repeat, "32m");
 
-function repeat(){
-    synth.triggerAttackRelease("B5", "64n");
-    ampEnv.triggerAttackRelease("64n");
-    //dummy_play();
-    dummy_play_test();
-    play_test_sampler();
-}
+parseDrums();
+parseHarmony();
+parseMelody();
+parseBass();
 
-function submitBPM() {
-    var bpm = document.getElementById('bpm').value;
-    Tone.Transport.bpm.value = bpm;
-}
-
+export{}
 //window.submitBPM=submitBPM;
 
