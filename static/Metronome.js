@@ -2,7 +2,7 @@
 //import { playMelody, setMelodyMultiplier } from "./MIDI_Melody.js";
 //import { playBass, setBassMultiplier } from "./MIDI_Bass.js";
 import { play_test_sampler } from "./sampler.js";
-import { play_test_poly } from "./polySynth.js";
+import { play_test_poly, mute_polysynth, unmute_polysynth } from "./polySynth.js";
 
 let drumMidi = null;
 let harmonyMidi=null;
@@ -95,8 +95,16 @@ function submitBPM() {
 Tone.Transport.bpm.value = 120;
 
 document.getElementById('playpause').addEventListener("click", () => {
-    Tone.Transport.state === "started" ? Tone.Transport.pause() : Tone.Transport.start();
-})
+        if(Tone.Transport.state === "started"){
+            Tone.Transport.pause();
+            mute_polysynth();
+        }
+        else{
+            unmute_polysynth();
+            Tone.Transport.start();
+        }
+    }
+)
 
 /*document.getElementById('play').addEventListener("click", () => {
     Tone.Transport.start();

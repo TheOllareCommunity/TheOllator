@@ -1,8 +1,9 @@
-const poly = new Tone.PolySynth().toDestination();
+const poly = new Tone.PolySynth();
 poly.sync();
 
 
 function play_MIDI(currentMidi) {
+    poly.toDestination();
 	if (currentMidi) {
         const now = Tone.now();
         currentMidi.tracks.forEach((track) => {
@@ -19,4 +20,12 @@ function play_MIDI(currentMidi) {
 	}
 }
 
-export { play_MIDI as play_test_poly };
+function mute(){
+    poly.volume.value = -128;
+}
+
+function unmute(){
+    poly.volume.value = 0;
+}
+
+export { play_MIDI as play_test_poly, mute as mute_polysynth, unmute as unmute_polysynth };
