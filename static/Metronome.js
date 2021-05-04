@@ -1,7 +1,8 @@
 import { playHarmony, setHarmonyMultiplier } from "./MIDI_Harmony.js";
 import { playMelody, setMelodyMultiplier } from "./MIDI_Melody.js";
 import { playBass, setBassMultiplier } from "./MIDI_Bass.js";
-import { play_test_sampler, set_sampler_multiplier } from "./sampler.js";
+import { play_test_sampler } from "./sampler.js";
+import { play_test_poly } from "./polySynth.js";
 
 let drumMidi = null;
 let harmonyMidi=null;
@@ -68,10 +69,11 @@ async function parseBass() {
 function repeat(){
     //dummy_play();
     //dummy_play_test();
-    playHarmony(harmonyMidi);
-    playMelody(melodyMidi);
-    playBass(bassMidi);
+    //playHarmony(harmonyMidi);
+    //playMelody(melodyMidi);
+    //playBass(bassMidi);
     play_test_sampler(drumMidi);
+    play_test_poly(harmonyMidi);
 
     console.log("repeat");
 }
@@ -80,9 +82,7 @@ function submitBPM() {
     var bpm = document.getElementById('bpm').value;
     console.log("triggered");
     if (bpm > 0) {
-        Tone.Transport.stop();
         Tone.Transport.bpm.value = bpm;
-        set_sampler_multiplier(120/bpm);
         setHarmonyMultiplier(120/bpm);
         setMelodyMultiplier(120/bpm);
         setBassMultiplier(120/bpm);

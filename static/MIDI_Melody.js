@@ -3,9 +3,12 @@ var AudioContextFunc = window.AudioContext || window.webkitAudioContext;
 var audioContext = new AudioContextFunc();
 var player=new WebAudioFontPlayer();
 let timeMultiplier=1;
+
+
 function setMelodyMultiplier(mult){
     timeMultiplier=mult;
 }
+
 
 function changeInstrument(path,name){
 	player.loader.startLoad(audioContext, path, name);
@@ -41,7 +44,6 @@ function playMelody(midi){
        })
     }
 )}
-
 
 
 export { playMelody as playMelody, setMelodyMultiplier as setMelodyMultiplier};
