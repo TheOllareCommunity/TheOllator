@@ -1,8 +1,5 @@
 let timeMultiplier=1;
 
-function setMultiplier(mult){
-    timeMultiplier=mult;
-}
 
 const sampler = new Tone.Sampler({
 			urls: {
@@ -17,7 +14,6 @@ const sampler = new Tone.Sampler({
 
 
 
-
         async function play_MIDI(currentMidi) {
 
 				    if (currentMidi) {
@@ -25,10 +21,9 @@ const sampler = new Tone.Sampler({
 					    const now = Tone.now();
 					    currentMidi.tracks.forEach((track) => {
 
-
 					    	//schedule all of the events
 					    	track.notes.forEach((note) => {
-
+                                if (note.time*timeMultiplier
 					    		sampler.triggerAttackRelease(
 					    			note.name,
 					    			note.duration * timeMultiplier,
@@ -41,6 +36,11 @@ const sampler = new Tone.Sampler({
 
 		}
 
+function setMultiplier(mult){
+    timeMultiplier=mult;
+    sampler.dispose();
+    sampler.play_MIDI();
+}
 
 
 

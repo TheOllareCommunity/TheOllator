@@ -78,6 +78,7 @@ function repeat(){
 
 function submitBPM() {
     var bpm = document.getElementById('bpm').value;
+    console.log("triggered");
     if (bpm > 0) {
         Tone.Transport.stop();
         Tone.Transport.bpm.value = bpm;
@@ -105,9 +106,8 @@ document.getElementById('pause').addEventListener("click", () => {
     Tone.Transport.pause() ;
 })
 */
-document.getElementById('bpmButton').addEventListener("click", () => {
+document.getElementById('bpm').addEventListener("change", () => {
     submitBPM();
-
 })
 
 
