@@ -21,4 +21,12 @@ function play_MIDI(currentMidi) {
 	}
 }
 
-export { play_MIDI as play_test_bass };
+function mute(){
+    bass.volume.value = -128;
+}
+
+function unmute(){
+    bass.volume.value = 0;
+}
+
+export { play_MIDI as play_test_bass, mute as mute_bass, unmute as unmute_bass };

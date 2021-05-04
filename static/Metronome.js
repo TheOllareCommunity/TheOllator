@@ -3,7 +3,7 @@
 //import { playBass, setBassMultiplier } from "./MIDI_Bass.js";
 import { play_test_sampler } from "./sampler.js";
 import { play_test_poly, mute_polysynth, unmute_polysynth } from "./polySynth.js";
-import { play_test_bass } from "./bassSynth.js";
+import { play_test_bass, mute_bass, unmute_bass } from "./bassSynth.js";
 
 
 let drumMidi = null;
@@ -75,7 +75,7 @@ function repeat(){
     //playMelody(melodyMidi);
     //playBass(bassMidi);
     play_test_sampler(drumMidi);
-    play_test_poly();
+    play_test_poly(harmonyMidi);
     play_test_bass(bassMidi);
 
     console.log("repeat");
@@ -101,9 +101,11 @@ document.getElementById('playpause').addEventListener("click", () => {
         if(Tone.Transport.state === "started"){
             Tone.Transport.pause();
             mute_polysynth();
+            mute_bass();
         }
         else{
             unmute_polysynth();
+            unmute_bass();
             Tone.Transport.start();
         }
     }
