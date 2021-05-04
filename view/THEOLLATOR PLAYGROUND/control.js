@@ -89,8 +89,14 @@ window.onmouseup =  () => {
 
 
 
+//----------------- play pause controls
 
+pp_btn = document.getElementById('pp_btn')
+pp_img = document.getElementById('pp_img')
 
-
+pp_btn.onclick = (e) => {
+  pp_img.classList.toggle("play");
+  pp_img.classList.toggle("pause");
+}
 
 //knob_d1.style.webkitTransform = rPre + rotation + rSuf;

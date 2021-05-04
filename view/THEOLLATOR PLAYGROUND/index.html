@@ -145,15 +145,26 @@
 
   </body>
   <footer>
-    <div class="playback_control">
-      <div class="bpm_container">
-
-      </div>
-      <div class="play_stop_container">
-
-      </div>
+    <div class="track_info_container">
+      <p>info</p>
     </div>
 
+    <div class="bpm_container">
+      <form id = 'bpm_form' action = "index.html" method = "post">
+        <button type = "button" id = "minus_btn" name = "minus">
+          <img id = 'minus_img' class = 'bpm_btn' alt = "minus" >
+        </button>
+        <input type = "number" id = "bpm_bar" name = "bpm" value = "120">
+        <button type = "button" id ="plus_btn" name = "plus">
+          <img id = 'plus_img' class = 'bpm_btn' alt = "plus" >
+        </button>
+      </form>
+    </div>
+    <div class="pp_container">
+      <div id="pp_btn">
+        <img class="play" id='pp_img' alt="play" >
+      </div>
+    </div>
   </footer>
 
 </html>

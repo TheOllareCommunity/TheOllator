@@ -1,9 +1,13 @@
 
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Megrim&display=swap');
 body{
   height: 100vh;
   color: white;
   background-color: #141414;
   user-select:none;
+  //font-family: 'Megrim', cursive;
+  font-family: 'UnifrakturCook', cursive;
 }
 
 header{
@@ -51,15 +55,35 @@ header{
   width: 23%;
   height: 100%;
 
-  background-color: #222222;
+  background-color: #282828;
 
-  border-radius: 4px;
-  border: 3px solid #f300ef;
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#4c4c4c+0,595959+12,666666+25,474747+39,2c2c2c+50,000000+51,111111+60,2b2b2b+76,1c1c1c+91,131313+100;Black+Gloss+%231 */
+  background: #4c4c4c; /* Old browsers */
+  background: -moz-linear-gradient(top,  #4c4c4c 0%, #595959 12%, #666666 25%, #474747 39%, #2c2c2c 50%, #000000 51%, #111111 60%, #2b2b2b 76%, #1c1c1c 91%, #131313 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #4c4c4c 0%,#595959 12%,#666666 25%,#474747 39%,#2c2c2c 50%,#000000 51%,#111111 60%,#2b2b2b 76%,#1c1c1c 91%,#131313 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #4c4c4c 0%,#595959 12%,#666666 25%,#474747 39%,#2c2c2c 50%,#000000 51%,#111111 60%,#2b2b2b 76%,#1c1c1c 91%,#131313 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313',GradientType=0 ); /* IE6-9 */
+
+  border-radius: 10px;
+  border: 2px solid #f300ef;
 
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+
+  box-shadow: 2px 2px 10px #f300ef, -2px -2px 10px #f300ef,
+              -2px 2px 10px #f300ef, 2px -2px 10px #f300ef,
+              0px 50px 200px #700070, 50px 0px 200px #700070,
+              inset 2px 2px 10px #555555, inset -2px 2px 10px #555555,
+              inset 2px -2px 10px #555555, inset -2px -2px 10px #555555;
+
+//  box-shadow: 2px 2px 15px #f300ef, -2px -2px 15px #f300ef,
+              -2px 2px 15px #f300ef, 2px -2px 15px #f300ef,
+              0px 50px 200px #700070, 50px 0px 200px #700070,
+              inset 2px 2px 10px #555555, inset -2px 2px 10px #555555,
+              inset 2px -2px 10px #555555, inset -2px -2px 10px #555555;
+
 }
 
 .cs_header{
@@ -73,7 +97,8 @@ header{
 }
 
 .channel_name{
-  font-size: 120%;
+  color: black;
+  font-size: 140%;
 
 }
 
@@ -101,7 +126,6 @@ header{
 .pad_section{
   width: 95%;
   height: 29%;
-  background-color: #f56942;
   border-radius: 2px;
   border: 2px solid black;
 }
@@ -117,16 +141,15 @@ header{
 }
 
 .knob_container{
-  width: 64%;
-  height: 80%;
+  width: 100%;
+  height: 100%;
 
   display: flex;
   flex-direction: row;
   align-items: center;
-
-  justify-self: center;
-  align-self: center;
+  justify-content: center;
 }
+
 .knob {
     -webkit-transform: rotate(-160deg);
     -moz-transform: rotate(-160deg);
@@ -134,35 +157,210 @@ header{
     -ms-transform: rotate(-160deg);
     transform: rotate(-160deg);
 
-    width: 80%;
+    width: 60%;
     height: auto;
+    border-radius: 50%;
+    box-shadow: 0px 10px 20px black;
 
 }
+
+.knob:before{
+  display: block;
+  width: 40px;
+  height: 40px;
+  content: '';
+  z-index: 2;
+  background-color: yellow;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  border-radius: 50%;
+  box-shadow: 0px 10px 20px black;
+}
+
 
 .volume_section{
   width: 95%;
   height: 19%;
   display: flex;
+
   flex-direction: row;
   align-items: center;
   justify-content: center;
 }
 
 .volume_knob_container{
-  width: 33%;
-  height: 85%;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
+.volume_knob_container .knob{
 
+    width: 30%;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0px 10px 20px black;
 
+}
 
 
 footer{
   height: 15%;
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
+  grid-template-rows: 100%;
+}
+
+.track_info_container{
+
 
 }
 
+.bpm_container{
+  width:100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
 
-#drums_pad{
-  background-color: black;
+#bpm_form{
+  width: 50%;
+  height: 50%;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/*---------------remove arrows in numeric input form--------------/*
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+/*----------------------------------------------------------------*/
+
+#bpm_bar{
+  text-align: center;
+  width: 50%;
+  height: 30%;
+  color: #f300ef;
+  background-color: #090909;
+  border-radius: 5px;
+  border-color: black;
+}
+
+input[type=number]:focus{
+  outline: none;
+  box-shadow: 0 0 3pt 2pt #f300ef;
+}
+
+#plus_btn{
+  width: 10%;
+  height: 60%;
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#45484d+0,000000+100;Black+3D+%231 */
+  background: rgb(69,72,77); /* Old browsers */
+  background: -moz-linear-gradient(top,  rgba(69,72,77,1) 0%, rgba(0,0,0,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+
+  border-radius: 5px;
+
+  box-shadow: 0px 5px 5px black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#minus_btn{
+  width: 10%;
+  height: 60%;
+
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#45484d+0,000000+100;Black+3D+%231 */
+  background: rgb(69,72,77); /* Old browsers */
+  background: -moz-linear-gradient(top,  rgba(69,72,77,1) 0%, rgba(0,0,0,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+
+  box-shadow: 0px 5px 5px black;
+
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.bpm_btn{
+  width: 90%;
+  height: auto;
+}
+#plus_img{
+  content:url("images/plus.png");
+}
+
+#minus_img{
+    content:url("images/minus.png");
+}
+
+.pp_container{
+  width:100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+#pp_btn{
+  width: 50%;
+  height: 50%;
+  border-radius: 10px;
+
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#45484d+0,000000+100;Black+3D+%231 */
+  background: rgb(69,72,77); /* Old browsers */
+  background: -moz-linear-gradient(top,  rgba(69,72,77,1) 0%, rgba(0,0,0,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+
+  box-shadow: 0px 5px 5px black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#pp_img{
+  height: 50%;
+  width: auto;
+}
+
+.play{
+  content:url("images/play.png");
+}
+
+.pause{
+  content:url("images/pause.png");
 }
