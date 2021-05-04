@@ -75,6 +75,7 @@ function repeat(){
     //playMelody(melodyMidi);
     //playBass(bassMidi);
     play_test_sampler(drumMidi);
+    play_test_poly();
     play_test_bass(bassMidi);
 
     console.log("repeat");
