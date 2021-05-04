@@ -1,0 +1,168 @@
+
+body{
+  height: 100vh;
+  color: white;
+  background-color: #141414;
+  user-select:none;
+}
+
+header{
+  height: 15%;
+}
+
+.logo_container{
+  width: :100vw;
+  height: 100%;
+
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#logo{
+  height: 130%;
+  width: auto;
+}
+
+
+.main_container{
+  width: 100%;
+  height: 70%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.cs_container{
+  width: 90%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.channel_strip{
+  width: 23%;
+  height: 100%;
+
+  background-color: #222222;
+
+  border-radius: 4px;
+  border: 3px solid #f300ef;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.cs_header{
+  width: 95%;
+  height: 9%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.channel_name{
+  font-size: 120%;
+
+}
+
+.channel_logo{
+  display: none;
+}
+
+
+#drums_channel_strip{
+  //background-color: #3de084;
+}
+
+#bass_channel_strip{
+  //background-color: #3de0b2;
+}
+
+#harmony_channel_strip{
+  //background-color: #3de0db;
+}
+
+#melody_channel_strip{
+  //background-color: #3dbde0;
+}
+
+.pad_section{
+  width: 95%;
+  height: 29%;
+  background-color: #f56942;
+  border-radius: 2px;
+  border: 2px solid black;
+}
+
+.knobs_section{
+  width: 95%;
+  height: 39%;
+
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 50% 50%;
+
+}
+
+.knob_container{
+  width: 64%;
+  height: 80%;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  justify-self: center;
+  align-self: center;
+}
+.knob {
+    -webkit-transform: rotate(-160deg);
+    -moz-transform: rotate(-160deg);
+    -o-transform: rotate(-160deg);
+    -ms-transform: rotate(-160deg);
+    transform: rotate(-160deg);
+
+    width: 80%;
+    height: auto;
+
+}
+
+.volume_section{
+  width: 95%;
+  height: 19%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.volume_knob_container{
+  width: 33%;
+  height: 85%;
+}
+
+
+
+
+
+footer{
+  height: 15%;
+
+}
+
+
+#drums_pad{
+  background-color: black;
+}
