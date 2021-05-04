@@ -3,6 +3,7 @@
 //import { playBass, setBassMultiplier } from "./MIDI_Bass.js";
 import { play_test_sampler } from "./sampler.js";
 import { play_test_poly } from "./polySynth.js";
+import { play_test_bass } from "./bassSynth.js";
 
 let drumMidi = null;
 let harmonyMidi=null;
@@ -73,7 +74,7 @@ function repeat(){
     //playMelody(melodyMidi);
     //playBass(bassMidi);
     play_test_sampler(drumMidi);
-    play_test_poly(harmonyMidi);
+    play_test_bass(bassMidi);
 
     console.log("repeat");
 }
