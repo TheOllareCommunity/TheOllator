@@ -1,5 +1,5 @@
 //import { playHarmony, setHarmonyMultiplier } from "./MIDI_Harmony.js";
-//import { playMelody, setMelodyMultiplier } from "./MIDI_Melody.js";
+import { play_test_melody, mute_melody, unmute_melody } from "./Melody.js";
 //import { playBass, setBassMultiplier } from "./MIDI_Bass.js";
 import { play_test_sampler } from "./sampler.js";
 import { play_test_poly, mute_polysynth, unmute_polysynth } from "./polySynth.js";
@@ -69,11 +69,7 @@ async function parseBass() {
 }
 
 function repeat(){
-    //dummy_play();
-    //dummy_play_test();
-    //playHarmony(harmonyMidi);
-    //playMelody(melodyMidi);
-    //playBass(bassMidi);
+    play_test_melody(melodyMidi);
     play_test_sampler(drumMidi);
     play_test_poly(harmonyMidi);
     play_test_bass(bassMidi);
@@ -86,9 +82,6 @@ function submitBPM() {
     console.log("triggered");
     if (bpm > 0) {
         Tone.Transport.bpm.value = bpm;
-        setHarmonyMultiplier(120/bpm);
-        setMelodyMultiplier(120/bpm);
-        setBassMultiplier(120/bpm);
     }
     else {
     alert("BPM can't be <=0");
@@ -100,10 +93,12 @@ Tone.Transport.bpm.value = 120;
 document.getElementById('playpause').addEventListener("click", () => {
         if(Tone.Transport.state === "started"){
             Tone.Transport.pause();
+            mute_melody();
             mute_polysynth();
             mute_bass();
         }
         else{
+            unmute_melody();
             unmute_polysynth();
             unmute_bass();
             Tone.Transport.start();
