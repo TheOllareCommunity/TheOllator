@@ -27,7 +27,7 @@ class Pad{ //pad class that handles a canvas
           canvas.resize(w,h)
         }
 
-        p5.background('#dad')
+        p5.background('#ffffff00') 
         if (p5.mouseIsPressed == true && mouseDown == false) {
           var mx = p5.mouseX;
           var my = p5.mouseY;

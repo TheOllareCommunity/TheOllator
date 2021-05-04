@@ -3,18 +3,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Megrim&display=swap');
 
 :root {
-  --drumColor: orange;
-  --bassColor: blue;
-  --melodyColor: white;
-  --harmonyColor: green;
+  --drumColor: rgb(113,252,197);
+  --bassColor: rgb(254,156,239);
+  --harmonyColor: rgb(22,254,241);
+  --melodyColor:rgb(249, 252, 77);
   --ollareColor: #f300ef;
 }
 
 body{
   height: 100vh;
   color: white;
-  /* background-color: #141414; */
-  background-image: url("images/sfondoPattern.jpg");
+  /* background-color: black;  */
+  background-image: url("images/5.jpg");
   user-select:none;
   font-family: 'UnifrakturCook', cursive;
 }
@@ -108,7 +108,7 @@ header{
   
   box-shadow: 2px 2px 10px var(--drumColor), -2px -2px 10px var(--drumColor),
               -2px 2px 10px var(--drumColor), 2px -2px 10px var(--drumColor),
-              0px 50px 200px #060070, 50px 0px 200px #a60000,
+              0px 20px 100px rgba(129, 255, 205, 0.74), 20px 0px 100px rgba(129, 255, 205, 0.74),
               inset 2px 2px 10px #555555, inset -2px 2px 10px #555555,
               inset 2px -2px 10px #555555, inset -2px -2px 10px #555555;
 }
@@ -117,7 +117,7 @@ header{
   
   box-shadow: 2px 2px 10px var(--bassColor), -2px -2px 10px var(--bassColor),
               -2px 2px 10px var(--bassColor), 2px -2px 10px var(--bassColor),
-              0px 50px 200px #060070, 50px 0px 200px #a60000,
+              0px 20px 100px rgba(250, 167, 237, 0.74), 20px 0px 100px rgba(250, 167, 237, 0.74),
               inset 2px 2px 10px #555555, inset -2px 2px 10px #555555,
               inset 2px -2px 10px #555555, inset -2px -2px 10px #555555;
 }
@@ -126,7 +126,7 @@ header{
   
   box-shadow: 2px 2px 10px var(--harmonyColor), -2px -2px 10px var(--harmonyColor),
               -2px 2px 10px var(--harmonyColor), 2px -2px 10px var(--harmonyColor),
-              0px 50px 200px #060070, 50px 0px 200px #a60000,
+              0px 20px 100px rgba(79, 248, 240, 0.753), 20px 0px 100px rgba(79, 248, 240, 0.753),
               inset 2px 2px 10px #555555, inset -2px 2px 10px #555555,
               inset 2px -2px 10px #555555, inset -2px -2px 10px #555555;
 }
@@ -135,10 +135,15 @@ header{
   
   box-shadow: 2px 2px 10px var(--melodyColor), -2px -2px 10px var(--melodyColor),
               -2px 2px 10px var(--melodyColor), 2px -2px 10px var(--melodyColor),
-              0px 50px 200px #060070, 50px 0px 200px #a60000,
+              0px 20px 100px rgba(250, 252, 168, 0.76), 20px 0px 100px rgba(253, 255, 139, 0.76),
               inset 2px 2px 10px #555555, inset -2px 2px 10px #555555,
               inset 2px -2px 10px #555555, inset -2px -2px 10px #555555;
 }
+
+/*--drumColor: rgb(113,252,197);
+  --bassColor: rgb(254,156,239);
+  --harmonyColor: rgb(22,254,241);
+  --melodyColor:rgb(249, 252, 77);*/
 
 .pad_section{
   width: 95%;
