@@ -1,6 +1,6 @@
-import { playHarmony, setHarmonyMultiplier } from "./MIDI_Harmony.js";
-import { playMelody, setMelodyMultiplier } from "./MIDI_Melody.js";
-import { playBass, setBassMultiplier } from "./MIDI_Bass.js";
+//import { playHarmony, setHarmonyMultiplier } from "./MIDI_Harmony.js";
+//import { playMelody, setMelodyMultiplier } from "./MIDI_Melody.js";
+//import { playBass, setBassMultiplier } from "./MIDI_Bass.js";
 import { play_test_sampler } from "./sampler.js";
 import { play_test_poly } from "./polySynth.js";
 
