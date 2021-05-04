@@ -80,7 +80,6 @@ window.onmousemove = (e) =>{
     }
 }
 
-
 // on mouse release
 window.onmouseup =  () => {
   mouseDown = false;
@@ -100,3 +99,19 @@ pp_btn.onclick = (e) => {
 }
 
 //knob_d1.style.webkitTransform = rPre + rotation + rSuf;
+
+
+
+//---------------- bpm + & - ------------------
+
+plus_btn = document.getElementById('plus_btn')
+minus_btn = document.getElementById('minus_btn')
+bpm_txt = document.getElementById('bpm_bar')
+
+plus_btn.onclick = () => {
+  bpm_txt.value = parseInt(bpm_txt.value) + 1;
+}
+
+minus_btn.onclick = () => {
+  bpm_txt.value = parseInt(bpm_txt.value) - 1;
+}
