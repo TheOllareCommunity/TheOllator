@@ -28,7 +28,7 @@ class Pad{ //pad class that handles a canvas
         }
 
         p5.background('#dad')
-        if (p5.mouseIsPressed == true) {
+        if (p5.mouseIsPressed == true && mouseDown == false) {
           var mx = p5.mouseX;
           var my = p5.mouseY;
           if (!(mx > w || mx < 0 || my > h || my < 0)){ //area condition to avoid pad crosstalking
