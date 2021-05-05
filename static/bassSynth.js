@@ -1,9 +1,26 @@
-const bass = new Tone.PolySynth(Tone.Synth, {
-			oscillator: {
-				partials: [0, 2, 3, 4],
-			}
-		}).toDestination();
-bass.set({
+const bass = new Tone.MonoSynth({
+	oscillator: {
+		type: "sine"
+	},
+	envelope: {
+		"attack": 0,
+		"attackCurve": "linear",
+		"decay": 0.3,
+		"decayCurve": "exponential",
+		"release": 0.8,
+		"releaseCurve": "exponential",
+		"sustain": 1
+	},
+	filter: {
+		"Q": 1,
+		"detune": 0,
+		"frequency": 4000,
+		"gain": 0,
+		"rolloff": -12,
+		"type": "lowpass"
+	},
+}).toDestination();
+/*bass.set({
 	"volume": 0,
 	"detune": 0,
 	"portamento": 0,
@@ -23,6 +40,7 @@ bass.set({
 		"type": "triangle"
 	}
 });
+*/
 bass.sync();
 
 

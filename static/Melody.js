@@ -1,4 +1,4 @@
-const fmSynth = new Tone.FmSynth().toDestination();
+const fmSynth = new Tone.FMSynth().toDestination();
 
 fmSynth.set({
 	"volume": 0,
