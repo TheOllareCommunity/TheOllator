@@ -142,29 +142,6 @@ def home():
 def MIDI_player():
     return render_template("DAW.html")
 
-@app.route('/MIDI_loader/')
-def MIDI_loader():
-    print("!!!!!!!!!!!BELLA!!!!!!!!!!!!\n\n")
-    return render_template("MIDI_loader.html")
-
-
-
-@app.route('/getMidi')
-def getMidi():
-    #return redirect(url_for('static', filename='midi.mid'));
-    ID_Beat = request.args.get('ID_Beat', 0, type=int)
-    ID_Harmony = request.args.get('ID_Harmony', 0, type=int)
-    #get filepath from db
-    filepath = 'static/midi.mid'
-    #pathlib.Path(__file__).parent.absolute()
-
-    return jsonify(result = url_for('static', filename='midi.mid'))
-
-@app.route('/m')
-def getMidiRoot():
-    return url_for('static', filename='midi.mid');
-
-
 @app.route('/fileUpload', methods=['POST'])
 def fileUpload():
     if request.method == 'POST':

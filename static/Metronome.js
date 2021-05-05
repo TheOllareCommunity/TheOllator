@@ -12,6 +12,12 @@ let bassMidi=null;
 let melodyMidi=null;
 
 
+parseDrums();
+parseHarmony();
+parseMelody();
+parseBass();
+
+
 async function parseDrums() {
 	//read the file
 	const reader = new FileReader();
@@ -31,7 +37,6 @@ async function parseHarmony() {
 	const reader = new FileReader();
 	reader.onload = function (e) {
 	    harmonyMidi = new Midi(e.target.result);
-	    console.log(harmonyMidi)
 	};
 	console.log(harmonyPath);
     let url = 'http://127.0.0.1:8080//static/MIDI/' +  harmonyPath + '/' + harmonyPath + '_harmony.mid';
@@ -77,9 +82,7 @@ function repeat(){
     console.log("repeat");
 }
 
-function submitBPM() {
-    var bpm = document.getElementById('bpm').value;
-    console.log("triggered");
+function submitBPM(bpm) {
     if (bpm > 0) {
         Tone.Transport.bpm.value = bpm;
     }
@@ -90,7 +93,17 @@ function submitBPM() {
 
 Tone.Transport.bpm.value = 120;
 
-document.getElementById('playpause').addEventListener("click", () => {
+
+//----------------- play pause controls
+
+let pp_btn = document.getElementById('pp_btn')
+let pp_img = document.getElementById('pp_img')
+
+pp_btn.addEventListener("click", () => {
+ console.log("playpause")
+  pp_img.classList.toggle("play");
+  pp_img.classList.toggle("pause");
+
         if(Tone.Transport.state === "started"){
             Tone.Transport.pause();
             mute_melody();
@@ -106,28 +119,34 @@ document.getElementById('playpause').addEventListener("click", () => {
     }
 )
 
-/*document.getElementById('play').addEventListener("click", () => {
-    Tone.Transport.start();
-})
-
-document.getElementById('pause').addEventListener("click", () => {
-    Tone.Transport.pause() ;
-})
-*/
-document.getElementById('bpm').addEventListener("change", () => {
-    submitBPM();
-})
 
 
-Tone.Transport.start("+1");
+
+//---------------- bpm + & - ------------------
+
+let plus_btn = document.getElementById('plus_btn')
+let minus_btn = document.getElementById('minus_btn')
+let bpm_txt = document.getElementById('bpm_bar')
+
+
+bpm_txt.addEventListener("change", () => {
+    console.log("bpm change")
+    submitBPM(bpm_txt.value);
+})
+
+
+plus_btn.onclick = () => {
+  bpm_txt.value = parseInt(bpm_txt.value) + 1;
+  submitBPM(bpm_txt.value);
+}
+
+minus_btn.onclick = () => {
+  if(parseInt(bpm_txt.value) - 1 > 0){
+    bpm_txt.value = parseInt(bpm_txt.value) - 1;
+    submitBPM(bpm_txt.value);
+    }
+}
 
 Tone.Transport.scheduleRepeat(repeat, "32m");
 
-parseDrums();
-parseHarmony();
-parseMelody();
-parseBass();
-
-export{}
-//window.submitBPM=submitBPM;
 

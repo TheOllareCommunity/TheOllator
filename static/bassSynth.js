@@ -36,8 +36,7 @@ function play_MIDI(currentMidi) {
         			note.name,
         			note.duration,
         			note.time + now,
-        			note.velocity,
-        			console.log(note.name)
+        			note.velocity
         		);
         	});
         });
