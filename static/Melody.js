@@ -1,5 +1,21 @@
-const fmSynth = new Tone.FMSynth().toDestination();
-fmSynth.oscillator.type = "sine4"
+const fmSynth = new Tone.FmSynth().toDestination();
+
+fmSynth.set({
+	"volume": 0,
+	"envelope": {
+		"attack": 0.002,
+		"attackCurve": "exponential",
+		"decay": 0.1,
+		"decayCurve": "linear",
+		"release": 0.005,
+		"releaseCurve": "exponential",
+		"sustain": 0.1,
+	},
+	"oscillator": {
+		"type": "sine4"
+	}
+});
+
 fmSynth.sync();
 
 
