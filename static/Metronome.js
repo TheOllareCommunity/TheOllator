@@ -69,9 +69,9 @@ async function parseBass() {
 }
 
 function repeat(){
-    play_test_melody(melodyMidi);
+    //play_test_melody(melodyMidi);
     play_test_sampler(drumMidi);
-    play_test_poly(harmonyMidi);
+    //play_test_poly(harmonyMidi);
     play_test_bass(bassMidi);
 
     console.log("repeat");
