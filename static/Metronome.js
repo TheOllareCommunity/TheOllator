@@ -74,9 +74,9 @@ async function parseBass() {
 }
 
 function repeat(){
-    //play_test_melody(melodyMidi);
+    play_test_melody(melodyMidi);
     play_test_sampler(drumMidi);
-    //play_test_poly(harmonyMidi);
+    play_test_poly(harmonyMidi);
     play_test_bass(bassMidi);
 
     console.log("repeat");
@@ -98,9 +98,14 @@ Tone.Transport.bpm.value = 120;
 
 let pp_btn = document.getElementById('pp_btn')
 let pp_img = document.getElementById('pp_img')
+let playing = false;
 
 pp_btn.addEventListener("click", () => {
- console.log("playpause")
+
+  if(!playing){
+    Tone.start()
+    playing = true;
+  }
   pp_img.classList.toggle("play");
   pp_img.classList.toggle("pause");
 
