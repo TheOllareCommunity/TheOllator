@@ -1,6 +1,22 @@
+/*var env = new Tone.ScaledEnvelope({
+		"attack": 0.7,
+		"attackCurve": "linear",
+		"decay": 0.3,
+		"decayCurve": "exponential",
+		"release": 0.3,
+		"releaseCurve": "exponential",
+		"sustain": 1,
+		"min": 0,
+ 	    "max" : 500
+ });*/
+
+
 const bass = new Tone.MonoSynth({
+    "detune":0,
+    "volume":-100,
 	oscillator: {
-		type: "sine"
+		type: "square16",
+		"detune":0
 	},
 	envelope: {
 		"attack": 0,
@@ -9,17 +25,22 @@ const bass = new Tone.MonoSynth({
 		"decayCurve": "exponential",
 		"release": 0.8,
 		"releaseCurve": "exponential",
-		"sustain": 1
+		"sustain": 0.5
 	},
 	filter: {
-		"Q": 1,
+		"Q": 5,
 		"detune": 0,
-		"frequency": 4000,
+		"frequency": 350,
 		"gain": 0,
 		"rolloff": -12,
 		"type": "lowpass"
 	},
 }).toDestination();
+
+
+//env.connect(bass.detune);
+
+
 /*bass.set({
 	"volume": 0,
 	"detune": 0,
