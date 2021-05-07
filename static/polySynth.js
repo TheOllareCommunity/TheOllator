@@ -1,7 +1,25 @@
-const poly = new Tone.PolySynth();
-connectHarmony(poly);
-poly.sync();
+const vol = new Tone.Volume(-10).toDestination();
 
+const filter = new Tone.Filter(2000, "lowpass");
+const poly = new Tone.PolySynth(
+{
+    oscillator : {
+        "type" : "fatsawtooth",
+        "count" : 7,
+        "spread" : 60
+    },
+    envelope: {
+        "attack": 0.01,
+        "decay": 0.1,
+        "sustain": 0.5,
+        "release": 0.4,
+        "attackCurve" : "exponential"
+    }
+}).connect(filter);
+
+filter.connect(vol);
+connectHarmony(filter);
+poly.sync();
 
 function play_MIDI(currentMidi) {
 	if (currentMidi) {

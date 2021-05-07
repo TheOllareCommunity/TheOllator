@@ -9,6 +9,7 @@
 		"min": 0,
  	    "max" : 500
  });*/
+const vol = new Tone.Volume(-10).toDestination();
 
 
 const bass = new Tone.MonoSynth({
@@ -35,8 +36,9 @@ const bass = new Tone.MonoSynth({
 		"rolloff": -12,
 		"type": "lowpass"
 	},
-}).toDestination();
+});
 
+bass.connect(vol);
 
 //env.connect(bass.detune);
 
