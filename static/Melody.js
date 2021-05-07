@@ -1,14 +1,14 @@
-
-
+const vol = new Tone.Volume(-10).toDestination();
 
 const fmSynth = new Tone.Synth();
+
 fmSynth.set({
  "oscillator" : {
         "type" : "pwm",
         "modulationFrequency" : 1
     },
     "filter" : {
-        "Q" : 6,
+        "Q" : 2,
         "rolloff" : -24
     },
     "envelope" : {
@@ -27,8 +27,9 @@ fmSynth.set({
         "exponent" : 2
     }
 })
+fmSynth.connect(vol);
 
-connectReverb(fmSynth);
+//connectReverb(fmSynth);
 
 fmSynth.sync();
 
