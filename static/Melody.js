@@ -1,5 +1,7 @@
-const fmSynth = new Tone.Synth().toDestination();
 
+
+
+const fmSynth = new Tone.Synth();
 fmSynth.set({
  "oscillator" : {
         "type" : "pwm",
@@ -25,6 +27,9 @@ fmSynth.set({
         "exponent" : 2
     }
 })
+
+connectReverb(fmSynth);
+
 fmSynth.sync();
 
 

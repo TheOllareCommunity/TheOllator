@@ -35,6 +35,7 @@ class Pad{ //pad class that handles a canvas
           if (!(mx > w || mx < 0 || my > h || my < 0)){ //area condition to avoid pad crosstalking
             xValue = mx
             yValue = my
+            setPadEffect(xValue, yValue, div) //div is the name of the pad
           }
         }
         
@@ -83,7 +84,8 @@ bassColor= '#16fef1';
 harmonyColor= '#71fcc5';
 melodyColor= '#ffd1f8';
 
-new Pad('drums_pad', drumColor)
-new Pad('bass_pad', bassColor)
-new Pad('harmony_pad', harmonyColor)
-new Pad('melody_pad', melodyColor)
+let drum_pad = new Pad('drums_pad', drumColor)
+let bass_pad = new Pad('bass_pad', bassColor)
+let harmony_pad = new Pad('harmony_pad', harmonyColor)
+let melody_pad = new Pad('melody_pad', melodyColor)
+

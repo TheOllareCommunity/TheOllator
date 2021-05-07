@@ -75,6 +75,7 @@ window.onmousemove = (e) =>{
       }
 
       knobs[element.id] = rotation
+      setEffect(element.id, rotation);
       element.style.webkitTransform = rPre + rotation + rSuf;
         yStart = e.clientY;
     }
