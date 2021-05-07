@@ -54,7 +54,7 @@ let mouseX=20, mouseY=80;
 
 //reverbs
 const freeverb = new Tone.Freeverb((mouseX-minV)/(maxV-minV), (mouseY-minV)/(maxV-minV)*(20000-20)+20);//.toDestination();*/
-const reverb = new Tone.Reverb(6).toDestination();
+
 /*const jcrReverb = new Tone.JCReverb((mouseY-minV)/(maxV-minV));//.toDestination();
 //player.connect(freeverb);
 player.chain(gainNode,freeverb,Tone.Destination);
@@ -73,14 +73,28 @@ player.chain(gainNode,pingPong,Tone.Destination);
 player.chain(gainNode,delay,jcrReverb,Tone.Destination); 
 player.chain(gainNode,delay,reverb,Tone.Destination);*/
 
-
-const melodyReverbNode = new Tone.Gain(0.8);
-
-function connectReverb(instrument){
+let melodyDecayTime = 0.001;
+let melodyDecayTimeMultiplier = 10;
+const melodyReverbNode = new Tone.Gain(0);
+const melodyReverb = new Tone.Reverb(melodyDecayTime).toDestination();
+const melodyFeedbackDelay = new Tone.FeedbackDelay("8n", melodyDecayTime).toDestination();
+function connectMelody(instrument){
 	instrument.connect(melodyReverbNode);
-	melodyReverbNode.connect(reverb);
+	melodyReverbNode.fan(melodyReverb, melodyFeedbackDelay);
 	instrument.toDestination();
 }
+
+let harmonyDecayTime = 0.001;
+let harmonyDecayTimeMultiplier = 10;
+const harmonyReverbNode = new Tone.Gain(0);
+const harmonyReverb = new Tone.Reverb(harmonyDecayTime).toDestination();
+const harmonyFeedbackDelay = new Tone.FeedbackDelay("8n", harmonyDecayTime).toDestination();
+function connectHarmony(instrument){
+	instrument.connect(harmonyReverbNode);
+	harmonyReverbNode.fan(harmonyReverb, harmonyFeedbackDelay);
+	instrument.toDestination();
+}
+
 
 
 function setEffect(knobID, value){
@@ -137,7 +151,7 @@ function setEffect(knobID, value){
 		
 		break
 		case "knob_m2" : 
-			melodyReverbNode
+			
 		break
 		case "knob_m3" : 
 		
@@ -153,7 +167,17 @@ function setEffect(knobID, value){
 
 
 function setPadEffect(x, y, pad){
-	if(pad == "melody_pad")
-		console.log("blla");
-	console.log("io")
+	y = 1 - y;
+	if(pad == "melody_pad"){
+		melodyReverbNode.gain.value = x
+		melodyFeedbackDelay.feedback.value = y
+		if(y >= 0.0001)
+			melodyReverb.decay = y * melodyDecayTimeMultiplier
+	}
+	else if(pad == "harmony_pad"){
+		harmonyReverbNode.gain.value = x
+		harmonyFeedbackDelay.feedback.value = y
+		if(y >= 0.0001)
+			harmonyReverb.decay = y * harmonyDecayTimeMultiplier
+	}
 }

@@ -1,9 +1,9 @@
 const poly = new Tone.PolySynth();
+connectHarmony(poly);
 poly.sync();
 
 
 function play_MIDI(currentMidi) {
-    poly.toDestination();
 	if (currentMidi) {
         const now = Tone.now();
         currentMidi.tracks.forEach((track) => {

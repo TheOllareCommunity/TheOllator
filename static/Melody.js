@@ -28,7 +28,7 @@ fmSynth.set({
     }
 })
 
-connectReverb(fmSynth);
+connectMelody(fmSynth);
 
 fmSynth.sync();
 

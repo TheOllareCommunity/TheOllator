@@ -35,7 +35,7 @@ class Pad{ //pad class that handles a canvas
           if (!(mx > w || mx < 0 || my > h || my < 0)){ //area condition to avoid pad crosstalking
             xValue = mx
             yValue = my
-            setPadEffect(xValue, yValue, div) //div is the name of the pad
+            setPadEffect(xValue / w, yValue / h, div) //div is the name of the pad
           }
         }
         
