@@ -2,11 +2,21 @@
 @import url('https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Megrim&display=swap');
 
+@font-face {
+  font-family: dripFont;
+  src: url("fonts/adrip1.ttf");
+}
+
 :root {
-  --drumColor: rgb(113,252,197);
-  --bassColor: rgb(254,156,239);
-  --harmonyColor: rgb(22,254,241);
-  --melodyColor:rgb(249, 252, 77);
+  /* --drumColor: #71fcc5;
+  --bassColor: #ffd1f8;
+  --harmonyColor: #16fef1;
+  --melodyColor:#f9fc4d; */
+
+  --drumColor:#f9fc4d;
+  --bassColor:#16fef1;
+  --harmonyColor:#71fcc5;
+  --melodyColor:#ffd1f8;
   --ollareColor: #f300ef;
 }
 
@@ -95,9 +105,26 @@ header{
 }
 
 .channel_name{
-  color: black;
-  font-size: 140%;
+  font-family: dripFont;
+  font-size: 170%;
+  text-shadow: 2px 3px 5px #1a312f;
+  letter-spacing: 0.05em;
+}
 
+#drums_channel_name{
+  color: #16fef1;
+}
+
+#bass_channel_name{
+  color: #16fef1;
+}
+
+#harmony_channel_name{
+  color: #16fef1;
+}
+
+#melody_channel_name{
+  color: #16fef1;
 }
 
 .channel_logo{
@@ -106,37 +133,33 @@ header{
 
 
 #drums_channel_strip{
-
-  box-shadow: 2px 2px 10px var(--drumColor), -2px -2px 10px var(--drumColor),
-              -2px 2px 10px var(--drumColor), 2px -2px 10px var(--drumColor),
-              0px 20px 100px rgba(129, 255, 205, 0.74), 20px 0px 100px rgba(129, 255, 205, 0.74),
+   box-shadow: /*2px 2px 10px var(--drumColor), -2px -2px 10px var(--drumColor),
+              -2px 2px 10px var(--drumColor), 2px -2px 10px var(--drumColor), */
+              0px 20px 100px rgba(250, 252, 168, 0.76), 20px 0px 100px rgba(253, 255, 139, 0.76),
               inset 2px 2px 10px #555555, inset -2px 2px 10px #555555,
               inset 2px -2px 10px #555555, inset -2px -2px 10px #555555;
 }
 
 #bass_channel_strip{
-
-  box-shadow: 2px 2px 10px var(--bassColor), -2px -2px 10px var(--bassColor),
-              -2px 2px 10px var(--bassColor), 2px -2px 10px var(--bassColor),
-              0px 20px 100px rgba(250, 167, 237, 0.74), 20px 0px 100px rgba(250, 167, 237, 0.74),
-              inset 2px 2px 10px #555555, inset -2px 2px 10px #555555,
-              inset 2px -2px 10px #555555, inset -2px -2px 10px #555555;
-}
-
-#harmony_channel_strip{
-
-  box-shadow: 2px 2px 10px var(--harmonyColor), -2px -2px 10px var(--harmonyColor),
-              -2px 2px 10px var(--harmonyColor), 2px -2px 10px var(--harmonyColor),
+  box-shadow: /*2px 2px 10px var(--bassColor), -2px -2px 10px var(--bassColor),
+              -2px 2px 10px var(--bassColor), 2px -2px 10px var(--bassColor), */
               0px 20px 100px rgba(79, 248, 240, 0.753), 20px 0px 100px rgba(79, 248, 240, 0.753),
               inset 2px 2px 10px #555555, inset -2px 2px 10px #555555,
               inset 2px -2px 10px #555555, inset -2px -2px 10px #555555;
 }
 
-#melody_channel_strip{
+#harmony_channel_strip{
+  box-shadow: /*2px 2px 10px var(--harmonyColor), -2px -2px 10px var(--harmonyColor),
+              -2px 2px 10px var(--harmonyColor), 2px -2px 10px var(--harmonyColor), */
+              0px 20px 100px rgba(129, 255, 205, 0.74), 20px 0px 100px rgba(129, 255, 205, 0.74),
+              inset 2px 2px 10px #555555, inset -2px 2px 10px #555555,
+              inset 2px -2px 10px #555555, inset -2px -2px 10px #555555;
+}
 
-  box-shadow: 2px 2px 10px var(--melodyColor), -2px -2px 10px var(--melodyColor),
-              -2px 2px 10px var(--melodyColor), 2px -2px 10px var(--melodyColor),
-              0px 20px 100px rgba(250, 252, 168, 0.76), 20px 0px 100px rgba(253, 255, 139, 0.76),
+#melody_channel_strip{
+  box-shadow: /*2px 2px 10px var(--melodyColor), -2px -2px 10px var(--melodyColor),
+              -2px 2px 10px var(--melodyColor), 2px -2px 10px var(--melodyColor), */
+              0px 20px 100px rgba(250, 167, 237, 0.74), 20px 0px 100px rgba(250, 167, 237, 0.74),
               inset 2px 2px 10px #555555, inset -2px 2px 10px #555555,
               inset 2px -2px 10px #555555, inset -2px -2px 10px #555555;
 }
@@ -173,6 +196,14 @@ header{
   justify-content: center;
 }
 
+.shadow{
+  width: 50%;
+  height: auto;
+  border-radius: 50%;
+  box-shadow: 0px 10px 20px black;
+}
+
+
 .knob {
     -webkit-transform: rotate(-160deg);
     -moz-transform: rotate(-160deg);
@@ -180,10 +211,10 @@ header{
     -ms-transform: rotate(-160deg);
     transform: rotate(-160deg);
 
-    width: 60%;
+    width: 100%;
     height: auto;
     border-radius: 50%;
-    box-shadow: 0px 10px 20px black;
+    /* box-shadow: 0px 10px 20px black; */
 
 }
 
@@ -201,9 +232,8 @@ header{
   bottom: 0;
   background: transparent;
   border-radius: 50%;
-  box-shadow: 0px 10px 20px black;
-}
-
+  /* box-shadow: 0px 10px 20px black; */
+}​
 
 .volume_section{
   width: 95%;
@@ -225,7 +255,7 @@ header{
   justify-content: center;
 }
 
-.volume_knob_container .knob{
+.volume_knob_container .shadow{
 
     width: 30%;
     height: auto;
@@ -289,6 +319,9 @@ input[type=number] {
   background-color: #090909;
   border-radius: 5px;
   border-color: black;
+  font-size: 102%;
+  font-family: unset;
+  letter-spacing: 0.05em;
 }
 
 input[type=number]:focus{
