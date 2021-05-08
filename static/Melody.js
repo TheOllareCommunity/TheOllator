@@ -1,30 +1,27 @@
-const vol = new Tone.Volume(-10).toDestination();
+const vol = new Tone.Volume(-30).toDestination();
 
 const fmSynth = new Tone.Synth();
 
 fmSynth.set({
- "oscillator" : {
-        "type" : "pwm",
-        "modulationFrequency" : 1
+    "harmonicity": 3.01,
+    "modulationIndex": 14,
+    "oscillator": {
+        "type": "fatsine4"
     },
-    "filter" : {
-        "Q" : 2,
-        "rolloff" : -24
+    "envelope": {
+        "attack": 0.002,
+        "decay": 0.3,
+        "sustain": 0.1,
+        "release": 1.2
     },
-    "envelope" : {
-        "attack" : 0.025,
-        "decay" : 0.3,
-        "sustain" : 0.9,
-        "release" : 2
+    "modulation" : {
+        "type": "square"
     },
-    "filterEnvelope" : {
-        "attack" : 0.245,
-        "decay" : 0.131,
-        "sustain" : 0.5,
-        "release" : 2,
-        "baseFrequency" : 20,
-        "octaves" : 7.2,
-        "exponent" : 2
+    "modulationEnvelope" : {
+        "attack": 0.01,
+        "decay": 0.5,
+        "sustain": 0.2,
+        "release": 0.1
     }
 })
 fmSynth.connect(vol);
@@ -44,7 +41,7 @@ function play_MIDI(currentMidi) {
         			note.name,
         			note.duration,
         			note.time + now,
-        			note.velocity
+        			note.velocity/2
         		);
         	});
         });
