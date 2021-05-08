@@ -1,12 +1,4 @@
-
-/*const player = new Tone.Player({
-	url: "https://tonejs.github.io/audio/loop/FWDL.mp3",
-	loop: true,
-	autostart: true,
-})*/
-
-/*let minV=0, maxV=360;
-let x = 100; 
+/*
 const gainNode = new Tone.Gain(0.5);
 //DISTORTION
 const distortion = new Tone.Distortion((x-minV)/(maxV-minV));//.toDestination(); //distortion range 0-1
@@ -25,36 +17,8 @@ const chorus = new Tone.Chorus(4, (x-minV)/(maxV-minV)*(100-1)+1, (x-minV)/(maxV
 //PITCH SHIFT
 const ps = new Tone.PitchShift((x-minV)/(maxV-minV)*(48+48)-48); //range +48/-48 semitones (8 ottave)
 
-//connect in parallel
-//player.connect(gainNode);
-//player.connect(distortion);
-//player.connect(compression);
-//player.connect(eq);
-//player.connect(bit);
-//player.connect(trem);
-//player.connect(chorus);
-//player.connect(cheby);
-//player.connect(ps);
-
-//connect in series
-player.chain(gainNode,distortion,Tone.Destination);
-player.chain(gainNode,compression,Tone.Destination);
-player.chain(gainNode,eq,Tone.Destination);
-player.chain(gainNode,distortion,eq,compression,Tone.Destination); //PUMP
-player.chain(gainNode,bit,Tone.Destination);
-player.chain(gainNode,trem,Tone.Destination);
-player.chain(gainNode,chorus,Tone.Destination);
-//player.chain(gainNode,cheby,Tone.Destination);
-player.chain(gainNode,ps,Tone.Destination);
-
-
-
-//PAD
-let mouseX=20, mouseY=80;
-
 //reverbs
 const freeverb = new Tone.Freeverb((mouseX-minV)/(maxV-minV), (mouseY-minV)/(maxV-minV)*(20000-20)+20);//.toDestination();*/
-
 /*const jcrReverb = new Tone.JCReverb((mouseY-minV)/(maxV-minV));//.toDestination();
 //player.connect(freeverb);
 player.chain(gainNode,freeverb,Tone.Destination);
@@ -62,9 +26,7 @@ player.chain(gainNode,freeverb,Tone.Destination);
 //player.chain(gainNode,jcrReverb,Tone.Destination); 
 
 //delays
-const feedbackDelay = new Tone.FeedbackDelay((mouseX-minV)/(maxV-minV)*(3-0.1)+0.1, (mouseY-minV)/(maxV-minV));//.toDestination();
 const pingPong = new Tone.PingPongDelay((mouseX-minV)/(maxV-minV)*(3-0.1)+0.1, (mouseY-minV)/(maxV-minV));
-const delay = new Tone.Delay((mouseX-minV)/(maxV-minV)*4);//.toDestination();
 //player.connect(feedbackDelay);
 player.chain(gainNode,feedbackDelay,Tone.Destination); 
 player.chain(gainNode,pingPong,Tone.Destination);
@@ -96,72 +58,89 @@ function connectHarmony(instrument){
 }
 
 
+let bassFrequency = 200;
+const bassAutoFilter = new Tone.AutoFilter();
+bassAutoFilter.set({
+	frequency: "8n",
+	bassFrequency: bassFrequency,
+	octaves: 3
+});
+function connectBass(instrument){
+	instrument.connect(bassAutoFilter);
+	bassAutoFilter.toDestination();
+}
+
+/*let drumFrequency = 10000;
+const drumAutoFilter = new Tone.AutoFilter(1, drumFrequency, 1).toDestination();
+function connectDrum(instrument){
+	instrument.connect(drumAutoFilter).toDestination();
+}*/
+
 
 function setEffect(knobID, value){
 	value = (value + maxRot) / (maxRot - minRot);
 	switch(knobID){
 
 		case "knob_d1" : 
-			a = 2+2
-			b = a+3
+			
 		break;
 		case "knob_d2" : 
 		
 		break;
 		case "knob_d3" : 
 		
-		break
+		break;
 		case "knob_d4" : 
 		
-		break
+		break;
 		case "knob_dv" : 
 		
-		break
+		break;
 		case "knob_b1" : 
-		
-		break
+			
+		break;
 		case "knob_b2" : 
 		
-		break
+		break;
 		case "knob_b3" : 
 		
-		break
+		break;
 		case "knob_b4" : 
 		
-		break
+		break;
 		case "knob_bv" : 
 		
-		break
+		break;
 		case "knob_h1" : 
 		
-		break
+		break;
 		case "knob_h2" : 
 		
-		break
+		break;
 		case "knob_h3" : 
 		
-		break
+		break;
 		case "knob_h4" : 
 		
-		break
+		break;
 		case "knob_hv" : 
 		
-		break
+		break;
 		case "knob_m1" : 
 		
-		break
+		break;
 		case "knob_m2" : 
 			
-		break
+		break;
 		case "knob_m3" : 
 		
-		break
+		break;
 		case "knob_m4" : 
 		
-		break
+		break;
 		case "knob_mv" : 
 		
-		break
+		
 	}
 }
 
@@ -179,5 +158,17 @@ function setPadEffect(x, y, pad){
 		harmonyFeedbackDelay.feedback.value = y
 		if(y >= 0.0001)
 			harmonyReverb.decay = y * harmonyDecayTimeMultiplier
+	}
+	else if(pad == "bass_pad"){
+		bassAutoFilter.set({
+			//frequency: y*10,
+			bassFrequency: x*5000,
+			octaves: 1
+		});
+		
+	}
+	else if(pad == "drums_pad"){
+		//drumAutoFilter.lowPassFreq = x*20000
+		//drumAutoFilter.frequency = y*20
 	}
 }

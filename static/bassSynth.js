@@ -9,7 +9,7 @@
 		"min": 0,
  	    "max" : 500
  });*/
-const vol = new Tone.Volume(-10).toDestination();
+const vol = new Tone.Volume(-10);
 
 
 const bass = new Tone.MonoSynth({
@@ -39,6 +39,7 @@ const bass = new Tone.MonoSynth({
 });
 
 bass.connect(vol);
+connectBass(vol);
 
 //env.connect(bass.detune);
 

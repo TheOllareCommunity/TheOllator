@@ -9,6 +9,7 @@ const sampler = new Tone.Sampler({
 
 }).toDestination();
 
+//connectDrum(sampler);
 sampler.sync();
 
 
