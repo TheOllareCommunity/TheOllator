@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <!--..............CSS LINKING.............-->
+    <style>
+      :root {
+          --background_url: {{ url_for('static', filename='style/imgs/5.jpg') }}
+          --plus_url: {{ url_for('static', filename='style/imgs/plus.png') }}
+          --minus_url: {{ url_for('static', filename='style/imgs/minus.png') }}
+          --play_url: {{ url_for('static', filename='style/imgs/play.png') }}
+          --stop_url: {{ url_for('static', filename='style/imgs/pause.png') }}
+      }
+    </style>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/cleanAll.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/dawStyle.css') }}">
+
+
+
+    <!--..............SCRIPT.............-->
+    <script src="{{ url_for('static', filename='p5/p5.js') }}"></script>
+
+    <script> var harmonyPath = '{{ harmonyPath }}'.substr(7,5); </script>
+    <script> var drumsPath =  '{{drumsPath }}'.substr(7,5); </script>
+
+    <script src="{{ url_for('static', filename='Pad.js') }}" type="text/javascript" defer></script>
+    <script src="{{ url_for('static', filename='dawControl.js') }}" type="text/javascript" defer></script>
+    <script type="text/javascript" src="https://unpkg.com/tone@latest/build/Tone.js" defer></script>
+    <script type="text/javascript" src="https://unpkg.com/@tonejs/midi" defer></script>
+    <script src="{{ url_for('static', filename='utils.js') }}" type="text/javascript" defer></script>
+    <script src="{{ url_for('static', filename='testEffects.js') }}" type="text/javascript" defer></script>
+    <script src="{{ url_for('static', filename='melody.js') }}" type="text/javascript" defer></script>
+    <script src="{{ url_for('static', filename='sampler.js') }}" type="text/javascript" defer></script>
+    <script src="{{ url_for('static', filename='harmony.js') }}" type="text/javascript" defer></script>
+    <script src="{{ url_for('static', filename='bass.js') }}" type="text/javascript" defer></script>
+    <script src="{{ url_for('static', filename='instrumentControl.js') }}" type="text/javascript" defer></script>
+    <script src="{{ url_for('static', filename='recorder.js') }}" type="text/javascript" defer></script>
+    <script src="{{ url_for('static', filename='Metronome.js') }}" type="text/javascript" defer></script>
+
+    
+    <title>The Ollator - Playground</title>
+
+  </head>
+  <header>
+    <div class="logo_container">
+      <img id="logo" src="{{ url_for('static', filename='style/imgs/TO.png') }}" alt="The Ollator">
+    </div>
+  </header>
+  <body>
+    <div class="overlayContainer">
+      <div class="overlay">
+        <div id="popupPanel">
+          <p class="sceckItOut">Check it out</p>
+          <audio controls></audio>
+        </div>
+      </div>
+    </div>
+
+    <div class="main_container">
+      <div class="cs_container">
+        <div class="channel_strip" id="drums_channel_strip">
+          <div class="cs_header">
+            <h2 class="channel_name" id="drums_channel_name">Drums</h2>
+            <div class="channel_logo">
+            </div>
+          </div>
+          <div class="pad_section" id="drums_pad">
+          </div>
+          <div class="knobs_section">
+            <div class="knob_container">
+              <div class="shadow">
+                <img src="{{ url_for('static', filename='style/imgs/knob.svg') }}" class="knob" id="knob_d1">
+              </div>
+            </div>
+            <div class="knob_container">
+              <div class="shadow">
+                <img src="{{ url_for('static', filename='style/imgs/knob.svg') }}" class="knob" id="knob_d2">
+              </div>
+            </div>
+            <div class="knob_container">
+              <div class="shadow">
+                <img src="{{ url_for('static', filename='style/imgs/knob.svg') }}" class="knob" id="knob_d3">
+              </div>
+            </div>
+            <div class="knob_container">
+              <div class="shadow">
+                <img src="{{ url_for('static', filename='style/imgs/knob.svg') }}" class="knob" id="knob_d4">
+              </div>
+            </div>
+          </div>
+          <div class="volume_section">
+            <div class="volume_knob_container">
+              <div class="shadow">
+                <img src="{{ url_for('static', filename='style/imgs/knob.svg') }}" class="knob" id="knob_dv">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="channel_strip" id="bass_channel_strip">
+          <div class="cs_header">
+            <h2 class="channel_name" id="bass_channel_name">Bass</h2>
+            <div class="channel_logo">
+            </div>
+          </div>
+          <div class="pad_section" id="bass_pad">
+          </div>
+          <div class="knobs_section">
+            <div class="knob_container">
+              <div class="shadow">
+                <img src="{{ url_for('static', filename='style/imgs/knob.svg') }}" class="knob" id="knob_b1">
+              </div>
+            </div>
+            <div class="knob_container">
+              <div class="shadow">
+                <img src="{{ url_for('static', filename='style/imgs/knob.svg') }}" class="knob" id="knob_b2">
+              </div>
+            </div>
+            <div class="knob_container">
+              <div class="shadow">
+                <img src="{{ url_for('static', filename='style/imgs/knob.svg') }}" class="knob" id="knob_b3">
+              </div>
+            </div>
+            <div class="knob_container">
+              <div class="shadow">
+                <img src="{{ url_for('static', filename='style/imgs/knob.svg') }}" class="knob" id="knob_b4">
+              </div>
+            </div>
+          </div>
+          <div class="volume_section">
+            <div class="volume_knob_container">
+              <div class="shadow">
+                <img src="{{ url_for('static', filename='style/imgs/knob.svg') }}" class="knob" id="knob_bv">
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="channel_strip" id="harmony_channel_strip">
+          <div class="cs_header">
+            <h2 class="channel_name" id="harmony_channel_name">Harmony</h2>
+            <div class="channel_logo"></div>
+          </div>
+          <div class="pad_section" id="harmony_pad">
+          </div>
+          <div class="knobs_section">
+            <div class="knob_container" >
+              <div class="shadow">
+                <img src="{{ url_for('static', filename='style/imgs/knob.svg') }}" class="knob" id="knob_h1">
+              </div>
+            </div>
+            <div class="knob_container">
+              <div class="shadow">
+                <img src="{{ url_for('static', filename='style/imgs/knob.svg') }}" class="knob" id="knob_h2">
+              </div>
+            </div>
+            <div class="knob_container">
+              <div class="shadow">
+                <img src="{{ url_for('static', filename='style/imgs/knob.svg') }}" class="knob" id="knob_h3">
+              </div>
+            </div>
+            <div class="knob_container">
+              <div class="shadow">
+                <img src="{{ url_for('static', filename='style/imgs/knob.svg') }}" class="knob" id="knob_h4">
+              </div>
+            </div>
+          </div>
+          <div class="volume_section">
+            <div class="volume_knob_container">
+              <div class="shadow">
+                <img src="{{ url_for('static', filename='style/imgs/knob.svg') }}" class="knob" id="knob_hv">
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="channel_strip" id="melody_channel_strip">
+          <div class="cs_header">
+            <h2 class="channel_name" id="melody_channel_name">Melody</h2>
+            <div class="channel_logo"></div>
+          </div>
+          <div class="pad_section" id="melody_pad">
+          </div>
+          <div class="knobs_section">
+            <div class="knob_container">
+              <div class="shadow">
+                <img src="{{ url_for('static', filename='style/imgs/knob.svg') }}" class="knob" id="knob_m1">
+              </div>
+            </div>
+            <div class="knob_container">
+              <div class="shadow">
+                <img src="{{ url_for('static', filename='style/imgs/knob.svg') }}" class="knob" id="knob_m2">
+              </div>
+            </div>
+            <div class="knob_container">
+              <div class="shadow">
+                <img src="{{ url_for('static', filename='style/imgs/knob.svg') }}" class="knob" id="knob_m3">
+              </div>
+            </div>
+            <div class="knob_container">
+              <div class="shadow">
+                <img src="{{ url_for('static', filename='style/imgs/knob.svg') }}" class="knob" id="knob_m4">
+              </div>
+            </div>
+          </div>
+          <div class="volume_section">
+            <div class="volume_knob_container">
+              <div class="shadow">
+                <img src="{{ url_for('static', filename='style/imgs/knob.svg') }}" class="knob" id="knob_mv">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+  <footer>
+    <div class="track_info_container">
+      <p>Info:</p>
+      <p>Harmony: ' {{ harmonyPath[3:8] }} ' by:
+          <a href="https://open.spotify.com/artist/6mhR58l7PmYbl5W2Y7qY9p">CPACOLLARETHEGANG</a>
+      </p>
+      <p>Rhythm: ' {{ drumsPath[3:8] }} ' by:
+         <a href="https://open.spotify.com/artist/6mhR58l7PmYbl5W2Y7qY9p">CPACOLLARETHEGANG</a>
+      </p>
+    </div>
+
+    <div class="bpm_container">
+      <form id = 'bpm_form' action = "index.html" method = "post">
+        <button type = "button" id = "minus_btn" name = "minus">
+          <img id = 'minus_img' class = 'bpm_btn' alt = "minus" >
+        </button>
+        <input type = "number" id = "bpm_bar" name = "bpm" value = "120">
+        <button type = "button" id ="plus_btn" name = "plus">
+          <img id = 'plus_img' class = 'bpm_btn' alt = "plus" >
+        </button>
+      </form>
+    </div>
+    <div class="pp_container">
+      <div id="pp_btn">
+        <img class="play" id='pp_img' alt="play" >
+      </div>
+        <div id ="record_btn" >
+          <!--<img class="record" id='rec_img' alt="record" >-->
+          <div id='rec_img' alt="record"></div>
+        </div>
+    </div>
+  </footer>
+
+</html>

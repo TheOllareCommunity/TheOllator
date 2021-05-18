@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Ollator - Community</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/cleanAll.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/community_style.css') }}">
+    <script src="{{ url_for('static', filename='communityScript.js') }}" type="text/javascript" defer></script>
+</head>
+<body id="body">
+  <div id="overlay_container">
+    <div id="overlay" class="invisible">
+      <div class="dropText">
+        Drop it like it's hot
+      </div>
+    </div>
+  </div>
+  <div class="main_container">
+    <div class="logo_container">
+      <img id="logo" src="{{ url_for('static', filename='style/imgs/TO.png') }}" alt="The Ollator">
+    </div>
+    <div class="description_container">
+      <div class="description">
+        The Ollator is an application allowing singers or rap / hip hop music fans to quickly get a beat for
+        their music projects or just for fun. The idea of The Ollator is to give the possibility to users to get a
+        beat that resembles his/her taste exploiting our machine learning algorithms with low effort.
+        <br><br>
+        The core of our application lies in the community built around it: to ensure for our machine learning
+        algorithms to have the maximum precision it is fundamental the contribution from each and every one of you
+        (bigger database means higher precision)!
+        So by uploading the midi stems of one of your beats, you will contribute to enlarge our family and
+        you will provide a better service for everyone (without mentioning that your name and link to your artist page
+        will be mentioned to our users ;) ).
+        <br><br>
+        Upload your midi file containing four tracks:
+        <br><br>
+        <div class="requirements">
+          Drum track, arranging the kick on the C1 note, the snare on D1 and the hi hat on E1.<br>
+          Bass track<br>
+          Harmony track<br>
+          Melody track<br>
+          <br>
+        </div>
+        Be sure to set the tempo at 120 bpm before exporting the midi file and to name your tracks properly
+        (i.e. name your bass track "bass", harmony "harmony", ...).
+      </div>
+    </div>
+    <div class="form_container">
+      <form class="community_form" action="/fileUpload" enctype="multipart/form-data" method="POST">
+        <div id="dragTextContainer">
+          <p class="dragtext">DRAG & DROP YOUR BEAT</p>
+        </div>
+        <input type="text" name="artist_name" placeholder="Artist name">
+        <input type="text" name="beat_name" placeholder="Title">
+        <input type="text" name="artist_page" placeholder="link to your music (spotify / soundcloud / youtube ..)">
+        <input name="fileInput" type="file" id="fileInput" >
+
+        <input class="submitBtn" type="submit">
+      <!--  <button class="submitBtn" id="uploadButton" title="Coming soon!">Upload your beat ...</button> -->
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

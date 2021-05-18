@@ -1,0 +1,4 @@
+artist :ollare
+beatName :the
+artist link :gang
+path :MIDIuploaded\BeatC_bass.mid

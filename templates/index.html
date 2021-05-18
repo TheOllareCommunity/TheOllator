@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>THE OLLATOR</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/cleanAll.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
+
+    <script src="{{ url_for('static', filename='indexControl.js') }}" type="text/javascript" defer></script>
+  </head>
+  <body>
+    <div class="logoSection">
+        <img class="logoImg" src="{{ url_for('static', filename='style/imgs/TO.png') }}" alt="THE OLLATOR">
+    </div>
+    <div class="formSection">
+      <form class="" action="/playlistForm" method="get">
+        <!--<label for="playlist_url">Spotify Playlist URL</label>--> <input id="urlArea" type="text" name="playlist_url" placeholder="Spotify Playlist URL ...">
+        <input id="start" class="submitBtn" type="submit" value="Submit">
+      </form>
+    </div>
+    <div class="footer">
+      <p>Generate your Hip-Hop track in seconds</p>
+      <div class="comunitySupport">
+        <p>If you wish to suport our community <a href="{{ url_for('communityPage') }}">click here</a></p>
+      </div>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,134 @@
+
+@font-face {
+  font-family: myFont;
+  src: url("fonts/AnotherAmerica.ttf");
+}
+
+body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  /*background-color: #141414;*/
+  background-image: url("/static/style/imgs/5.jpg");
+  background-attachment: fixed;
+  background-position: center;
+}
+
+p{
+    font-family: myFont;
+    font-size: 156%;
+    letter-spacing: 0.15em;
+    padding-bottom: 20px;
+}
+
+.logoImg{
+  width: 50vw;
+  height: auto;
+}
+
+h1{
+  font-family: myFont;
+  font-size: 7vw;
+  color: rgb(243, 0, 239);
+}
+
+
+label{
+  margin-right: 20px;
+}
+
+.submitBtn {
+  width: 10vw;
+  background-color: rgb(243 0 239);
+
+  background: -moz-linear-gradient(top,  rgb(243 0 239) 0%, rgb(15,15,15) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  rgb(243 0 239) 0%, rgb(15,15,15) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgb(243 0 239) 0%, rgb(15,15,15) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 );
+
+  color: white;
+  font-family: myFont;
+  font-size: 150%;
+  letter-spacing: 0.16em;
+  font-weight: 600;
+  padding: 6px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.submitBtn:active {
+  background: -moz-linear-gradient(top,  rgb(15,15,15) 0%, rgb(243 0 239) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  rgb(15,15,15) 0%, rgb(243 0 239) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgb(15,15,15) 0%, rgb(243 0 239) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+#uploadButton{
+    width: auto;
+}
+
+.logoSection{
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.formSection{
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 15px;
+}
+form{
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input[type=text], select {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+  /*font-family: 'myFont';
+  font-size: 151%;
+  letter-spacing: 0.12em;*/
+}
+
+
+.button{
+  width: 10vw;
+  background-color: rgb(243 0 239);
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 20px;
+  border-radius: 5px;
+}
+
+.footer{
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.uploadForm{
+    font-family:myFont;
+}
