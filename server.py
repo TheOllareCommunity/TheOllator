@@ -20,7 +20,7 @@ Run app.py
 """
 
 import os
-from flask import Flask, jsonify, session, request, redirect, render_template,flash, url_for, send_from_directory
+from flask import Flask, jsonify, session, request, redirect, render_template, flash, url_for, send_from_directory
 from werkzeug.utils import secure_filename
 from flask_session import Session
 from ClassificationPkg import getClassification
@@ -29,10 +29,9 @@ import spotipy
 import uuid
 import pathlib
 
-
-
 # upload file parameters
 UPLOAD_FOLDER = 'MIDIuploaded'
+INTERPOLATION_FOLDER = 'MIDIuploaded/interpolations'
 ALLOWED_EXTENSIONS = {'wav', 'aiff', 'caf', 'flac', 'mp3', 'mid'}
 
 
@@ -51,7 +50,6 @@ def session_cache_path():
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER  #
 
-
 projectPath = pathlib.Path(__file__).parent.absolute()  # get path of the project
 
 app = Flask(__name__)
@@ -69,6 +67,7 @@ if not os.path.exists(caches_folder):
 @app.route('/')
 def index():
     return render_template("index.html")
+
 
 @app.route('/playlists')
 def playlists():
@@ -91,17 +90,21 @@ def currently_playing():
         return track
     return "No track currently playing."
 
+
 @app.route('/home/')
 def home():
     return render_template("index.html")
+
 
 @app.route('/DAW/')
 def MIDI_player():
     return render_template("DAW.html")
 
+
 @app.route('/community')
 def communityPage():
     return render_template('community.html')
+
 
 @app.route('/fileUpload', methods=['POST'])
 def fileUpload():
@@ -110,7 +113,6 @@ def fileUpload():
         if 'fileInput' not in request.files:
             flash('No file part')
             return redirect(url_for('.communityPage', result=-2))
-
 
         file = request.files['fileInput']
         artistName = request.form['artist_name']
@@ -121,13 +123,12 @@ def fileUpload():
             flash('No selected file')
             return redirect(url_for('.communityPage', result=-2))
 
-
         if file and allowed_file(file.filename):
             print("file allowed")
             filename = secure_filename(file.filename)
             print(filename)
             file.save(os.path.join(UPLOAD_FOLDER, filename))
-            #write file containing beat info
+            # write file containing beat info
             with open(UPLOAD_FOLDER + '/' + artistName + '_' + beatName + '.txt', 'w') as f:
                 f.write(
                     'artist :' + artistName + '\n' + 'beatName :' + beatName + '\n' + 'artist link :'
@@ -155,6 +156,19 @@ def current_user():
         return redirect('/')
     spotify = spotipy.Spotify(auth_manager=auth_manager)
     return spotify.current_user()
+
+
+@app.route('/interpolationUploader/<beatName>', methods=['POST'])
+def interpolationUploader(beatName):
+    # f = request.files['file']
+    f = request.data
+    if request.method == 'POST' and f:
+        newFile = open(os.path.join(INTERPOLATION_FOLDER, beatName), "wb")
+        # write to file
+        for byte in f:
+            newFile.write(byte.to_bytes(1, byteorder='big'))
+        # f.save(os.path.join(INTERPOLATION_FOLDER, "test.mid"))
+        return 'file uploaded successfully'
 
 
 '''
