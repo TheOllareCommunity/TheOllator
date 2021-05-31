@@ -15,12 +15,24 @@ function playMIDI(currentMidi, instrument, now) {
         		    );
 
         		}
-        		instrument.triggerAttackRelease(
-        			note.name,
-        			note.duration,
-        			note.time + now,
-        			note.velocity
-        		);
+				console.log(note);
+				if(instrument.name === "sampler"){
+					instrument.triggerAttackRelease(
+						note.name,
+						note.duration,
+						note.time + now,
+						note.velocity
+					);
+				}
+        		else{
+					note.midi = setMode(6, "C", note.midi);
+					instrument.triggerAttackRelease(
+						note.name,
+						note.duration,
+						note.time + now,
+						note.velocity
+					);
+				}
         	});
         });
 	}
