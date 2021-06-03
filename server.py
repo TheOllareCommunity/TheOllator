@@ -95,6 +95,10 @@ def currently_playing():
 def home():
     return render_template("index.html")
 
+@app.route('/featureSelection')
+def feaureSelection():
+    return render_template("FeaturesRecap.html")
+
 
 @app.route('/DAW/')
 def MIDI_player():

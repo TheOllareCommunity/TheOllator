@@ -1,0 +1,65 @@
+header{
+  height: 15vh;
+}
+
+.logo_container{
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#logo{
+  height: 130%;
+  width: auto;
+  /* z-index: 1; */
+}
+
+#mainContainer{
+  width: 100vw;
+  height: 85vh;
+  display: flex;
+  flex-direction: vertical;
+  align-items: center;
+  justify-content: center;
+}
+
+#chartContainer{
+  width: 80%;
+  height: 80%;
+  display: flex;
+  flex-direction: horizontal;
+  align-items: center;
+  justify-content: center;
+  background-color: #212121;
+  border-radius: 9px;
+  border: 1px solid black;
+}
+
+#sliderContainer{
+  width: 45%;
+  height: 100%;
+  display: flex;
+  flex-direction: horizontal;
+  align-items: center;
+  justify-content: center;
+}
+
+#radarContainer{
+  width: 45%;
+  height: 100%;
+  display: flex;
+  flex-direction: horizontal;
+  align-items: center;
+  justify-content: center;
+}
+
+#radarChart{
+  height: 80% !important;
+  width: auto !important;
+}
+
+#playBeat{
+}
