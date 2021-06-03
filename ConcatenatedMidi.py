@@ -1,9 +1,96 @@
 import csv
 import py_midicsv as pm
+from mido import MidiFile
+from mido import MidiTrack
+from mido import MetaMessage
+
+mid0 = MidiFile()
+mid0.ticks_per_beat=96
+track0 = MidiTrack()
+mid0.tracks.append(track0)
 
 
-file1= 'C:\\Users\\eugep\\Desktop\\EUGE\\MAE\\Creative Programming\\Progetto\\Ollator\\TheOllator\\static\\MIDI_2bar\\BeatA_drum_2bar.mid';
-file2= 'C:\\Users\\eugep\\Desktop\\EUGE\\MAE\\Creative Programming\\Progetto\\Ollator\\TheOllator\\static\\MIDI_2bar\\BeatB_drum_2bar.mid';
+print("-------------------1111111---------------------------")
+mid = MidiFile('/Users/PilvioSol/Desktop/BeatA_drum_2bar.mid')
+
+
+for msg in mid.tracks[0]:
+    print(msg)
+
+for msg in mid.tracks[0]:
+    mid0.tracks[0].append(msg)
+
+
+print("-------------------22222---------------------------")
+
+mid2 = MidiFile('/Users/PilvioSol/Desktop/interpolation_AB.mid')
+
+#the first [] of mid.track has to be changed depending on the track: some tracks have information on the first subtrack '[0]',
+# other on the third '[2]'
+for msg in mid2.tracks[2][:-1]:
+    #print(msg)
+    msg.time=int(msg.time*96/220)
+    #print(msg)
+    mid0.tracks[0].append(msg)
+
+
+'''for msg in mid0.tracks[0]:
+    print(msg)'''
+
+
+mid0.save('/Users/PilvioSol/Desktop/Giucca.mid')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''file1= "/Users/PilvioSol/Desktop/BeatC_drum.mid";
+file2= "/Users/PilvioSol/Desktop/BeatC_drum.mid";
 
 # Load the MIDI file and parse it into CSV format
 csv_string1 = pm.midi_to_csv(file1)
@@ -75,7 +162,7 @@ with open("concatenated_file.mid", "wb") as output_file:
 
 
 
-'''
+
 
 
 with open("converted2.csv", "w") as f:
