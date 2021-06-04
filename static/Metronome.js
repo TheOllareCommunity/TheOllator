@@ -136,8 +136,10 @@ pp_btn.addEventListener("click", () => {
     }
 })
 
+//----------------- change interpolation button
 
-
+let load_btn = document.getElementById('pp_btn')
+let load_img = document.getElementById('load_img')
 
 
 //---------------- bpm + & - ------------------

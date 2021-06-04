@@ -11,6 +11,7 @@
           --minus_url: {{ url_for('static', filename='style/imgs/minus.png') }}
           --play_url: {{ url_for('static', filename='style/imgs/play.png') }}
           --stop_url: {{ url_for('static', filename='style/imgs/pause.png') }}
+          --load_url: {{ url_for('static', filename='style/imgs/load.png') }}
       }
     </style>
 
@@ -242,6 +243,9 @@
       </form>
     </div>
     <div class="pp_container">
+      <div id="load_btn">
+        <img class="load" id='load_img' alt="load" >
+      </div>
       <div id="pp_btn">
         <img class="play" id='pp_img' alt="play" >
       </div>
