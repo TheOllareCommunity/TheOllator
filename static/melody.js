@@ -4,10 +4,9 @@ const melodyCrusher = new Tone.BitCrusher(16);
 melodyCrusher.wet.value = 0
 
 
-
-
-const fmSynth = new Tone.Synth();
-fmSynth.set({
+function melodyRecycle(){
+    let newSynth=  new Tone.Synth();
+    newSynth.set({
     "harmonicity": 3.01,
     "modulationIndex": 14,
     "oscillator": {
@@ -30,8 +29,15 @@ fmSynth.set({
     }
 })
 
+    connectMelody(newSynth);
+    newSynth.sync();
 
-connectMelody(fmSynth);
+    return newSynth;
+}
+
+
+let fmSynth = melodyRecycle();
+
 
 setEffect("knob_m1", knobs["knob_m1"])
 setEffect("knob_m2", knobs["knob_m2"])

@@ -8,10 +8,11 @@ const bassFreqEnv = new Tone.FrequencyEnvelope({
 	release:0,
 	baseFrequency: "C2",
 	octaves: 2
-})
+	})
 
-const bassSynth = new Tone.MonoSynth();
-bassSynth.set({
+function bassRecycle(){
+    let newSynth= new Tone.MonoSynth();
+    newSynth.set({
     "detune":0,
     "volume":-100,
 	oscillator: {
@@ -36,8 +37,13 @@ bassSynth.set({
 		"type": "lowpass"
 	},
 })
+    connectBass(newSynth, bassFreqEnv);
+    newSynth.sync();
 
-connectBass(bassSynth, bassFreqEnv)
+    return newSynth;
+}
+
+let bassSynth=bassRecycle();
 
 setEffect("knob_b1", knobs["knob_b1"])
 setEffect("knob_b2", knobs["knob_b2"])

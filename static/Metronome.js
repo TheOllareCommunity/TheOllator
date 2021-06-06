@@ -1,3 +1,4 @@
+
 let drumMidi = null;
 let harmonyMidi=null;
 let bassMidi=null;
@@ -28,6 +29,23 @@ async function parseDrums() {
     let url = 'http://127.0.0.1:8080//static/MIDI/' +  drumsPath + '/' + drumsPath + '_drum.mid';
     let blob = await fetch(url).then(response => response.blob());
     reader.readAsArrayBuffer(blob);
+}
+
+async function parseInterpolation() {
+	//read the file
+	const reader = new FileReader();
+	reader.onload = function (e) {
+	    drumMidi = new Midi(e.target.result);
+	};
+	let letters= ["A","B","C","D","E","F","G","H","I","J"];
+	var randomLetter = letters[Math.floor(Math.random() * letters.length)];
+    console.log(randomLetter);
+    while (randomLetter == intPath) {
+        randomLetter = letters[Math.floor(Math.random() * letters.length)];}
+    let url = 'http://127.0.0.1:8080//static/Long_interpolations/' + 'LI_' +  intPath  + randomLetter + '.mid';
+    let blob = await fetch(url).then(response => response.blob());
+    reader.readAsArrayBuffer(blob);
+    console.log(url);
 }
 
 async function parseHarmony() {
@@ -67,9 +85,19 @@ function repeat(){
 
     console.log("repeat1");
     poly.dispose();
+    fmSynth.dispose();
+    bassSynth.dispose();
+    sampler.dispose();
+
     Tone.Transport.bpm.value = 120;
     poly=harmonyRecycle();
+    fmSynth=melodyRecycle();
+    bassSynth=bassRecycle();
+    sampler=drumRecycle();
     setEffect("knob_hv",knobs["knob_hv"]);
+    setEffect("knob_mv",knobs["knob_mv"]);
+    setEffect("knob_bv",knobs["knob_bv"]);
+    setEffect("knob_dv",knobs["knob_dv"]);
 
     //console.log(harmonyMidi);
 
@@ -110,6 +138,7 @@ function submitBPM(bpm) {
 let pp_btn = document.getElementById('pp_btn')
 let pp_img = document.getElementById('pp_img')
 let playing = false;
+let playControl = false;
 
 pp_btn.addEventListener("click", () => {
     if(!playing){
@@ -125,7 +154,8 @@ pp_btn.addEventListener("click", () => {
         mute(fmSynth);
         mute(bassSynth);
         mute(poly);
-        mute(sampler)
+        mute(sampler);
+        playControl = false;
     }
     else{
         Tone.Transport.start();
@@ -133,13 +163,28 @@ pp_btn.addEventListener("click", () => {
         setEffect("knob_bv", knobs["knob_bv"]);
         setEffect("knob_hv", knobs["knob_hv"]);
         setEffect("knob_dv", knobs["knob_dv"]);
+        playControl = true;
     }
 })
 
 //----------------- change interpolation button
 
-let load_btn = document.getElementById('pp_btn')
+let load_btn = document.getElementById('load_btn')
 let load_img = document.getElementById('load_img')
+
+
+
+load_btn.addEventListener("click", () => {
+    Tone.Transport.stop();
+    Tone.Transport.cancel(0);
+    parseInterpolation();
+    Tone.Transport.scheduleRepeat(repeat, "304m");
+    if(playControl){
+        Tone.Transport.start();
+        console.log("zanonibomboloni")
+    }
+})
+
 
 
 //---------------- bpm + & - ------------------
