@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style/cleanAll.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style/featureSelStyle.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/sliderStyle.css') }}">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js" type="text/javascript"></script>
     <script src="{{ url_for('static', filename='featureSelection.js') }}" type="text/javascript" defer></script>
 
@@ -21,12 +23,30 @@
 <body>
     <div id="mainContainer">
         <div id="chartContainer">
-            <div id="sliderContainer"></div>
+            <div id="sliderContainer">
+                <div class = 'sliderName'>Energy</div>
+                <div class="singleSlider">
+                    <input id ='sliderEnergy' type="range" min="0" max="100" value="0" class="range blue"/>
+                </div>
+                <div class = 'sliderName'>Valence</div>
+                <div class="singleSlider">
+                    <input id ='sliderValence' type="range" min="0" max="100" value="0" class="range blue"/>
+                </div>
+                <div class = 'sliderName'>Danceability</div>
+                <div class="singleSlider">
+                    <input id ='sliderDanceability' type="range" min="0" max="100" value="0" class="range blue"/>
+                </div>
+                <div class = 'sliderName'>Mode</div>
+                <div class="singleSlider">
+                    <input id ='sliderMode' type="range" min="0" max="100" value="0" class="range blue"/>
+                </div>
+            </div>
             <div id="radarContainer">
                 <canvas id="radarChart"></canvas>
             </div>
         </div>
         <div id="playBeat"></div>
+        <div id = "continueButton">continue</div>
     </div>
     
 </body>

@@ -24,7 +24,7 @@ from flask import Flask, jsonify, session, request, redirect, render_template, f
 from werkzeug.utils import secure_filename
 from flask_session import Session
 from ClassificationPkg import getClassification
-from db import getMIDIfromBeatID
+from db import getMIDIfromBeatID, getFeaturesFromBeatID
 import spotipy
 import uuid
 import pathlib
@@ -96,9 +96,9 @@ def home():
     return render_template("index.html")
 
 @app.route('/featureSelection')
-def feaureSelection():
+def featureSelection():
     return render_template("FeaturesRecap.html")
-
+    
 
 @app.route('/DAW/')
 def MIDI_player():
@@ -147,11 +147,20 @@ def playlistForm():
     playlist_url = request.args.get("playlist_url")
     if playlist_url.startswith('spotify:playlist:'):
         beatID = getClassification(playlist_url)
-        messages = getMIDIfromBeatID(beatID)
-        return render_template('DAW.html', harmonyPath=str(messages[0]), drumsPath=str(messages[1]))
+        features = getFeaturesFromBeatID(beatID)
+
+        return redirect(url_for('.featureSelection', energy = features[0], valence = features[1], danceability = features[2], mode = features[3], beatID = beatID))
 
     return redirect(url_for('.index', result=-1))
 
+
+#è necessario passare beatID a openDaw per ricavare i midi, openDAW chiamata da featuresRecap 
+
+@app.route('/openDAW')
+def openDaw():
+ #   messages = getMIDIfromBeatID(beatID)
+ #  return render_template('DAW.html', harmonyPath=str(messages[0]), drumsPath=str(messages[1]))
+    return 0
 
 @app.route('/current_user')
 def current_user():

@@ -65,6 +65,16 @@ def getFeaturesFromDb():
 
     return features
 
+def getFeaturesFromBeatID(beatID = None):
+    cur.execute("SELECT Energy, Valence, Danceability, Mode  FROM Beat where ID_Beat = ?", (str(beatID),))  # db response
+    songs = cur.fetchall()
+    for song in songs:
+        energy = song[0]
+        valence = song[1]
+        danceability = song[2]
+        mode = song[3]
+
+    return (energy, valence, danceability, mode)
 
 def getMIDIfromBeatID(beatID=None):
     harmonyPath = None

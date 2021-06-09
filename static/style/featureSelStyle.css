@@ -1,3 +1,8 @@
+@font-face {
+  font-family: myFont;
+  src: url("fonts/AnotherAmerica.ttf");
+}
+
 header{
   height: 15vh;
 }
@@ -42,16 +47,37 @@ header{
   width: 45%;
   height: 100%;
   display: flex;
-  flex-direction: horizontal;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.singleSlider{
+  width: 100%;
+  height: 10%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.sliderName{
+  width: 70%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content:flex-start;
+  font-family: myFont;
+  letter-spacing: 0.22em;
+  font-size: 118%;
 }
 
 #radarContainer{
   width: 45%;
   height: 100%;
   display: flex;
-  flex-direction: horizontal;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
 }
@@ -62,4 +88,10 @@ header{
 }
 
 #playBeat{
+}
+
+#continueButton{
+  height: 40px;
+  width: 40px;
+  background-color: bisque;
 }

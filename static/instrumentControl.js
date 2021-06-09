@@ -15,7 +15,6 @@ function playMIDI(currentMidi, instrument, now) {
         		    );
 
         		}
-				console.log(note);
 				if(instrument.name === "sampler"){
 					instrument.triggerAttackRelease(
 						note.name,

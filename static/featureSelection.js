@@ -1,3 +1,17 @@
+let energySlider = document.getElementById('sliderEnergy');
+let valenceSlider = document.getElementById('sliderValence');
+let danceabilitySlider = document.getElementById('sliderDanceability');
+let changed = false;
+
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+
+const energy = urlParams.get('energy')
+const valence = urlParams.get('valence')
+const danceability = urlParams.get('danceability')
+const mode = urlParams.get('mode')
+
+
 var ctx = document.getElementById('radarChart').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'radar',
@@ -5,7 +19,7 @@ var myChart = new Chart(ctx, {
         labels: ['Energy', 'Valence', 'Danceability','Mode'],
         datasets: [{    //anche più di un dataset, potremmo fare 1 grafico per il primo beat e 1 grafico per quello modificato
             label: 'Pervious features values',
-            data: [12, 19, 30, 25],
+            data: [energy*100, valence*100, danceability*100, mode*100],
             backgroundColor: [
                 'rgba(248, 104, 235, 0.2)',
             ],
@@ -16,7 +30,7 @@ var myChart = new Chart(ctx, {
         },
         {    //second dataset
             label: 'New features values',
-            data: [85,24,73,52],
+            data: [energy*100, valence*100, danceability*100, mode*100],
             backgroundColor: [
                 'rgba(224, 251, 255, 0.7)',
             ],
@@ -64,3 +78,41 @@ var myChart = new Chart(ctx, {
         }
     }
 });
+
+energySlider.value = (energy*100).toString()
+valenceSlider.value = (valence*100).toString()
+danceabilitySlider.value = (danceability*100).toString()
+
+
+energySlider.onchange  = (e)=>{
+    if(!changed)
+        changed = true;
+    myChart.data.datasets[0].data[0] = e.target.value;
+    myChart.update();
+};
+valenceSlider.onchange  = (e)=>{
+    if(!changed)
+        changed = true;
+    myChart.data.datasets[0].data[1] = e.target.value;
+    myChart.update();
+};
+danceabilitySlider.onchange  = (e)=>{
+    if(!changed)
+        changed = true;
+    myChart.data.datasets[0].data[2] = e.target.value;
+    myChart.update();
+};
+
+
+document.getElementById("continueButton").onclick = ()=>{
+    if(changed){
+        location.href = url_for('.openDAW', energy = energySlider.value/100,
+        valence = valenceSlider.value/100, 
+        danceability = danceabilitySlider.value/100,
+        mode = 1)
+    }
+    else 
+        location.href = url_for('.openDAW', beatID = beatID);
+}
+
+
