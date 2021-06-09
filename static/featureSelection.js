@@ -103,16 +103,7 @@ danceabilitySlider.onchange  = (e)=>{
     myChart.update();
 };
 
-
 document.getElementById("continueButton").onclick = ()=>{
-    if(changed){
-        location.href = url_for('.openDAW', energy = energySlider.value/100,
-        valence = valenceSlider.value/100, 
-        danceability = danceabilitySlider.value/100,
-        mode = 1)
-    }
-    else 
-        location.href = url_for('.openDAW', beatID = beatID);
+    document.getElementById("rescan").click()
 }
-
 

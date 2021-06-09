@@ -21,10 +21,12 @@ Run app.py
 
 import os
 from flask import Flask, jsonify, session, request, redirect, render_template, flash, url_for, send_from_directory
+import numpy
 from werkzeug.utils import secure_filename
 from flask_session import Session
 from ClassificationPkg import getClassification
 from db import getMIDIfromBeatID, getFeaturesFromBeatID
+from SpotifyFeatures import SpotifyFeatures, getMidpoint
 import spotipy
 import uuid
 import pathlib
@@ -158,9 +160,19 @@ def playlistForm():
 
 @app.route('/openDAW')
 def openDaw():
- #   messages = getMIDIfromBeatID(beatID)
- #  return render_template('DAW.html', harmonyPath=str(messages[0]), drumsPath=str(messages[1]))
-    return 0
+    
+    energy = int(request.args.get("Energy"))/100
+    valence = int(request.args.get("Valence"))/100
+    danceability = int(request.args.get("Danceability"))/100
+    mode = int(request.args.get("Mode"))/100
+
+    # dalle features vogliamo getSongID
+    
+    midpoint = numpy.array([energy, valence, 120, danceability, mode])
+    beatID = getClassification(midpoint = midpoint)
+
+    messages = getMIDIfromBeatID(beatID)
+    return render_template('DAW.html', harmonyPath=str(messages[0]), drumsPath=str(messages[1]))
 
 @app.route('/current_user')
 def current_user():

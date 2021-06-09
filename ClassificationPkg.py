@@ -15,9 +15,11 @@ getClassification(playlistURI='spotify:playlist:0XgEPjlWTX4g4HjBNhtZIL')
     return: 1x1 numpy.array containing index of FeatureSpaceRepresentation class selected  
 '''
 
-def getClassification(playlistId='spotify:playlist:0XgEPjlWTX4g4HjBNhtZIL'):
+def getClassification(playlistId='spotify:playlist:0XgEPjlWTX4g4HjBNhtZIL', midpoint = numpy.array([])):
     startDb()
-    midpoint = getPlaylistMidpoint(playlistId)
+    if midpoint.size == 0:
+        midpoint = getPlaylistMidpoint(playlistId)
+
     model = KNeighborsClassifier(n_neighbors=1)
     representation = FeatureSpaceRepresentation()
     classes = representation.getClasses()

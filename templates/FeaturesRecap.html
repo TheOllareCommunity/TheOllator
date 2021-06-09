@@ -23,24 +23,25 @@
 <body>
     <div id="mainContainer">
         <div id="chartContainer">
-            <div id="sliderContainer">
+            <form id="sliderForm" action="/openDAW" method="get">
                 <div class = 'sliderName'>Energy</div>
                 <div class="singleSlider">
-                    <input id ='sliderEnergy' type="range" min="0" max="100" value="0" class="range blue"/>
+                    <input name="Energy" id ='sliderEnergy' type="range" min="0" max="100" value="0" class="range blue"/>
                 </div>
                 <div class = 'sliderName'>Valence</div>
                 <div class="singleSlider">
-                    <input id ='sliderValence' type="range" min="0" max="100" value="0" class="range blue"/>
+                    <input name="Valence" id ='sliderValence' type="range" min="0" max="100" value="0" class="range blue"/>
                 </div>
                 <div class = 'sliderName'>Danceability</div>
                 <div class="singleSlider">
-                    <input id ='sliderDanceability' type="range" min="0" max="100" value="0" class="range blue"/>
+                    <input name="Danceability" id ='sliderDanceability' type="range" min="0" max="100" value="0" class="range blue"/>
                 </div>
                 <div class = 'sliderName'>Mode</div>
                 <div class="singleSlider">
-                    <input id ='sliderMode' type="range" min="0" max="100" value="0" class="range blue"/>
+                    <input name="Mode" id ='sliderMode' type="range" min="0" max="100" value="0" class="range blue"/>
                 </div>
-            </div>
+                <input id="rescan" class="submitBtn" type="submit" value="Submit">
+            </form>
             <div id="radarContainer">
                 <canvas id="radarChart"></canvas>
             </div>
