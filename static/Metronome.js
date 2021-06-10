@@ -137,6 +137,10 @@ function submitBPM(bpm) {
 
 let pp_btn = document.getElementById('pp_btn')
 let pp_img = document.getElementById('pp_img')
+
+let load_btn = document.getElementById('load_btn')
+let load_img = document.getElementById('load_img')
+
 let playing = false;
 let playControl = false;
 
@@ -148,6 +152,8 @@ pp_btn.addEventListener("click", () => {
     }
     pp_img.classList.toggle("play");
     pp_img.classList.toggle("pause");
+    load_img.classList.toggle("load");
+    load_img.classList.toggle("load_dis");
 
     if(Tone.Transport.state === "started"){
         Tone.Transport.pause();
@@ -169,19 +175,13 @@ pp_btn.addEventListener("click", () => {
 
 //----------------- change interpolation button
 
-let load_btn = document.getElementById('load_btn')
-let load_img = document.getElementById('load_img')
-
-
 
 load_btn.addEventListener("click", () => {
-    Tone.Transport.stop();
-    Tone.Transport.cancel(0);
-    parseInterpolation();
-    Tone.Transport.scheduleRepeat(repeat, "304m");
-    if(playControl){
-        Tone.Transport.start();
-        console.log("zanonibomboloni")
+    if (!playControl){
+         Tone.Transport.cancel(0);
+         parseInterpolation();
+         Tone.Transport.scheduleRepeat(repeat, "304m");
+         console.log("zanonibomboloni")
     }
 })
 

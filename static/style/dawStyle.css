@@ -514,6 +514,10 @@ input[type=number]:focus{
   content:url("/static/style/imgs/load.svg");
 }
 
+.load_dis{
+  content:url("/static/style/imgs/load_disabled.svg");
+}
+
 
 #record_btn{
   width: 45%;
