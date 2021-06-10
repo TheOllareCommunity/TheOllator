@@ -14,7 +14,6 @@ parseMelody();
 parseBass();
 
 Tone.Transport.bpm.value = currentBpm;
-//Tone.Transport.loop = true
 
 //Tone.Transport.setLoopPoints("0:0:0", "64:0:0")
 Tone.Transport.scheduleRepeat(repeat, "304m")
@@ -99,7 +98,6 @@ function repeat(){
     setEffect("knob_bv",knobs["knob_bv"]);
     setEffect("knob_dv",knobs["knob_dv"]);
 
-    //console.log(harmonyMidi);
 
     const now = Tone.now();
 
@@ -110,20 +108,13 @@ function repeat(){
 
     Tone.Transport.bpm.value = currentBpm;
     console.log("repeat2");
-    //console.log(poly.activeVoices);
 }
 
 function submitBPM(bpm) {
     if (bpm > 0) {
         console.log(poly)
         currentBpm = bpm;
-        //Tone.Transport.cancel(0)
         Tone.Transport.bpm.value = bpm;
-        //Tone.Transport.stop()
-        //Tone.Transport.position = 0;
-        //Tone.Transport.scheduleRepeat(repeat, "16m")
-        //Tone.Transport.setLoopPoints("0:0:0", "64:0:0")
-        //Tone.Transport.start("0","0:0:0")
     }
     else {
         alert("BPM can't be <=0");
@@ -181,7 +172,6 @@ load_btn.addEventListener("click", () => {
          Tone.Transport.cancel(0);
          parseInterpolation();
          Tone.Transport.scheduleRepeat(repeat, "304m");
-         console.log("zanonibomboloni")
     }
 })
 
