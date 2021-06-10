@@ -38,7 +38,6 @@ async function parseInterpolation() {
 	};
 	let letters= ["A","B","C","D","E","F","G","H","I","J"];
 	var randomLetter = letters[Math.floor(Math.random() * letters.length)];
-    console.log(randomLetter);
     while (randomLetter == intPath) {
         randomLetter = letters[Math.floor(Math.random() * letters.length)];}
     let url = 'http://127.0.0.1:8080//static/Long_interpolations/' + 'LI_' +  intPath  + randomLetter + '.mid';
@@ -120,9 +119,6 @@ function submitBPM(bpm) {
         alert("BPM can't be <=0");
     }
 }
-
-
-
 
 //----------------- play pause controls
 
