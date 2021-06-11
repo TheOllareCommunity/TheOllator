@@ -1,4 +1,7 @@
-
+let dropupElements = document.getElementsByClassName("dropup-element")
+let dueArray = Array.from(dropupElements) 
+let dropUp = document.getElementsByClassName("dropbtn")[0]
+let currentMode = 0
 
 let element = null;
 let mouseDown = false;
@@ -107,4 +110,14 @@ overlay_container.onclick = function(){
 
 popupPanel.onclick = function(e){
     e.stopPropagation();
+}
+
+for(var i = 0; i < dropupElements.length; i++){
+  dropupElements.item(i).onclick = (e)=>{
+    dropUp.innerHTML = e.target.innerHTML
+    console.log(e.target.innerHTML)
+    currentMode = dueArray.indexOf(e.target)
+    if(playing) 
+      repeat()
+  }
 }

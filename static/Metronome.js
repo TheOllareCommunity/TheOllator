@@ -83,6 +83,7 @@ function repeat(){
     Tone.Transport.bpm.value = currentBpm;
     console.log("repeat2");
     //console.log(poly.activeVoices);
+    
 }
 
 function submitBPM(bpm) {
