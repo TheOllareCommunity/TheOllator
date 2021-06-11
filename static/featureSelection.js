@@ -10,6 +10,7 @@ const energy = urlParams.get('energy')
 const valence = urlParams.get('valence')
 const danceability = urlParams.get('danceability')
 const mode = urlParams.get('mode')
+const link = urlParams.get('link')
 
 
 var ctx = document.getElementById('radarChart').getContext('2d');
@@ -107,3 +108,4 @@ document.getElementById("continueButton").onclick = ()=>{
     document.getElementById("rescan").click()
 }
 
+document.getElementById("spotifyPlayer").src = link;

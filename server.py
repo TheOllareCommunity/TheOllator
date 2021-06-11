@@ -30,6 +30,7 @@ from SpotifyFeatures import SpotifyFeatures, getMidpoint
 import spotipy
 import uuid
 import pathlib
+from SpotipyEnvironmentPkg import SpotipyEnvironment
 
 # upload file parameters
 UPLOAD_FOLDER = 'MIDIuploaded'
@@ -150,8 +151,15 @@ def playlistForm():
     if playlist_url.startswith('spotify:playlist:'):
         beatID = getClassification(playlist_url)
         features = getFeaturesFromBeatID(beatID)
-
-        return redirect(url_for('.featureSelection', energy = features[0], valence = features[1], danceability = features[2], mode = features[3], beatID = beatID))
+        beatNames = getMIDIfromBeatID(beatID)
+        harmony = beatNames[0]
+        drums = beatNames[1]
+        sp = SpotipyEnvironment().sp
+        searchResults =sp.search(q="artist:" + "CPACOLLARETHEGANG" + " track:" + "Beat" + str(drums[0][0])[-1] + str(harmony[0][0])[-1], type="track")
+        link = searchResults["tracks"]["items"][0]["external_urls"]["spotify"]
+        link = link.replace("https://open.spotify.com/", "https://open.spotify.com/embed/")
+        print(link)
+        return redirect(url_for('.featureSelection', energy = features[0], valence = features[1], danceability = features[2], mode = features[3], link = link))
 
     return redirect(url_for('.index', result=-1))
 

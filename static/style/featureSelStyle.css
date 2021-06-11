@@ -26,7 +26,7 @@ header{
   width: 100vw;
   height: 85vh;
   display: flex;
-  flex-direction: vertical;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -87,13 +87,51 @@ header{
   width: auto !important;
 }
 
-#playBeat{
+.belowStuff{
+  width: 80%;
+  height: 20%;
+  display: grid;
+  grid-template-columns: 30% 40% 30%;
+  grid-template-rows: 100%;
+}
+
+.playContainer{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 #continueButton{
-  height: 40px;
-  width: 40px;
-  background-color: bisque;
+  width: 30%;
+  height: 40%;
+  background-color: rgb(243 0 239);
+
+  background: -moz-linear-gradient(top,  rgb(243 0 239) 0%, rgb(15,15,15) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  rgb(243 0 239) 0%, rgb(15,15,15) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgb(243 0 239) 0%, rgb(15,15,15) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 );
+
+  color: white;
+  font-family: myFont;
+  font-size: 150%;
+  letter-spacing: 0.16em;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.continueButtonContainer{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 .submitBtn{
