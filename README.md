@@ -26,7 +26,8 @@ Spotify for developers gives the permission to access to many audio features for
 
 # Synthesis and User Interface
 In this phase each of the 4 midi file is separately synthesized and controlled with an effect-chain. For this purpose we used [Tone.js](https://tonejs.github.io/) library that permits us to use a wide variety of synthetic instrument such as oscillators, sampler, .. and effects such as distortion, chorus, LFOs,..
-<img width="1440" alt="Gui" src="https://user-images.githubusercontent.com/57909529/118052378-e724c880-b382-11eb-8dba-030970011e12.png">
+<img width="1440" alt="NEWGUI" src="https://user-images.githubusercontent.com/57909529/122616101-0b627c00-d08a-11eb-8248-a5b48a7be5f6.png">
+
 The User Interface is vertically divided in the four components of each beat. Each division has a module made up of a 2D pad and five knobs. The user can play with them finding out the effect of each knob or pad and discovering new sounds and combinations. 
 At the bottom we have the adjustable BPM and play/pause button. Furthermore we give the opportunity to record the voice over the beat with the dedicated button. Once the user has finished the recording, a pop-up will arise and he/she will have the chance to listen to it and eventually download it.
 
@@ -46,6 +47,11 @@ The Ollator is made up of several technologies and languages. Following the work
 # Growing Community!
 We give the possibility to upload beats in the main page of The Ollator with the aim of creating a community of producers whose beats can be selected to be used (and downloaded / purchased) in the system. With the growing of the community, the dataset will enlarge widening the variance of the beats and carrying the system to better classification results. Furthermore this will give the possibility to producers who upload their tracks to appear in users' searches (the artist's page related to the beat will be mentioned to our users). To do that just fill the form linked to the main page of the Ollator and follow the instructions.
 <img width="1440" alt="Upload" src="https://user-images.githubusercontent.com/57909529/118052435-015ea680-b383-11eb-895f-949a47c1e72a.png">
+
+
+# Generative Drums
+Finally our latest feature is out. We implemented a generative algorithm based on Magenta's [MusicVAE](https://magenta.tensorflow.org/music-vae) that can be anbled with the third button placed at bottom right of the GUI. This algorithm trigger a script that starts a drum loop different from the "basic" one or better, that extends the "basic" one interpolating it with another one choosed randomly from our database. The new loop starts identically at the basic one for 2 bars, then starts a 8-bar interpolation from the first drum loop to the second one, 2 bars of the second drum-loop and finally another 8-bars interpolation from the second drum loop to the first one. All this passages repeated along time. This smooth, continuous transition makes the beat lively but pleasent and can be triggered any time the user wants, performing the interpolation with the starting drum loop and every different time with another one within our dataset.
+
 
 
 # Future developments
