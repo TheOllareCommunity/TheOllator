@@ -29,7 +29,7 @@ In this phase each of the 4 midi file is separately synthesized and controlled w
 <img width="1440" alt="NEWGUI" src="https://user-images.githubusercontent.com/57909529/122616101-0b627c00-d08a-11eb-8248-a5b48a7be5f6.png">
 
 The User Interface is vertically divided in the four components of each beat. Each division has a module made up of a 2D pad and five knobs. The user can play with them finding out the effect of each knob or pad and discovering new sounds and combinations. 
-At the bottom we have the adjustable BPM and play/pause button. Furthermore we give the opportunity to record the voice over the beat with the dedicated button. Once the user has finished the recording, a pop-up will arise and he/she will have the chance to listen to it and eventually download it.
+At the bottom we have the adjustable BPM, the play/pause button and the trigger of our new implementation explained in a further section "Generative Drums" below in this README. Furthermore we give the opportunity to record the voice over the beat with the dedicated button. Once the user has finished the recording, a pop-up will arise and he/she will have the chance to listen to it and eventually download it.
 
 
 
