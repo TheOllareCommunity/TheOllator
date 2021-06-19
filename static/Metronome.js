@@ -116,7 +116,6 @@ pp_btn.addEventListener("click", () => {
         Tone.start()
         initRecorder(Tone.context);
         playing = true;
-        dropUp.style.pointerEvents = "all";
     }
     pp_img.classList.toggle("play");
     pp_img.classList.toggle("pause");
@@ -129,6 +128,9 @@ pp_btn.addEventListener("click", () => {
         mute(bassSynth);
         mute(poly);
         mute(sampler)
+
+        dropUp.style.pointerEvents = "all";
+        dropUp.style.opacity = "1";
     }
     else{
         Tone.Transport.start();

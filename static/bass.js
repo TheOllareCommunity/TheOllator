@@ -40,8 +40,8 @@ function bassRecycle(){
         },
     })
 
-    connectBass(newSynth);
-    bassSynth.sync();
+    connectBass(newSynth, bassFreqEnv);
+    newSynth.sync();
     return newSynth;
 }
 

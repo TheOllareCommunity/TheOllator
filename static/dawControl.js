@@ -1,7 +1,8 @@
 let dropupElements = document.getElementsByClassName("dropup-element")
 let dueArray = Array.from(dropupElements) 
-let dropUp = document.getElementsByClassName("dropbtn")[0]
+let dropUp = document.getElementsByClassName("dropup")[0]
 let dropup_content = document.getElementsByClassName("dropup-content")[0]
+let dropUp_btn = document.getElementsByClassName("dropbtn")[0]
 let currentMode = 0
 
 let element = null;
@@ -115,10 +116,14 @@ popupPanel.onclick = function(e){
 
 for(var i = 0; i < dropupElements.length; i++){
   dropupElements.item(i).onclick = (e)=>{
-    if(!playing){
-        dropUp.innerHTML = e.target.innerHTML
+    if(Tone.Transport.state != "started"){
+        dropUp_btn.innerHTML = e.target.innerHTML
         console.log(e.target.innerHTML)
         currentMode = dueArray.indexOf(e.target)
+        fmSynth.dispose();
+        poly.dispose();
+        bassSynth.dispose();
+
         fmSynth = melodyRecycle()
         poly = harmonyRecycle()
         bassSynth = bassRecycle()
@@ -129,6 +134,11 @@ for(var i = 0; i < dropupElements.length; i++){
 
 
 dropUp.addEventListener("mouseover", () => {
-    if( !playing)
+    if( Tone.Transport.state != "started")
         dropup_content.style.display = "block";
-}
+})
+
+dropUp.addEventListener("mouseout", () => {
+    if( Tone.Transport.state != "started")
+        dropup_content.style.display = "none";
+})
