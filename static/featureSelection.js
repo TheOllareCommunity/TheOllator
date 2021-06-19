@@ -116,8 +116,6 @@ danceabilitySlider.onchange  = (e)=>{
     myChart.update();
 };
 modeSwitch.onchange = (e)=>{
-    myChart.data.datasets[0].data[3] = (e.target.checked) ? 100 : 0;
-    myChart.update();
     if(!e.target.checked){
         document.getElementsByClassName("modeText")[0].style.transform="translateX(40px)";
         document.getElementsByClassName("modeText")[0].innerHTML="Minor"
