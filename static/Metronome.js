@@ -65,7 +65,6 @@ async function parseBass() {
 
 function repeat(){
 
-    console.log("repeat1");
     poly.dispose();
     Tone.Transport.bpm.value = 120;
     poly=harmonyRecycle();
@@ -117,9 +116,12 @@ pp_btn.addEventListener("click", () => {
         Tone.start()
         initRecorder(Tone.context);
         playing = true;
+        dropUp.style.pointerEvents = "all";
     }
     pp_img.classList.toggle("play");
     pp_img.classList.toggle("pause");
+    dropUp.style.pointerEvents = "none";
+    dropUp.style.opacity = "0.7";
 
     if(Tone.Transport.state === "started"){
         Tone.Transport.pause();
