@@ -24,11 +24,17 @@ As protocol for music information we used the wel known MIDI. Since the beats wi
 # Machine Learning
 Spotify for developers gives the permission to access to many audio features for every track present in the database. We exploited them to build our feature space: a multi-dimensional one where each of our 100 beats represent a point. Then we perform the same operation for the songs that compose the playlist loaded by the user and we calculate their "mid-point". The last passage consists in plugging the midpoint inside the feature space populated by our beats and compute the nearest one that is, indeed, the beat that resembles better the entire playlist of the user. Once the nearest beat is found, we query the database for the midi files that constitutes it so that the re-synthesis can be performed and manipulated through the user interface.
 
+# Features Recap
+After the playlist is processed, an interface with a radar graph will show the characteristics of the songs which helps to understand better its qualities and eventually rearrange the features in order to have a more consonant output with the user tastes. A Spotify preview gives also the possibility to have a 30 seconds demo of the fetched song. By clicking on the continue button, if some features have been changed, the algorithm is triggered again to output the new beat, otherwise the same beat is kept and a new interactive GUI is presented.
+![ollatornewpage](https://user-images.githubusercontent.com/57753418/122637156-6e392f00-d0ed-11eb-992b-1d24556951f1.png)
+
+
+
 # Synthesis and User Interface
 In this phase each of the 4 midi file is separately synthesized and controlled with an effect-chain. For this purpose we used [Tone.js](https://tonejs.github.io/) library that permits us to use a wide variety of synthetic instrument such as oscillators, sampler, .. and effects such as distortion, chorus, LFOs,..
 ![new](https://user-images.githubusercontent.com/57753418/122636587-59a76780-d0ea-11eb-9165-5a8176340a7d.png)
 The User Interface is vertically divided in the four components of each beat. Each division has a module made up of a 2D pad and five knobs. The user can play with them finding out the effect of each knob or pad and discovering new sounds and combinations. 
-At the bottom we have the adjustable BPM and the play/pause button. Furthermore we give the opportunity to record the voice over the beat with the dedicated button and the possibility to change the musical mode of your song with the "drop up" button menu . Once the user has finished the recording, a pop-up will arise and he/she will have the chance to listen to it and eventually download it.
+At the bottom we have the adjustable BPM and the play/pause button. Furthermore we give the opportunity to record the voice over the beat with the dedicated button and the possibility to change the musical mode of your song by varying the modal scale in use with the "drop up" button menu . Once the user has finished the recording, a pop-up will arise and he/she will have the chance to listen to it and eventually download it.
 
 
 
@@ -50,7 +56,7 @@ We give the possibility to upload beats in the main page of The Ollator with the
 
 
 # Future developments
-  - Possibility to choose more than one beat to be played. Since the dataset at now consists of 100 beats that are combination of 10 beats, choosing more than one beat to listen/manipulate will lead to similar beats (for example, the 2 nearest beat would probablt have the same harmonic content or the same rithmic content). So this issue is dependent from the previous point. Having a wider dataset will head also to this possibility;
+  - Possibility to choose more than one beat to be played. Since the dataset at now consists of 100 beats that are combination of 10 beats, choosing more than one beat to listen/manipulate will lead to similar beats (for example, the 2 nearest beat would probably have the same harmonic content or the same rithmic content). So this issue is dependent from the previous point. Having a wider dataset will head also to this possibility;
   - Sound improvement. We will improve the sound quality with the implementation of further libraries and sounds;
   - Development of stand-alone application. The audio quality is now bounded with the fact that we are manipulating it via web. With the development of an application we will overcome this issue and also give a more user friendly way of using The Ollator;
   - Within the application: give the possibility to change and costumize effects.
