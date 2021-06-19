@@ -26,9 +26,10 @@ Spotify for developers gives the permission to access to many audio features for
 
 # Synthesis and User Interface
 In this phase each of the 4 midi file is separately synthesized and controlled with an effect-chain. For this purpose we used [Tone.js](https://tonejs.github.io/) library that permits us to use a wide variety of synthetic instrument such as oscillators, sampler, .. and effects such as distortion, chorus, LFOs,..
-<img width="1440" alt="Gui" src="https://user-images.githubusercontent.com/57909529/118052378-e724c880-b382-11eb-8dba-030970011e12.png">
+![new](https://user-images.githubusercontent.com/57753418/122636587-59a76780-d0ea-11eb-9165-5a8176340a7d.png)
 The User Interface is vertically divided in the four components of each beat. Each division has a module made up of a 2D pad and five knobs. The user can play with them finding out the effect of each knob or pad and discovering new sounds and combinations. 
-At the bottom we have the adjustable BPM and play/pause button. Furthermore we give the opportunity to record the voice over the beat with the dedicated button. Once the user has finished the recording, a pop-up will arise and he/she will have the chance to listen to it and eventually download it.
+At the bottom we have the adjustable BPM and the play/pause button. Furthermore we give the opportunity to record the voice over the beat with the dedicated button and the possibility to change the musical mode of your song with the "drop up" button menu . Once the user has finished the recording, a pop-up will arise and he/she will have the chance to listen to it and eventually download it.
+
 
 
 
