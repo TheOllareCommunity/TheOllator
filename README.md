@@ -32,9 +32,9 @@ After the playlist is processed, an interface with a radar graph will show the c
 
 # Synthesis and User Interface
 In this phase each of the 4 midi file is separately synthesized and controlled with an effect-chain. For this purpose we used [Tone.js](https://tonejs.github.io/) library that permits us to use a wide variety of synthetic instrument such as oscillators, sampler, .. and effects such as distortion, chorus, LFOs,..
-![new](https://user-images.githubusercontent.com/57753418/122636587-59a76780-d0ea-11eb-9165-5a8176340a7d.png)
+![Immagine 2021-06-19 114122](https://user-images.githubusercontent.com/57753418/122638260-785e2c00-d0f3-11eb-8d79-240dbbf1965a.png)
 The User Interface is vertically divided in the four components of each beat. Each division has a module made up of a 2D pad and five knobs. The user can play with them finding out the effect of each knob or pad and discovering new sounds and combinations. 
-At the bottom we have the adjustable BPM and the play/pause button. Furthermore we give the opportunity to record the voice over the beat with the dedicated button and the possibility to change the musical mode of your song by varying the modal scale in use with the "drop up" button menu . Once the user has finished the recording, a pop-up will arise and he/she will have the chance to listen to it and eventually download it.
+At the bottom we have the adjustable BPM and the play/pause button. Furthermore we give the opportunity to change the musical mode of the song by varying the modal scale in use with the drop-up button menu and also to record the voice over the beat with the dedicated button. Once the user has finished the recording, a pop-up will arise and it will be given the chance to listen to it and eventually download it.
 
 
 
