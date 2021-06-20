@@ -3,9 +3,6 @@ const melodyVol = new Tone.Volume(-10).toDestination();
 const melodyCrusher = new Tone.BitCrusher(16);
 melodyCrusher.wet.value = 0
 
-
-
-
 function melodyRecycle(){
     let newSynth = new Tone.Synth();
 

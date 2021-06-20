@@ -123,10 +123,12 @@ for(var i = 0; i < dropupElements.length; i++){
         fmSynth.dispose();
         poly.dispose();
         bassSynth.dispose();
+        sampler.dispose();
 
         fmSynth = melodyRecycle()
         poly = harmonyRecycle()
         bassSynth = bassRecycle()
+        sampler = drumsRecycle()
         repeat()
     }
   }
