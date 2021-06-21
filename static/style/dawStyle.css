@@ -443,9 +443,9 @@ input[type=number]:focus{
 }
 
 /* Show the dropup menu on hover */
-.dropup:hover .dropup-content {
+/*.dropup:hover .dropup-content {
   display: block;
-}
+}*/
 
 /* Change the background color of the dropup button when the dropup content is shown */
 .dropup:hover .dropbtn {

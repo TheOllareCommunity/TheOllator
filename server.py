@@ -172,7 +172,7 @@ def openDaw():
     energy = int(request.args.get("Energy"))/100
     valence = int(request.args.get("Valence"))/100
     danceability = int(request.args.get("Danceability"))/100
-    mode = int(request.args.get("Mode"))/100
+    mode = 1 if request.args.get("Mode") == 'on' else 0
 
     # dalle features vogliamo getSongID
     

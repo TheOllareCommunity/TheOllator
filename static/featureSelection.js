@@ -1,6 +1,7 @@
 let energySlider = document.getElementById('sliderEnergy');
 let valenceSlider = document.getElementById('sliderValence');
 let danceabilitySlider = document.getElementById('sliderDanceability');
+let modeSwitch = document.getElementById('switchMode');
 let changed = false;
 
 const queryString = window.location.search;
@@ -17,10 +18,10 @@ var ctx = document.getElementById('radarChart').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'radar',
     data: {
-        labels: ['Energy', 'Valence', 'Danceability','Mode'],
+        labels: ['Danceability', 'Energy', 'Valence'],
         datasets: [{    //anche più di un dataset, potremmo fare 1 grafico per il primo beat e 1 grafico per quello modificato
-            label: 'Pervious features values',
-            data: [energy*100, valence*100, danceability*100, mode*100],
+            label: 'New features values',
+            data: [danceability*100, energy*100, valence*100,],
             backgroundColor: [
                 'rgba(248, 104, 235, 0.2)',
             ],
@@ -30,8 +31,8 @@ var myChart = new Chart(ctx, {
             borderWidth: 1
         },
         {    //second dataset
-            label: 'New features values',
-            data: [energy*100, valence*100, danceability*100, mode*100],
+            label: 'Previous features values',
+            data: [danceability*100, energy*100, valence*100,],
             backgroundColor: [
                 'rgba(224, 251, 255, 0.7)',
             ],
@@ -50,7 +51,7 @@ var myChart = new Chart(ctx, {
                     color: '#949494'
                 },
                 angleLines: {
-                    color: '#949494'
+                    color: '#bcbcbc'
                 }, 
                 ticks:{
                     display: false,
@@ -60,7 +61,7 @@ var myChart = new Chart(ctx, {
                     }
                 },
                 pointLabels: {
-                    color: '#949494',
+                    color: '#bcbcbc',
                     font:{
                         size: 20
                     }
@@ -72,8 +73,9 @@ var myChart = new Chart(ctx, {
                 labels: {
                     // This more specific font property overrides the global property
                     font: {
-                        size: 17
-                    }
+                        size: 16
+                    },
+                    color: '#bcbcbc'
                 }
             }
         }
@@ -83,26 +85,48 @@ var myChart = new Chart(ctx, {
 energySlider.value = (energy*100).toString()
 valenceSlider.value = (valence*100).toString()
 danceabilitySlider.value = (danceability*100).toString()
+modeSwitch.checked = (mode=="1") ? true : false
+
+if(!modeSwitch.checked){
+    document.getElementsByClassName("modeText")[0].style.transform="translateX(40px)";
+    document.getElementsByClassName("modeText")[0].innerHTML="Minor"
+}
+else{
+    document.getElementsByClassName("modeText")[0].style.transform="translateX(0px)";
+    document.getElementsByClassName("modeText")[0].innerHTML="Major"
+}
 
 
 energySlider.onchange  = (e)=>{
     if(!changed)
         changed = true;
-    myChart.data.datasets[0].data[0] = e.target.value;
+    myChart.data.datasets[0].data[1] = e.target.value;
     myChart.update();
 };
 valenceSlider.onchange  = (e)=>{
     if(!changed)
         changed = true;
-    myChart.data.datasets[0].data[1] = e.target.value;
+    myChart.data.datasets[0].data[2] = e.target.value;
     myChart.update();
 };
 danceabilitySlider.onchange  = (e)=>{
     if(!changed)
         changed = true;
-    myChart.data.datasets[0].data[2] = e.target.value;
+    myChart.data.datasets[0].data[0] = e.target.value;
     myChart.update();
 };
+modeSwitch.onchange = (e)=>{
+    if(!e.target.checked){
+        document.getElementsByClassName("modeText")[0].style.transform="translateX(40px)";
+        document.getElementsByClassName("modeText")[0].innerHTML="Minor"
+    }
+    else{
+        document.getElementsByClassName("modeText")[0].style.transform="translateX(0px)";
+        document.getElementsByClassName("modeText")[0].innerHTML="Major"
+    }
+        
+};
+
 
 document.getElementById("continueButton").onclick = ()=>{
     document.getElementById("rescan").click()

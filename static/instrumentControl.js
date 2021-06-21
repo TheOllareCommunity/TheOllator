@@ -24,7 +24,7 @@ function playMIDI(currentMidi, instrument, now) {
 					);
 				}
         		else{
-					note.midi = setMode(6, "C", note.midi);
+					note.midi = setMode(currentMode, "C", note.midi);
 					instrument.triggerAttackRelease(
 						note.name,
 						note.duration,

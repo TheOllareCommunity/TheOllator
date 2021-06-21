@@ -65,7 +65,6 @@ async function parseBass() {
 
 function repeat(){
 
-    console.log("repeat1");
     poly.dispose();
     Tone.Transport.bpm.value = 120;
     poly=harmonyRecycle();
@@ -83,6 +82,7 @@ function repeat(){
     Tone.Transport.bpm.value = currentBpm;
     console.log("repeat2");
     //console.log(poly.activeVoices);
+    
 }
 
 function submitBPM(bpm) {
@@ -119,6 +119,8 @@ pp_btn.addEventListener("click", () => {
     }
     pp_img.classList.toggle("play");
     pp_img.classList.toggle("pause");
+    dropUp.style.pointerEvents = "none";
+    dropUp.style.opacity = "0.7";
 
     if(Tone.Transport.state === "started"){
         Tone.Transport.pause();
@@ -126,6 +128,9 @@ pp_btn.addEventListener("click", () => {
         mute(bassSynth);
         mute(poly);
         mute(sampler)
+
+        dropUp.style.pointerEvents = "all";
+        dropUp.style.opacity = "1";
     }
     else{
         Tone.Transport.start();
